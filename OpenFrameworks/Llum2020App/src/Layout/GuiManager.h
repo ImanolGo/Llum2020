@@ -79,7 +79,8 @@ public:
 
     void setSceneTransitionTime(float value) {m_sceneTransitionTime = value;}
 
-    void setUseHueColorCorrection(bool value){m_useHueCorrection = value;}
+    void setColorCorrectionType(int value){m_shaderColorMode = value;}
+
 private:
     
     void setupGuiParameters();

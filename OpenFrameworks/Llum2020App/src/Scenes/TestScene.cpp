@@ -171,7 +171,7 @@ void TestScene::willFadeIn()
     m_timer.start(false,true);
     this->deleteAnimations();
     this->startAnimations();
-    AppManager::getInstance().getGuiManager().setUseHueColorCorrection(false);
+    AppManager::getInstance().getGuiManager().setColorCorrectionType(0);
 	AppManager::getInstance().getGuiManager().loadPresets(this->getName());
 }
 

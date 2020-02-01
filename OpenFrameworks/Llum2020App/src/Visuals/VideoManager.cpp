@@ -117,13 +117,7 @@ void VideoManager::setupFbo()
 
 void VideoManager::setupShaders(float width,float height)
 {
-    this->setupLevels(width, height);
     this->setupBlur(width, height);
-}
-
-void VideoManager::setupLevels(float width, float height)
-{
-    m_levels.setup(width,height);
 }
 
 void VideoManager::setupBlur(float width, float height)
@@ -251,13 +245,10 @@ void VideoManager::updateFbos()
 
 void VideoManager::drawVideo()
 {
-    m_levels.begin();
-    ofClear(0);
-    m_videoPlayer.draw(0, m_exportFbo.getHeight(), m_exportFbo.getWidth(), -m_exportFbo.getHeight());
-    m_levels.end();
+
     
     m_blur.begin();
-    m_levels.draw();
+	m_videoPlayer.draw(0, m_exportFbo.getHeight(), m_exportFbo.getWidth(), -m_exportFbo.getHeight());
     m_blur.end();
     
     m_blur.draw();

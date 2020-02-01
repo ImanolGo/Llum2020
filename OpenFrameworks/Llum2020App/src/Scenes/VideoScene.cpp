@@ -95,7 +95,7 @@ void VideoScene::willFadeIn() {
         m_videoPlayer.play();
     }
 
-    AppManager::getInstance().getGuiManager().setUseHueColorCorrection(false);
+    AppManager::getInstance().getGuiManager().setColorCorrectionType(0);
 	AppManager::getInstance().getGuiManager().loadPresets(this->getName());
     
 }

@@ -150,11 +150,6 @@ void ColorManager::endColorLevels()
 	m_shaderLevelCorrection.end();
 }
 
-void ColorManager::endColorCorrection()
-{
-	m_shaderColorCorrection.end();
-}
-
 void ColorManager::setupGradients()
 {
 	m_mainGradient.allocate(100, 100, OF_IMAGE_COLOR);

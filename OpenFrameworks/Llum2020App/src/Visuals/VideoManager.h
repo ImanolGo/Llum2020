@@ -10,7 +10,6 @@
 
 #include "Manager.h"
 #include "SettingsManager.h"
-#include "ofxPSLevels.h"
 #include "ofxBlur.h"
 #include "ofxFastFboReader.h"
 
@@ -50,22 +49,7 @@ public:
     void loadVideos(string& path);
     
     void load(string& name);
-    
-    void setContrast(float& value) {m_levels.contrast = value;}
-    
-    void setSaturation(float& value) {m_levels.saturation = value;}
-    
-    void setBrightness(float& value) {m_levels.brightness = value;}
-    
-    void setGamma(float& value) {m_levels.gamma = value;}
-    
-    void setMinInput(float& value) {m_levels.minInput = value;}
-    
-    void setMaxInput(float& value) {m_levels.maxInput = value;}
-    
-    void setMinOutput(float& value) {m_levels.minOutput = value;}
-    
-    void setMaxOutput(float& value) {m_levels.maxOutput = value;}
+   
     
     void setBlurScale(float& value);
     
@@ -100,8 +84,6 @@ private:
     
     void setupBlur(float width, float height);
     
-    void setupLevels(float width, float height);
-    
     void updateFbos();
     
     void updateVideo();
@@ -120,7 +102,6 @@ private:
     ResourcesPathMap    m_videoResourcesPath;   ///< stores the video paths
 
     ofVideoPlayer 	    m_videoPlayer;
-    ofxPSLevels         m_levels;
     ofxBlur             m_blur;
     ofxFastFboReader    m_reader;
   
