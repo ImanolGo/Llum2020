@@ -13,7 +13,7 @@
 #include "scenes.h"
 #include "AppManager.h"
 
-SceneManager::SceneManager(): Manager(), m_alpha(-1), m_transitionTime(0.5), m_sceneOffset(2), m_currentVideoIndex(0), m_status(false), m_useHueCorrection(false)
+SceneManager::SceneManager(): Manager(), m_alpha(-1), m_transitionTime(0.5), m_sceneOffset(2), m_currentVideoIndex(0), m_status(false)
 {
 	//Intentionally left empty
 }
@@ -182,6 +182,8 @@ void SceneManager::update()
 
 void SceneManager::updateFbo()
 {
+	bool useHue = AppManager::getInstance().getColorManager().getUseHueCorrection();
+
     m_levels.begin();
         ofClear(0);
         ofEnableAlphaBlending();
@@ -204,8 +206,8 @@ void SceneManager::updateFbo()
     ofPushStyle();
     ofSetColor(255);
     ofEnableAlphaBlending();
-    if(m_useHueCorrection){
-        auto floatColor = AppManager::getInstance().getGuiManager().getSolidColor();
+    if(useHue){
+        auto floatColor = AppManager::getInstance().getColorManager().getSolidColor();
         m_hueShader.begin();
         m_hueShader.setUniform4f("color", floatColor);
         
@@ -213,7 +215,7 @@ void SceneManager::updateFbo()
     
         m_fboColor.draw(0,0);
     
-    if(m_useHueCorrection){
+    if(useHue){
         m_hueShader.end();
     }
     ofDisableAlphaBlending();

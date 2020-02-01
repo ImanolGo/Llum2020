@@ -45,6 +45,7 @@ void GuiManager::setup()
     
     this->setupGuiParameters();
     this->setupScenesGui();
+	this->setupColorsGui();
     this->setupLedsGui();
     this->setupVideoGui();
     this->setupProcessingGroup();
@@ -96,17 +97,25 @@ void GuiManager::setupScenesGui()
     for(int i=0; i< scenesManager->getNumberScenes(); i++){
         m_sceneNames.push_back(scenesManager->getSceneName(i));
     }
-    
-    m_solidColor.set( "Color", ofFloatColor::white );
-    m_presets.add(m_solidColor);
- 
-    m_useHueCorrection.set("HueCorrection", true);
-    m_useHueCorrection.addListener(scenesManager, &SceneManager::setUseHueCorrection);
-	m_presets.add(m_useHueCorrection);
 
     m_sceneTransitionTime.set("TransitionTime", 0.5, 0.0, 10);
     m_sceneTransitionTime.addListener(scenesManager, &SceneManager::onTransitionTimeChange);
     m_parameters.add(m_sceneTransitionTime);
+
+}
+
+void GuiManager::setupColorsGui()
+{
+	auto colorManager = &AppManager::getInstance().getColorManager();
+	m_colorsGroup.setName("Colors");
+
+	m_solidColor.set("Color", ofFloatColor::white);
+	m_solidColor.addListener(colorManager, &ColorManager::setSolidColor);
+	m_presets.add(m_solidColor);
+
+	m_useHueCorrection.set("HueCorrection", true);
+	m_useHueCorrection.addListener(colorManager, &ColorManager::setUseHueCorrection);
+	m_presets.add(m_useHueCorrection);
 
 }
 
@@ -278,11 +287,16 @@ void GuiManager::drawGui()
             if (ofxImGui::BeginTree(m_scenesGroup, mainSettings))
             {
                 ofxImGui::AddParameter(m_sceneTransitionTime);
-                ofxImGui::AddParameter(m_solidColor);      
-                ofxImGui::AddParameter(m_useHueCorrection);
                 ofxImGui::AddCombo(m_sceneMode, m_sceneNames);
                 ofxImGui::EndTree(mainSettings);
             }
+
+			if (ofxImGui::BeginTree(m_colorsGroup, mainSettings))
+			{
+				ofxImGui::AddParameter(m_solidColor);
+				ofxImGui::AddParameter(m_useHueCorrection);
+				ofxImGui::EndTree(mainSettings);
+			}
             
             if (ofxImGui::BeginTree(m_videoGroup, mainSettings))
             {

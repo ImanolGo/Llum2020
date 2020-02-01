@@ -70,6 +70,9 @@ public:
     
     //! Returns the VideoManager manager
     VideoManager&  getVideoManager() { return m_videoManager; }
+
+	//! Returns the ColorManager manager
+	ColorManager&  getColorManager() { return m_colorManager; }
     
     void changeFrameRate(int& fps);
 
@@ -118,6 +121,7 @@ private:
     SceneManager             m_sceneManager;             ///< Manages all the scenes
     LedsManager              m_ledsManager;              ///< Manages the leds
     VideoManager             m_videoManager;             ///< Manages the video playback
+	ColorManager             m_colorManager;             ///< Manages the colors and gradients
    
     bool                     m_debugMode;
     bool                     m_initialized;

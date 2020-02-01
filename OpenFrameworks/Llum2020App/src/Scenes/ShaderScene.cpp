@@ -103,7 +103,7 @@ void ShaderScene::drawShader()
 {
     float width = m_fbo.getWidth();
     float height = m_fbo.getHeight();
-    auto floatColor = AppManager::getInstance().getGuiManager().getSolidColor();
+    auto floatColor = AppManager::getInstance().getColorManager().getSolidColor();
     float parameter = AppManager::getInstance().getGuiManager().getShaderParameter();
     int direction = AppManager::getInstance().getGuiManager().getShaderDirection();
     float colorAmount = AppManager::getInstance().getGuiManager().getColorAmount();

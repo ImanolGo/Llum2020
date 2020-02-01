@@ -92,6 +92,7 @@ void AppManager::setupManagers()
 {
     m_settingsManager.setup();
     m_resourceManager.setup();
+	m_colorManager.setup();
     //m_viewManager.setup();
     m_visualEffectsManager.setup();
     m_layoutManager.setup();

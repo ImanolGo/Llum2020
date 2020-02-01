@@ -98,7 +98,6 @@ public:
     
     bool getCurrentStatus() const {return m_status;}
     
-    void setUseHueCorrection(bool & value){m_useHueCorrection = value;}
     
 private:
     
@@ -150,7 +149,7 @@ private:
     int                      m_sceneOffset;
     bool                     m_status;
     int                      m_currentVideoIndex;
-    bool                     m_useHueCorrection;
+  
 };
 
 //==========================================================================

@@ -69,8 +69,6 @@ public:
     
     void onVideoChange(int videoIndex);
     
-    ofFloatColor getSolidColor() const{return m_solidColor.get();}
-    
     float getShaderSpeed() const {return m_shaderSpeed.get();}
     
     float getShaderParameter() const{return m_shaderParameter.get();}
@@ -91,6 +89,8 @@ private:
     void drawGui();
     
     void setupVideoGui();
+
+	void setupColorsGui();
     
     void setupShadersGui();
     
@@ -118,6 +118,7 @@ private:
     ofParameterGroup m_modeGroup;
     ofParameterGroup m_videoGroup;
     ofParameterGroup m_ledsGroup;
+	ofParameterGroup m_colorsGroup;
     ofParameterGroup m_scenesGroup;
     ofParameterGroup m_postProcessingGroup;
     ofParameterGroup m_shadersGroup;
