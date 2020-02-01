@@ -45,14 +45,26 @@ void LayoutManager::setup()
 
 	Manager::setup();
 
-  
+
     this->setupFbos();
     this->setupWindowFrames();
+	this->setupOutput();
     
     this->createTextVisuals();
     this->createImageVisuals();
 }
 
+void LayoutManager::setupOutput()
+{
+	string name = "Llum2020";
+	#ifdef TARGET_WIN32
+		m_sender.init(name);
+
+	#elif TARGET_OSX
+		m_syphonServer.setName(name);
+	#endif	
+
+}
 
 void LayoutManager::setupFbos()
 {
@@ -197,6 +209,21 @@ void LayoutManager::update()
         return;
     
     this->updateFbos();
+	this->sendOutput();
+}
+
+
+void LayoutManager::sendOutput()
+{
+	auto & fbo = AppManager::getInstance().getSceneManager().getFbo();
+
+	#ifdef TARGET_WIN32
+		m_sender.send(fbo.getTexture());
+
+	#elif TARGET_OSX
+		m_syphonServer.publishFBO(fbo);
+	#endif	
+
 }
 
 void LayoutManager::updateFbos()

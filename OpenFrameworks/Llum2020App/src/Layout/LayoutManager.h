@@ -16,8 +16,11 @@
 #include "ImageVisual.h"
 #include "RectangleVisual.h"
 
-
-
+#ifdef TARGET_WIN32
+	 #include "ofxSpout.h"
+#elif TARGET_OSX
+	#include "ofxSyphon.h"
+#endif
 //========================== class LayoutManager ==============================
 //============================================================================
 /** \class LayoutManager LayoutManager.h
@@ -93,6 +96,10 @@ private:
     void addVisuals();
 
     void setupFbos();
+
+	void setupOutput();
+
+	void sendOutput();
     
     void resetWindowRects();
     
@@ -146,6 +153,14 @@ private:
     FboMap              m_fbos;
     
     DrawMode            m_drawMode;
+
+
+	#ifdef TARGET_WIN32
+		ofxSpout::Sender m_sender;
+
+	#elif TARGET_OSX
+		ofxSyphonServer     m_syphonServer;
+	#endif	
 
 };
 

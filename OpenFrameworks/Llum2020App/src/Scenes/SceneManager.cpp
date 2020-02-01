@@ -46,11 +46,9 @@ void SceneManager::setup()
 void SceneManager::createScenes()
 {
     m_mySceneManager = make_shared<ofxSceneManager>();
-    //m_mySceneManager = shared_ptr<ofxSceneManager>(new ofxSceneManager());
-    
-    //std::shared_ptr<Lhs>(new Lhs("foo"));
-    //m_mySceneManager->setTransitionFade();
-	m_mySceneManager->setTransitionDissolve();
+
+    m_mySceneManager->setTransitionFade();
+	//m_mySceneManager->setTransitionDissolve();
     
     ofPtr<ofxScene> scene;
     
