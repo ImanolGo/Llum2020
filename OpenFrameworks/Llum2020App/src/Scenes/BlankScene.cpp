@@ -8,6 +8,7 @@
 
 
 #include "BlankScene.h"
+#include "AppManager.h"
 
 
 BlankScene::BlankScene(): ofxScene("Blank"){}
@@ -26,6 +27,7 @@ void BlankScene::draw() {
 }
 
 void BlankScene::willFadeIn() {
+	 AppManager::getInstance().getGuiManager().loadPresets(this->getName());
      ofLogNotice("BlankScene::willFadeIn");
 }
 
@@ -34,6 +36,7 @@ void BlankScene::willDraw() {
 }
 
 void BlankScene::willFadeOut() {
+	AppManager::getInstance().getGuiManager().savePresets(this->getName());
     ofLogNotice("BlankScene::willFadeOut");
 }
 

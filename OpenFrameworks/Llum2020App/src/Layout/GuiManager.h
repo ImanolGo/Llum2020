@@ -24,6 +24,7 @@
 class GuiManager: public Manager
 {
     static const string GUI_SETTINGS_FILE_NAME;
+	static const string GUI_SETTINGS_FILE_PATH;
     static const string GUI_SETTINGS_NAME;
     static const int GUI_WIDTH;
     
@@ -44,9 +45,9 @@ public:
     //! Draw the gui
     void draw();
     
-    void saveGuiValues(string path = "");
+    void savePresets(string path = "");
     
-    void loadGuiValues(string path = "");
+    void loadPresets(string path = "");
     
     void toggleGui();
     
@@ -101,6 +102,10 @@ private:
     
     void updateSize(const ofxImGui::Settings& settings);
 
+	void saveGuiValues();
+
+	void loadGuiValues();
+
     
 private:
     
@@ -108,6 +113,7 @@ private:
         
     
     ofParameterGroup      m_parameters;
+	ofParameterGroup      m_presets;
     
     ofParameterGroup m_modeGroup;
     ofParameterGroup m_videoGroup;

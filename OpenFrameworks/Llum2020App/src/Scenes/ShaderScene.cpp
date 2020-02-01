@@ -124,6 +124,7 @@ void ShaderScene::willFadeIn() {
      this->setupShader();
      ofLogNotice("ShaderScene::willFadeIn");
      AppManager::getInstance().getGuiManager().setUseHueColorCorrection(true);
+	 AppManager::getInstance().getGuiManager().loadPresets(this->getName());
     
 }
 
@@ -133,6 +134,7 @@ void ShaderScene::willDraw() {
 
 void ShaderScene::willFadeOut() {
     ofLogNotice("ShaderScene::willFadeOut");
+	AppManager::getInstance().getGuiManager().savePresets(this->getName());
 }
 
 void ShaderScene::willExit() {

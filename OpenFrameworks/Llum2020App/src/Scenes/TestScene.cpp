@@ -172,6 +172,7 @@ void TestScene::willFadeIn()
     this->deleteAnimations();
     this->startAnimations();
     AppManager::getInstance().getGuiManager().setUseHueColorCorrection(false);
+	AppManager::getInstance().getGuiManager().loadPresets(this->getName());
 }
 
 void TestScene::willDraw(){
@@ -180,6 +181,7 @@ void TestScene::willDraw(){
 
 void TestScene::willFadeOut() {
     ofLogNotice("TestScene::willFadeOut");
+	AppManager::getInstance().getGuiManager().savePresets(this->getName());
 }
 
 void TestScene::willExit() {

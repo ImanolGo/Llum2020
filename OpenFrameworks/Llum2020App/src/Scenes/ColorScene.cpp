@@ -72,6 +72,7 @@ void ColorScene::drawRectangle()
 void ColorScene::willFadeIn() {
      ofLogNotice("ColorScene::willFadeIn");
      AppManager::getInstance().getGuiManager().setUseHueColorCorrection(true);
+	 AppManager::getInstance().getGuiManager().loadPresets(this->getName());
 }
 
 void ColorScene::willDraw() {
@@ -79,6 +80,7 @@ void ColorScene::willDraw() {
 }
 
 void ColorScene::willFadeOut() {
+	AppManager::getInstance().getGuiManager().savePresets(this->getName());
     ofLogNotice("ColorScene::willFadeOut");
 }
 

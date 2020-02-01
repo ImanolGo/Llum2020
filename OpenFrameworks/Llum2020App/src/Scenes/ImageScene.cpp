@@ -67,6 +67,7 @@ void ImageScene::drawImage()
 void ImageScene::willFadeIn() {
      ofLogNotice("ImageScene::willFadeIn");
      AppManager::getInstance().getGuiManager().setUseHueColorCorrection(false);
+	 AppManager::getInstance().getGuiManager().loadPresets(this->getName());
 }
 
 void ImageScene::willDraw() {
@@ -75,6 +76,7 @@ void ImageScene::willDraw() {
 
 void ImageScene::willFadeOut() {
     ofLogNotice("ImageScene::willFadeOut");
+	AppManager::getInstance().getGuiManager().savePresets(this->getName());
 }
 
 void ImageScene::willExit() {

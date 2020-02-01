@@ -16,6 +16,8 @@
 
 
 const string GuiManager::GUI_SETTINGS_FILE_NAME = "xmls/GuiSettings.xml";
+const string GuiManager::GUI_SETTINGS_FILE_PATH = "xmls/";
+
 const string GuiManager::GUI_SETTINGS_NAME = "GUI";
 const int GuiManager::GUI_WIDTH = 300;
 
@@ -47,7 +49,7 @@ void GuiManager::setup()
     this->setupVideoGui();
     this->setupProcessingGroup();
     this->setupShadersGui();
-    this->loadGuiValues();
+	this->loadGuiValues();
     
     //this->drawGui();
 
@@ -96,11 +98,11 @@ void GuiManager::setupScenesGui()
     }
     
     m_solidColor.set( "Color", ofFloatColor::white );
-    m_parameters.add(m_solidColor);
+    m_presets.add(m_solidColor);
  
     m_useHueCorrection.set("HueCorrection", true);
     m_useHueCorrection.addListener(scenesManager, &SceneManager::setUseHueCorrection);
-    m_parameters.add(m_useHueCorrection);
+	m_presets.add(m_useHueCorrection);
 
     m_sceneTransitionTime.set("TransitionTime", 0.5, 0.0, 10);
     m_sceneTransitionTime.addListener(scenesManager, &SceneManager::onTransitionTimeChange);
@@ -156,19 +158,19 @@ void GuiManager::setupShadersGui()
     m_shadersGroup.setName("Shaders");
     
     m_shaderSpeed.set("Speed", 1.0, 0.0, 2.0);
-    m_parameters.add(m_shaderSpeed);
+	m_presets.add(m_shaderSpeed);
     m_shadersGroup.add(m_shaderSpeed);
     
     m_shaderParameter.set("Parameter", 1.0, 0.0, 5.0);
-    m_parameters.add(m_shaderParameter);
+	m_presets.add(m_shaderParameter);
     m_shadersGroup.add(m_shaderParameter);
     
     m_colorAmount.set("ColorAmount", 0.0, 0.0, 1.0);
-    m_parameters.add(m_colorAmount);
+	m_presets.add(m_colorAmount);
     m_shadersGroup.add(m_colorAmount);
     
     m_shaderDirection.set("Direction", 0, 0, 3);
-    m_parameters.add(m_shaderDirection);
+	m_presets.add(m_shaderDirection);
     m_shadersGroup.add(m_shaderDirection);
     
 }
@@ -358,37 +360,62 @@ void GuiManager::updateSize(const ofxImGui::Settings& settings)
     m_position = ofPoint(settings.windowPos.x, settings.windowPos.y);
 }
 
-void GuiManager::saveGuiValues(string path)
+
+
+void GuiManager::loadPresets(string path)
 {
-    ofLogNotice() <<"GuiManager::saveGuiValues-> saving values from: " << GUI_SETTINGS_FILE_NAME;
+	if (path.empty()) {
+		return;
+	}
+	
+	path = GUI_SETTINGS_FILE_PATH + "Preset_" + path + ".xml";
+
+	ofLogNotice() << "GuiManager::loadPresets-> loading values from: " << path;
+
+	ofXml xml;
+	xml.load(path);
+
+	ofDeserialize(xml, m_presets);
+}
+
+void GuiManager::savePresets(string path)
+{
+
+	if (path.empty()) {
+		return;
+	}
+
+	path = GUI_SETTINGS_FILE_PATH + "Preset_" + path + ".xml";
+
+    ofLogNotice() <<"GuiManager::savePresets-> saving values from: " << path;
     
     ofXml xml;
-    ofSerialize(xml, m_parameters);
-    //xml.serialize(m_parameters);
-    
-    if(path.empty()){
-        xml.save(GUI_SETTINGS_FILE_NAME);
-    }
-    else{
-        xml.save(path);
-    }
+    ofSerialize(xml, m_presets);
+   
+	xml.save(path);
    
 }
 
-void GuiManager::loadGuiValues(string path)
+void GuiManager::saveGuiValues()
+{
+
+	ofLogNotice() << "GuiManager::saveGuiValues-> saving values from: " << GUI_SETTINGS_FILE_NAME;
+
+	ofXml xml;
+	ofSerialize(xml, m_parameters);
+
+	xml.save(GUI_SETTINGS_FILE_NAME);
+
+}
+
+void GuiManager::loadGuiValues()
 {
     
     ofLogNotice() <<"GuiManager::loadGuiValues-> loading values from: " << GUI_SETTINGS_FILE_NAME;
     
     ofXml xml;
-    if(path.empty()){
-         xml.load(GUI_SETTINGS_FILE_NAME);
-    }
-    else{
-         xml.load(path);
-    }
+	xml.load(GUI_SETTINGS_FILE_NAME);
     
-    //xml.deserialize(m_parameters);
     ofDeserialize(xml, m_parameters);
 }
 

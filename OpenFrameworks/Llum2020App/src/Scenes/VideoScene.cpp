@@ -96,6 +96,7 @@ void VideoScene::willFadeIn() {
     }
 
     AppManager::getInstance().getGuiManager().setUseHueColorCorrection(false);
+	AppManager::getInstance().getGuiManager().loadPresets(this->getName());
     
 }
 
@@ -105,6 +106,7 @@ void VideoScene::willDraw() {
 
 void VideoScene::willFadeOut() {
     ofLogNotice("VideoScene::willFadeOut");
+	AppManager::getInstance().getGuiManager().savePresets(this->getName());
 }
 
 void VideoScene::willExit() {
