@@ -12,7 +12,6 @@
 #include "ofxSceneManager.h"
 #include "ofxSimpleTimer.h"
 #include "ofxFastFboReader.h"
-#include "ofxPSLevels.h"
 
 
 //========================== class SceneManager ==============================
@@ -71,22 +70,7 @@ public:
     void onChangeSceneDuration(float& value);
     
     const string& getCurrentSceneName() const {return m_currentSceneName;}
-    
-    void setContrast(float& value) {m_levels.contrast = value;}
-    
-    void setSaturation(float& value) {m_levels.saturation = value;}
-    
-    void setBrightness(float& value) {m_levels.brightness = value;}
-    
-    void setGamma(float& value) {m_levels.gamma = value;}
-    
-    void setMinInput(float& value) {m_levels.minInput = value;}
-    
-    void setMaxInput(float& value) {m_levels.maxInput = value;}
-    
-    void setMinOutput(float& value) {m_levels.minOutput = value;}
-    
-    void setMaxOutput(float& value) {m_levels.maxOutput = value;}
+ 
 
     void addVideos();
     
@@ -106,10 +90,6 @@ private:
     
     //! Set up the fbo that saves the texture.
     void setupFbo();
-    
-    void setupLevels();
-    
-    void setupShader();
     
     //! Set up the scene timer
     void setupTimer();
@@ -139,9 +119,7 @@ private:
     ofxSimpleTimer           m_sceneTimer;
     float                    m_alpha;
     ofxFastFboReader         m_reader;
-    ofxPSLevels              m_levels;
     ofParameterGroup         m_parameters;
-    ofShader                 m_hueShader;
     
     vector<string>           m_sceneList;
     string                   m_currentSceneName;

@@ -135,16 +135,17 @@ private:
     ofParameter<int>        m_viewMode;
     ofParameter<int>        m_sceneMode;
 	ofParameter<int>        m_gradientMode;
+	ofParameter<int>        m_shaderColorMode;
     ofParameter<float>      m_ledsSize;
     ofParameter<bool>       m_ledsGrid;
     
     ofParameter<int>        m_maxDataPacketSize;
     
-    ofParameter<ofFloatColor>  m_solidColor;
-    ofParameter<bool>        m_useHueCorrection;
+    ofParameter<ofFloatColor>	m_solidColor;
     
     std::vector<std::string>    m_sceneNames;
 	std::vector<std::string>    m_gradientNames;
+	std::vector<std::string>    m_shaderColorNames;
     
     ofParameter<float>      m_contrast;
     ofParameter<float>      m_saturation;

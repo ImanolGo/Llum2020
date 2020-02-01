@@ -23,6 +23,8 @@
 
 class ColorManager: public Manager
 {
+	enum Shader_Type { PASS = 0, HUE, GRADIENT };
+
 
 	static const string GRADIENTS_PATH;
     
@@ -54,9 +56,38 @@ public:
     
 	const vector<pair<string, ofImage>> & getGradients() const { return m_gradients; }
 
+	const vector<string> getShaderColorNames() { return m_shaderColorNames; }
+
 	void changeGradientIndex(int& index);
 
-	ofImage & getGradient() { return m_mainGradient; }
+	void changeShaderType(int& index);
+
+	ofTexture & getGradient() { return m_mainGradient; }
+
+
+	void beginColorLevels();
+
+	void endColorLevels();
+
+	void beginColorCorrection();
+
+	void endColorCorrection();
+
+	void setContrast(float& value) {m_contrast = value; }
+
+	void setSaturation(float& value) {m_saturation = value; }
+
+	void setBrightness(float& value) {m_brightness = value; }
+
+	void setGamma(float& value) {m_gamma = value; }
+
+	void setMinInput(float& value) {m_minInput = value; }
+
+	void setMaxInput(float& value) {m_maxInput = value; }
+
+	void setMinOutput(float& value) {m_minOutput = value; }
+
+	void setMaxOutput(float& value) {m_maxOutput = value; }
 
 
 
@@ -64,13 +95,35 @@ private:
 
 	void setupGradients();
 
+	void setupFbo();
+
+	void setupColorCorrectionShader(const string& name);
+
+	void setupShaders();
+
+	void setupColorLevelShader();
+
+
+
 
 private:
 
-	bool                     m_useHueCorrection;
-	ofFloatColor			 m_solidColor;
-	vector<pair<string, ofImage>>     m_gradients;
-	ofImage					m_mainGradient;
+	bool							m_useHueCorrection;
+	ofFloatColor					m_solidColor;
+	vector<pair<string, ofImage>>   m_gradients;
+	ofTexture						m_mainGradient;
+	ofShader						m_shaderColorCorrection, m_shaderLevelCorrection;
+	vector<std::string>				m_shaderColorNames;
+	ofFbo							m_gradientFbo;
+
+	float m_contrast;
+	float m_saturation;
+	float m_brightness;
+	float m_gamma;
+	float m_minInput;
+	float m_maxInput;
+	float m_minOutput;
+	float m_maxOutput;
 };
 
 //==========================================================================

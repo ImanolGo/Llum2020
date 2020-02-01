@@ -1,3 +1,5 @@
+#version 120
+
 uniform sampler2DRect inputTexture;
 
 uniform float contrast;

@@ -34,9 +34,6 @@ void SceneManager::setup()
 
     this->createScenes();
     this->setupFbo();
-    this->setupLevels();
-    this->setupShader();
-   // this->setupTimer();
 
     ofLogNotice() <<"SceneManager::initialized";
 
@@ -132,28 +129,6 @@ void SceneManager::setupFbo()
     
 }
 
-void SceneManager::setupLevels()
-{
-    float width = AppManager::getInstance().getSettingsManager().getAppWidth();
-    float height = AppManager::getInstance().getSettingsManager().getAppHeight();
-    
-    m_levels.setup(width,height);
-}
-
-void SceneManager::setupShader()
-{
-    string path = "shaders/ColorHueShader";
-    
-    m_hueShader.unload();
-    if(m_hueShader.load(path))
-    {
-        ofLogNotice() << "SceneManager::setupShader-> successfully loaded " << path;
-    }
-    else{
-        ofLogNotice() << + "SceneManager::setupShader-> Cannot load " << path;
-    }
-}
-
 
 void SceneManager::setupTimer()
 {
@@ -184,42 +159,20 @@ void SceneManager::updateFbo()
 {
 	bool useHue = AppManager::getInstance().getColorManager().getUseHueCorrection();
 
-    m_levels.begin();
+	m_fboColor.begin();
         ofClear(0);
-        ofEnableAlphaBlending();
+		AppManager::getInstance().getColorManager().beginColorCorrection();
          m_mySceneManager->draw();
-         ofDisableAlphaBlending();
-    m_levels.end();
+		 AppManager::getInstance().getColorManager().endColorCorrection();
+	m_fboColor.end();
     
-    m_fboColor.begin();
-    ofClear(0,0,0);
-       ofPushStyle();
-        ofSetColor(255);
-        ofEnableAlphaBlending();
-            m_levels.draw();
-        ofDisableAlphaBlending();
-		ofPopStyle();
-    m_fboColor.end();
     
     m_fbo.begin();
-    ofClear(0,0,0);
-    ofPushStyle();
-    ofSetColor(255);
-    ofEnableAlphaBlending();
-    if(useHue){
-        auto floatColor = AppManager::getInstance().getColorManager().getSolidColor();
-        m_hueShader.begin();
-        m_hueShader.setUniform4f("color", floatColor);
-        
-    }
-    
+    ofClear(0);
+		AppManager::getInstance().getColorManager().beginColorLevels();
         m_fboColor.draw(0,0);
-    
-    if(useHue){
-        m_hueShader.end();
-    }
-    ofDisableAlphaBlending();
-    ofPopStyle();
+		AppManager::getInstance().getColorManager().endColorLevels();
+   
     m_fbo.end();
 }
 

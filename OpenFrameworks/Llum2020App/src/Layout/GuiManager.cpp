@@ -110,24 +110,32 @@ void GuiManager::setupColorsGui()
 	m_colorsGroup.setName("Colors");
 
 	m_gradientNames.clear();
-	m_gradientMode.set("Gradient", 0);
-	m_gradientMode.addListener(colorManager, &ColorManager::changeGradientIndex);
-	m_colorsGroup.add(m_gradientMode);
-
 	auto & gradients = colorManager->getGradients();
 
 	for (int i = 0; i < gradients.size(); i++) {
 		m_gradientNames.push_back(gradients[i].first);
 	}
+	m_gradientMode.set("Gradient", 0);
+	m_gradientMode.addListener(colorManager, &ColorManager::changeGradientIndex);
+	m_colorsGroup.add(m_gradientMode);
+
 
 
 	m_solidColor.set("Color", ofFloatColor::white);
 	m_solidColor.addListener(colorManager, &ColorManager::setSolidColor);
 	m_presets.add(m_solidColor);
 
-	m_useHueCorrection.set("HueCorrection", true);
-	m_useHueCorrection.addListener(colorManager, &ColorManager::setUseHueCorrection);
-	m_presets.add(m_useHueCorrection);
+
+	m_shaderColorNames.clear();
+	auto & shader_names = colorManager->getShaderColorNames();
+
+	for (int i = 0; i < shader_names.size(); i++) {
+		m_shaderColorNames.push_back(shader_names[i]);
+	}
+	
+	m_shaderColorMode.set("Correction", 0);
+	m_shaderColorMode.addListener(colorManager, &ColorManager::changeShaderType);
+	m_colorsGroup.add(m_shaderColorMode);
 
 }
 
@@ -199,47 +207,47 @@ void GuiManager::setupShadersGui()
 
 void GuiManager::setupProcessingGroup()
 {
-    auto scenesManager = &AppManager::getInstance().getSceneManager();
+    auto colorManager = &AppManager::getInstance().getColorManager();
     
     m_postProcessingGroup.setName("Post Processing");
     
     m_contrast.set("Contrast", 1.0, 0.0, 2.0);
-    m_contrast.addListener(scenesManager, &SceneManager::setContrast);
+    m_contrast.addListener(colorManager, &ColorManager::setContrast);
     m_parameters.add(m_contrast);
     m_postProcessingGroup.add(m_contrast);
     
     m_saturation.set("Saturation", 1.0, 0.0, 2.0);
-    m_saturation.addListener(scenesManager, &SceneManager::setSaturation);
+    m_saturation.addListener(colorManager, &ColorManager::setSaturation);
     m_parameters.add(m_saturation);
     m_postProcessingGroup.add(m_saturation);
     
     m_brightness.set("Brightness", 1.0, 0.0, 2.0);
-    m_brightness.addListener(scenesManager, &SceneManager::setBrightness);
+    m_brightness.addListener(colorManager, &ColorManager::setBrightness);
     m_parameters.add(m_brightness);
     m_postProcessingGroup.add(m_brightness);
     
     m_gamma.set("Gamma", 1.0, 0.0, 2.0);
-    m_gamma.addListener(scenesManager, &SceneManager::setGamma);
+    m_gamma.addListener(colorManager, &ColorManager::setGamma);
     m_parameters.add(m_gamma);
     m_postProcessingGroup.add(m_gamma);
     
     m_minInput.set("MinInput", 0.0, 0.0, 1.0);
-    m_minInput.addListener(scenesManager, &SceneManager::setMinInput);
+    m_minInput.addListener(colorManager, &ColorManager::setMinInput);
     m_parameters.add(m_minInput);
     m_postProcessingGroup.add(m_minInput);
     
     m_maxInput.set("MaxInput", 1.0, 0.0, 1.0);
-    m_maxInput.addListener(scenesManager, &SceneManager::setMaxInput);
+    m_maxInput.addListener(colorManager, &ColorManager::setMaxInput);
     m_parameters.add(m_maxInput);
     m_postProcessingGroup.add(m_maxInput);
     
     m_minOutput.set("MinOutput", 0.0, 0.0, 1.0);
-    m_minOutput.addListener(scenesManager, &SceneManager::setMinOutput);
+    m_minOutput.addListener(colorManager, &ColorManager::setMinOutput);
     m_parameters.add(m_minOutput);
     m_postProcessingGroup.add(m_minOutput);
     
     m_maxOutput.set("MaxOutput", 1.0, 0.0, 1.0);
-    m_maxOutput.addListener(scenesManager, &SceneManager::setMaxOutput);
+    m_maxOutput.addListener(colorManager, &ColorManager::setMaxOutput);
     m_parameters.add(m_maxOutput);
     m_postProcessingGroup.add(m_maxOutput);
 }
@@ -305,11 +313,10 @@ void GuiManager::drawGui()
 
 			if (ofxImGui::BeginTree(m_colorsGroup, mainSettings))
 			{
-				ofxImGui::AddCombo(m_gradientMode, m_gradientNames);
 				ofxImGui::AddParameter(m_solidColor);
-				ofxImGui::AddParameter(m_useHueCorrection);
-				//ofTexture texture = AppManager::getInstance().getColorManager().getGradient().getTexture();
+				ofxImGui::AddCombo(m_gradientMode, m_gradientNames);
 				ImGui::Image(GetImTextureID(AppManager::getInstance().getColorManager().getGradient()), ImVec2(GUI_WIDTH, 50));
+				ofxImGui::AddCombo(m_shaderColorMode, m_shaderColorNames);
 				ofxImGui::EndTree(mainSettings);
 			}
             
