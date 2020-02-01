@@ -134,6 +134,7 @@ private:
     ofParameter<string>     m_videoPath;
     ofParameter<int>        m_viewMode;
     ofParameter<int>        m_sceneMode;
+	ofParameter<int>        m_gradientMode;
     ofParameter<float>      m_ledsSize;
     ofParameter<bool>       m_ledsGrid;
     
@@ -143,6 +144,7 @@ private:
     ofParameter<bool>        m_useHueCorrection;
     
     std::vector<std::string>    m_sceneNames;
+	std::vector<std::string>    m_gradientNames;
     
     ofParameter<float>      m_contrast;
     ofParameter<float>      m_saturation;

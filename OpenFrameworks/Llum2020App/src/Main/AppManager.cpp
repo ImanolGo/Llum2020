@@ -130,8 +130,9 @@ void AppManager::draw()
     
     ofBackground(17,17,17);
     m_layoutManager.draw();
-    m_guiManager.draw();    
-}
+    m_guiManager.draw();  
+	m_colorManager.draw();
+}	
 
 void AppManager::toggleDebugMode()
 {

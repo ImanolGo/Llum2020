@@ -24,6 +24,7 @@
 class ColorManager: public Manager
 {
 
+	static const string GRADIENTS_PATH;
     
 public:
     
@@ -51,15 +52,25 @@ public:
 
 	ofFloatColor getSolidColor() const { return m_solidColor; }
     
+	const vector<pair<string, ofImage>> & getGradients() const { return m_gradients; }
+
+	void changeGradientIndex(int& index);
+
+	ofImage & getGradient() { return m_mainGradient; }
+
+
 
 private:
+
+	void setupGradients();
 
 
 private:
 
 	bool                     m_useHueCorrection;
 	ofFloatColor			 m_solidColor;
-   
+	vector<pair<string, ofImage>>     m_gradients;
+	ofImage					m_mainGradient;
 };
 
 //==========================================================================

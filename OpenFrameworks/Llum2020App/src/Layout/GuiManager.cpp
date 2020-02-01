@@ -109,6 +109,18 @@ void GuiManager::setupColorsGui()
 	auto colorManager = &AppManager::getInstance().getColorManager();
 	m_colorsGroup.setName("Colors");
 
+	m_gradientNames.clear();
+	m_gradientMode.set("Gradient", 0);
+	m_gradientMode.addListener(colorManager, &ColorManager::changeGradientIndex);
+	m_colorsGroup.add(m_gradientMode);
+
+	auto & gradients = colorManager->getGradients();
+
+	for (int i = 0; i < gradients.size(); i++) {
+		m_gradientNames.push_back(gradients[i].first);
+	}
+
+
 	m_solidColor.set("Color", ofFloatColor::white);
 	m_solidColor.addListener(colorManager, &ColorManager::setSolidColor);
 	m_presets.add(m_solidColor);
@@ -293,8 +305,11 @@ void GuiManager::drawGui()
 
 			if (ofxImGui::BeginTree(m_colorsGroup, mainSettings))
 			{
+				ofxImGui::AddCombo(m_gradientMode, m_gradientNames);
 				ofxImGui::AddParameter(m_solidColor);
 				ofxImGui::AddParameter(m_useHueCorrection);
+				//ofTexture texture = AppManager::getInstance().getColorManager().getGradient().getTexture();
+				ImGui::Image(GetImTextureID(AppManager::getInstance().getColorManager().getGradient()), ImVec2(GUI_WIDTH, 50));
 				ofxImGui::EndTree(mainSettings);
 			}
             
