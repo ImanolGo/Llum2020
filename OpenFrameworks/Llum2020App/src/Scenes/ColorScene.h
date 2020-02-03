@@ -9,7 +9,6 @@
 #pragma once
 
 #include "ofxScene.h"
-#include "RectangleVisual.h"
 
 class ColorScene : public ofxScene {
 
@@ -44,16 +43,11 @@ public:
     
 private:
     
-    void setupFbo();
-    
-    void updateFbo();
-    
-    void drawFbo();
+   
     
 private:
     
     
-    ofFbo         m_fbo;
     bool          m_initialized;
 
 };

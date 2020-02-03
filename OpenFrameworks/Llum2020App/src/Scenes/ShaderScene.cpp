@@ -79,7 +79,7 @@ void ShaderScene::updateTime()
 void ShaderScene::updateFbo()
 {
     m_fbo.begin();
-    ofClear(0);
+    ofClear(0,255);
     this->drawShader();
     m_fbo.end();
 }

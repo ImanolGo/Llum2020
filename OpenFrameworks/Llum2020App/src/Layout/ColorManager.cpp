@@ -104,7 +104,7 @@ void ColorManager::changeShaderType(int& index)
 			this->setupColorCorrectionShader("ColorHueShader");
 			break;
 		case GRADIENT:
-			this->setupColorCorrectionShader("ColorGradientShader");
+			this->setupColorCorrectionShader("ColorGradingShader");
 			break;
 	}
 }
@@ -122,11 +122,11 @@ void ColorManager::draw()
 
 void ColorManager::beginColorCorrection()
 {
-	ofDisableArbTex();
+	//ofDisableArbTex();
 	m_shaderColorCorrection.begin();
 	m_shaderColorCorrection.setUniform4f("color", m_solidColor);
 	m_shaderColorCorrection.setUniformTexture("texGradient", m_gradientFbo.getTexture(), 1);
-
+	m_shaderColorCorrection.setUniform2f("size", glm::vec2(m_gradientFbo.getWidth(), m_gradientFbo.getHeight()));
 }
 
 void ColorManager::endColorCorrection()

@@ -128,6 +128,9 @@ void SceneManager::setupFbo()
     
     m_fboColor.allocate(width, height, GL_RGBA);
     m_fboColor.begin(); ofClear(0); m_fboColor.end();
+
+	m_fboScene.allocate(width, height, GL_RGBA);
+	m_fboScene.begin(); ofClear(0); m_fboScene.end();
      
 }
 
@@ -162,21 +165,29 @@ void SceneManager::updateFbo()
 	bool useHue = AppManager::getInstance().getColorManager().getUseHueCorrection();
 
 	ofEnableAlphaBlending();
+
+	m_fboScene.begin();
+		ofClear(0, 0, 0, 255);
+		ofSetColor(255);
+		m_mySceneManager->draw();
+	m_fboScene.end();
+
+
 	m_fboColor.begin();
-        ofClear(0,0,0,0);
+        ofClear(0,0,0,255);
 		ofSetColor(255);
 		AppManager::getInstance().getColorManager().beginColorCorrection();
-         m_mySceneManager->draw();
-		 AppManager::getInstance().getColorManager().endColorCorrection();
+		 m_fboScene.draw(0,0);
+		AppManager::getInstance().getColorManager().endColorCorrection();
 	m_fboColor.end();
     
     
 
     m_fbo.begin();
-		ofClear(0, 0, 0, 0);
-		//AppManager::getInstance().getColorManager().beginColorLevels();
+		ofClear(0, 0, 0, 255);
+		AppManager::getInstance().getColorManager().beginColorLevels();
         m_fboColor.draw(0,0);
-		//AppManager::getInstance().getColorManager().endColorLevels();
+		AppManager::getInstance().getColorManager().endColorLevels();
    
     m_fbo.end();
 }

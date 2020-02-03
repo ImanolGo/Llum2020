@@ -115,7 +115,7 @@ private:
 private:
 
     shared_ptr<ofxSceneManager>          m_mySceneManager;
-    ofFbo                    m_fbo, m_fboColor;
+    ofFbo                    m_fbo, m_fboColor, m_fboScene;
     ofxSimpleTimer           m_sceneTimer;
     float                    m_alpha;
     ofxFastFboReader         m_reader;

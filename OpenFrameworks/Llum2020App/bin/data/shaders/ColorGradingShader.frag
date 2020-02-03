@@ -2,6 +2,7 @@
 
 uniform sampler2DRect tex0;
 uniform sampler2DRect texGradient;
+uniform vec2 size;
 
 varying vec2 texCoordVarying;
 
@@ -18,8 +19,8 @@ void main()
     vec4 tex = texture2DRect(tex0, texCoordVarying);
     float brightness = luma(tex); 
 
-    vec2 coord = vec2(brightness, 0.5);
-    vec4 color = texture2DRect(texGradient, coord);
+    vec2 coord = vec2(brightness*size.x, size.y*0.5);
+    vec4 outputCol = texture2DRect(texGradient, coord);
 
-    gl_FragColor = vec4(color.rgb*brightness, tex.a);
+    gl_FragColor = vec4(outputCol.rgb, tex.a);
 }

@@ -29,49 +29,27 @@ void ColorScene::setup() {
     
     
     ofLogNotice(getName() + "::setup");
-    this->setupFbo();
     
     m_initialized = true;
-}
-
-void ColorScene::setupFbo()
-{
-    float width = AppManager::getInstance().getSettingsManager().getAppWidth();
-    float height = AppManager::getInstance().getSettingsManager().getAppHeight();
-    
-	m_fbo.allocate(width, height, GL_RGBA);
-	m_fbo.begin(); ofClear(0, 0, 0, 0); m_fbo.end();
 }
 
 
 void ColorScene::update()
 {
-    this->updateFbo();
-}
-
-void ColorScene::updateFbo()
-{
-    auto floatColor = AppManager::getInstance().getColorManager().getSolidColor();
-    //auto color = ofColor(floatColor.b*255, floatColor.g*255, floatColor.b*255 );
-   // m_rectangle.setColor(floatColor);
-
-	m_fbo.begin();
-		ofSetColor(floatColor);
-		ofDrawRectangle(0, 0,  m_fbo.getWidth(), m_fbo.getHeight());
-	m_fbo.end();
-    
+    //
 }
 
 
 void ColorScene::draw()
 {
+	float width = AppManager::getInstance().getSettingsManager().getAppWidth();
+	float height = AppManager::getInstance().getSettingsManager().getAppHeight();
+	auto & floatColor = AppManager::getInstance().getColorManager().getSolidColor();
 
-	this->drawFbo();
-}
-
-void ColorScene::drawFbo()
-{
-    m_fbo.draw(0,0);
+	ofPushStyle();
+		ofSetColor(floatColor);
+		ofDrawRectangle(0,0, width, height);
+	ofPopStyle();
 }
 
 void ColorScene::willFadeIn() {
