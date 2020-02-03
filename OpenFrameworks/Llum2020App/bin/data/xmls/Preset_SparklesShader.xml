@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <group>
+	<Gradient>1</Gradient>
 	<Color>0.592559, 0.92241, 0.981567, 1</Color>
+	<Correction>1</Correction>
 	<Speed>0.235</Speed>
 	<Parameter>0.672</Parameter>
 	<ColorAmount>0.143</ColorAmount>

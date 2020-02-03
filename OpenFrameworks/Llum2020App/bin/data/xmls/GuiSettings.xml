@@ -1,8 +1,6 @@
 <?xml version="1.0"?>
 <group>
-	<Color>0.723502, 0.0800187, 0.0800187, 1</Color>
-	<HueCorrection>1</HueCorrection>
-	<TransitionTime>0.5</TransitionTime>
+	<TransitionTime>1.723</TransitionTime>
 	<Size>8.403</Size>
 	<Grid>0</Grid>
 	<VideoPath>/media/imanolgo/DATA/GoogleDrive/Freelancing/2020/KontrastMoment/KontrastMomentDress/Software/OpenFrameworks/KontrastMomentDressApp/bin/data/images</VideoPath>
@@ -14,9 +12,4 @@
 	<MaxInput>1</MaxInput>
 	<MinOutput>0</MinOutput>
 	<MaxOutput>1</MaxOutput>
-	<Speed>1.807</Speed>
-	<Parameter>0.525</Parameter>
-	<ColorAmount>0</ColorAmount>
-	<Direction>0</Direction>
-	<MaxDataSize>200</MaxDataSize>
 </group>

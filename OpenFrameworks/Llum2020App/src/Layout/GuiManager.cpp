@@ -98,7 +98,7 @@ void GuiManager::setupScenesGui()
         m_sceneNames.push_back(scenesManager->getSceneName(i));
     }
 
-    m_sceneTransitionTime.set("TransitionTime", 0.5, 0.0, 10);
+    m_sceneTransitionTime.set("TransitionTime", 2.0, 0.0, 10);
     m_sceneTransitionTime.addListener(scenesManager, &SceneManager::onTransitionTimeChange);
     m_parameters.add(m_sceneTransitionTime);
 
@@ -118,6 +118,7 @@ void GuiManager::setupColorsGui()
 	m_gradientMode.set("Gradient", 0);
 	m_gradientMode.addListener(colorManager, &ColorManager::changeGradientIndex);
 	m_colorsGroup.add(m_gradientMode);
+	m_presets.add(m_gradientMode);
 
 
 
@@ -136,6 +137,7 @@ void GuiManager::setupColorsGui()
 	m_shaderColorMode.set("Correction", 0);
 	m_shaderColorMode.addListener(colorManager, &ColorManager::changeShaderType);
 	m_colorsGroup.add(m_shaderColorMode);
+	m_presets.add(m_shaderColorMode);
 
 }
 
@@ -303,6 +305,15 @@ void GuiManager::drawGui()
     
             ImGui::Text("%.1f FPS (%.3f ms/frame)", ofGetFrameRate(), 1000.0f / ImGui::GetIO().Framerate);
             
+			if (ImGui::Button("Save Gui"))
+			{
+				this->saveGuiValues();
+			}
+
+			if (ImGui::Button("Load Gui"))
+			{
+				this->loadGuiValues();
+			}
            
             if (ofxImGui::BeginTree(m_scenesGroup, mainSettings))
             {

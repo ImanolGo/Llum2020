@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <group>
+	<Gradient>0</Gradient>
 	<Color>1, 1, 1, 1</Color>
+	<Correction>0</Correction>
 	<Speed>1</Speed>
 	<Parameter>1</Parameter>
 	<ColorAmount>0</ColorAmount>

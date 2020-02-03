@@ -8,7 +8,6 @@
 
 #include "ofMain.h"
 
-
 #include "SceneManager.h"
 #include "scenes.h"
 #include "AppManager.h"
