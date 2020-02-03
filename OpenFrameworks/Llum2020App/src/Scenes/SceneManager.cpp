@@ -117,6 +117,9 @@ void SceneManager::setupFbo()
     float width = AppManager::getInstance().getSettingsManager().getAppWidth();
     float height = AppManager::getInstance().getSettingsManager().getAppHeight();
     
+
+	ofLogNotice() << "SceneManager::setupFbos << width =  " << width << ", height = " << height;
+
     //float width = ofGetWidth();
     //float height = ofGetHeight();
 
@@ -125,8 +128,7 @@ void SceneManager::setupFbo()
     
     m_fboColor.allocate(width, height, GL_RGBA);
     m_fboColor.begin(); ofClear(0); m_fboColor.end();
-    
-    
+     
 }
 
 
@@ -161,19 +163,20 @@ void SceneManager::updateFbo()
 
 	ofEnableAlphaBlending();
 	m_fboColor.begin();
-        ofClear(0,255);
-		//AppManager::getInstance().getColorManager().beginColorCorrection();
+        ofClear(0,0,0,0);
+		ofSetColor(255);
+		AppManager::getInstance().getColorManager().beginColorCorrection();
          m_mySceneManager->draw();
-		// AppManager::getInstance().getColorManager().endColorCorrection();
+		 AppManager::getInstance().getColorManager().endColorCorrection();
 	m_fboColor.end();
     
     
 
     m_fbo.begin();
-		ofClear(0,255);
-		AppManager::getInstance().getColorManager().beginColorLevels();
+		ofClear(0, 0, 0, 0);
+		//AppManager::getInstance().getColorManager().beginColorLevels();
         m_fboColor.draw(0,0);
-		AppManager::getInstance().getColorManager().endColorLevels();
+		//AppManager::getInstance().getColorManager().endColorLevels();
    
     m_fbo.end();
 }

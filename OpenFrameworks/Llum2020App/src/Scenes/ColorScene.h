@@ -44,17 +44,17 @@ public:
     
 private:
     
-    void setupRectangle();
+    void setupFbo();
     
-    void updateRectangle();
+    void updateFbo();
     
-    void drawRectangle();
+    void drawFbo();
     
 private:
     
     
-    RectangleVisual         m_rectangle;
-    bool                    m_initialized;
+    ofFbo         m_fbo;
+    bool          m_initialized;
 
 };
 

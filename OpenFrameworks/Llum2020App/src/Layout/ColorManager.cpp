@@ -70,6 +70,8 @@ void ColorManager::setupColorLevelShader()
 
 void ColorManager::setupColorCorrectionShader(const string& name)
 {
+	//string path = ofToDataPath("shaders/" + name);
+
 	string path = "shaders/" + name;
 
 	m_shaderColorCorrection.unload();

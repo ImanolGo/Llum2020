@@ -29,49 +29,54 @@ void ColorScene::setup() {
     
     
     ofLogNotice(getName() + "::setup");
-    this->setupRectangle();
+    this->setupFbo();
     
     m_initialized = true;
 }
 
-void ColorScene::setupRectangle()
+void ColorScene::setupFbo()
 {
     float width = AppManager::getInstance().getSettingsManager().getAppWidth();
     float height = AppManager::getInstance().getSettingsManager().getAppHeight();
     
-    m_rectangle = RectangleVisual(ofPoint(0), width, height, false);
+	m_fbo.allocate(width, height, GL_RGBA);
+	m_fbo.begin(); ofClear(0, 0, 0, 0); m_fbo.end();
 }
 
 
 void ColorScene::update()
 {
-    this->updateRectangle();
+    this->updateFbo();
 }
 
-void ColorScene::updateRectangle()
+void ColorScene::updateFbo()
 {
     auto floatColor = AppManager::getInstance().getColorManager().getSolidColor();
     //auto color = ofColor(floatColor.b*255, floatColor.g*255, floatColor.b*255 );
    // m_rectangle.setColor(floatColor);
-    m_rectangle.setColor(ofColor::white);
+
+	m_fbo.begin();
+		ofSetColor(floatColor);
+		ofDrawRectangle(0, 0,  m_fbo.getWidth(), m_fbo.getHeight());
+	m_fbo.end();
     
 }
 
 
 void ColorScene::draw()
 {
-    ofBackground(0,0,0);
-    this->drawRectangle();
+
+	this->drawFbo();
 }
 
-void ColorScene::drawRectangle()
+void ColorScene::drawFbo()
 {
-    m_rectangle.draw();
+    m_fbo.draw(0,0);
 }
 
 void ColorScene::willFadeIn() {
      ofLogNotice("ColorScene::willFadeIn");
-     AppManager::getInstance().getGuiManager().setColorCorrectionType(1);
+     AppManager::getInstance().getGuiManager().setColorCorrectionType(0);
 	 AppManager::getInstance().getGuiManager().loadPresets(this->getName());
 }
 
