@@ -159,16 +159,18 @@ void SceneManager::updateFbo()
 {
 	bool useHue = AppManager::getInstance().getColorManager().getUseHueCorrection();
 
+	ofEnableAlphaBlending();
 	m_fboColor.begin();
-        ofClear(0);
-		AppManager::getInstance().getColorManager().beginColorCorrection();
+        ofClear(0,255);
+		//AppManager::getInstance().getColorManager().beginColorCorrection();
          m_mySceneManager->draw();
-		 AppManager::getInstance().getColorManager().endColorCorrection();
+		// AppManager::getInstance().getColorManager().endColorCorrection();
 	m_fboColor.end();
     
     
+
     m_fbo.begin();
-    ofClear(0);
+		ofClear(0,255);
 		AppManager::getInstance().getColorManager().beginColorLevels();
         m_fboColor.draw(0,0);
 		AppManager::getInstance().getColorManager().endColorLevels();

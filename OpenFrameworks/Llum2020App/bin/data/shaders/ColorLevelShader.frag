@@ -2,6 +2,8 @@
 
 uniform sampler2DRect inputTexture;
 
+varying vec2 texCoordVarying;
+
 uniform float contrast;
 uniform float saturation;
 uniform float brightness;
@@ -54,7 +56,7 @@ vec3 ContrastSaturationBrightness(vec3 color, float brt, float sat, float con)
 void main ()
 {
     // Sample the input pixel
-    vec4 colorIn = texture2DRect (inputTexture, gl_TexCoord [ 0 ].xy);
+    vec4 colorIn = texture2DRect (inputTexture, texCoordVarying);
     vec4 colorOut;
     // csb first
     colorOut.rgb = ContrastSaturationBrightness(colorIn.rgb, brightness, saturation, contrast);

@@ -55,7 +55,7 @@ void AppManager::setupOF()
     ofSetLogLevel(OF_LOG_NOTICE);
     ofSetVerticalSync(false);
     ofSetFrameRate(60);
-	ofDisableArbTex();
+	//ofDisableArbTex();
     
     
     //ofSetEscapeQuitsApp(false);
@@ -93,7 +93,6 @@ void AppManager::setupManagers()
 {
     m_settingsManager.setup();
     m_resourceManager.setup();
-	m_colorManager.setup();
     //m_viewManager.setup();
     m_visualEffectsManager.setup();
     m_layoutManager.setup();
@@ -101,6 +100,7 @@ void AppManager::setupManagers()
     m_ledsManager.setup();
     m_modelManager.setup();
     m_keyboardManager.setup();
+	m_colorManager.setup();
     m_sceneManager.setup();
   
     m_guiManager.setup();

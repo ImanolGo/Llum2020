@@ -36,10 +36,10 @@ void ColorManager::setup()
 
     ofLogNotice() <<"ColorManager::initialized";
 	
+	this->setupFbo();
 	this->setupGradients();
 	this->setupShaders();
-	this->setupFbo();
-
+	
 	m_shaderColorNames = {"Original", "Hue", "Gradient"};
 
 
@@ -49,13 +49,14 @@ void ColorManager::setup()
 
 void ColorManager::setupShaders()
 {
+	//ofDisableArbTex();
 	this->setupColorCorrectionShader("ColorPassShader");
 	this->setupColorLevelShader();
 }
 
 void ColorManager::setupColorLevelShader()
 {
-	string path = "shaders/ColorLevelShader";
+	string path = ofToDataPath("shaders/ColorLevelShader");
 
 	m_shaderLevelCorrection.unload();
 	if (m_shaderLevelCorrection.load(path))
@@ -119,6 +120,7 @@ void ColorManager::draw()
 
 void ColorManager::beginColorCorrection()
 {
+	ofDisableArbTex();
 	m_shaderColorCorrection.begin();
 	m_shaderColorCorrection.setUniform4f("color", m_solidColor);
 	m_shaderColorCorrection.setUniformTexture("texGradient", m_gradientFbo.getTexture(), 1);
