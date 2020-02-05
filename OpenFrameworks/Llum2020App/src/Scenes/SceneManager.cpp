@@ -32,8 +32,8 @@ void SceneManager::setup()
 	Manager::setup();
 
     this->createScenes();
-    this->setupFbo();
-
+    this->setupFbos();
+	
     ofLogNotice() <<"SceneManager::initialized";
 
 }
@@ -98,6 +98,14 @@ void SceneManager::createScenes()
     m_mySceneManager->addScene(shaderScene);
     m_sceneOffset++;
 
+	//Create Etsatic Scene
+	scene = ofPtr<ofxScene>(new VectorFieldScene("Ecstatic"));
+	m_mySceneManager->addScene(scene);
+
+	//Create Melancholic
+	auto vectorScene = ofPtr<VectorFieldScene>(new VectorFieldScene("MELANCHOLIC"));
+	vectorScene->setAdditiveBlend(true);
+	m_mySceneManager->addScene(vectorScene);
 
     
     float width = AppManager::getInstance().getSettingsManager().getAppWidth();
@@ -111,7 +119,7 @@ void SceneManager::createScenes()
 }
 
 
-void SceneManager::setupFbo()
+void SceneManager::setupFbos()
 {
     float width = AppManager::getInstance().getSettingsManager().getAppWidth();
     float height = AppManager::getInstance().getSettingsManager().getAppHeight();
@@ -168,7 +176,9 @@ void SceneManager::updateFbo()
 	m_fboScene.begin();
 		ofClear(0, 0, 0, 255);
 		ofSetColor(255);
+		AppManager::getInstance().getColorManager().beginBlur();
 		m_mySceneManager->draw();
+		AppManager::getInstance().getColorManager().endBlur();
 	m_fboScene.end();
 
 

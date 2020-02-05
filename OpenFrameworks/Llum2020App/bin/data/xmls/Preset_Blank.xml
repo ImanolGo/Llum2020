@@ -3,8 +3,23 @@
 	<Gradient>0</Gradient>
 	<Color>1, 1, 1, 1</Color>
 	<Correction>0</Correction>
-	<Speed>1</Speed>
+	<Contrast>1</Contrast>
+	<Saturation>1</Saturation>
+	<Brightness>1</Brightness>
+	<Gamma>1</Gamma>
+	<Blur>0.756</Blur>
+	<MinInput>0</MinInput>
+	<MaxInput>1</MaxInput>
+	<MinOutput>0</MinOutput>
+	<MaxOutput>1</MaxOutput>
+	<Speed>0</Speed>
 	<Parameter>1</Parameter>
 	<ColorAmount>0</ColorAmount>
 	<Direction>0</Direction>
+	<Dir__Mag_>0</Dir__Mag_>
+	<Size>6</Size>
+	<Num>800</Num>
+	<Fade>0</Fade>
+	<Vect__Speed>0.2</Vect__Speed>
+	<Randomness>0.5</Randomness>
 </group>

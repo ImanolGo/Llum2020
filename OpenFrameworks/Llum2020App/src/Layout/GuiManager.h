@@ -99,6 +99,8 @@ private:
     
     void setupLedsGui();
 
+	void setupParticlesGui();
+
     void setupProcessingGroup();
     
     void updateSize(const ofxImGui::Settings& settings);
@@ -123,6 +125,7 @@ private:
     ofParameterGroup m_scenesGroup;
     ofParameterGroup m_postProcessingGroup;
     ofParameterGroup m_shadersGroup;
+	ofParameterGroup m_particlesGroup;
     ofParameterGroup m_communicationsGroup;
     
     ofParameter<float>      m_sceneTransitionTime;
@@ -157,6 +160,16 @@ private:
     ofParameter<float>      m_minOutput;
     ofParameter<float>      m_maxOutput;
     ofParameter<float>      m_blur;
+
+	ofParameter<float>      m_particlesDirection;
+	ofParameter<float>      m_particlesDirectionMag;
+	ofParameter<float>      m_particlesSpeed;
+	ofParameter<float>      m_particlesSize;
+	ofParameter<float>      m_particlesFade;
+	ofParameter<int>        m_particlesNum;
+	ofParameter<float>      m_particlesVectSpeed;
+	ofParameter<float>      m_particlesRandomness;
+	ofParameter<float>      m_particlesBlur;
     
     float m_width, m_height;
     ofPoint   m_position;

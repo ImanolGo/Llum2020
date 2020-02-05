@@ -14,3 +14,4 @@
 #include "ImageScene.h"
 #include "ColorScene.h"
 #include "ShaderScene.h"
+#include "VectorFieldScene.h"

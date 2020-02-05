@@ -50,6 +50,7 @@ void GuiManager::setup()
     this->setupVideoGui();
     this->setupProcessingGroup();
     this->setupShadersGui();
+	this->setupParticlesGui();
 	this->loadGuiValues();
     
     //this->drawGui();
@@ -215,42 +216,48 @@ void GuiManager::setupProcessingGroup()
     
     m_contrast.set("Contrast", 1.0, 0.0, 2.0);
     m_contrast.addListener(colorManager, &ColorManager::setContrast);
-    m_parameters.add(m_contrast);
+    m_presets.add(m_contrast);
     m_postProcessingGroup.add(m_contrast);
     
     m_saturation.set("Saturation", 1.0, 0.0, 2.0);
     m_saturation.addListener(colorManager, &ColorManager::setSaturation);
-    m_parameters.add(m_saturation);
+	m_presets.add(m_saturation);
     m_postProcessingGroup.add(m_saturation);
     
     m_brightness.set("Brightness", 1.0, 0.0, 2.0);
     m_brightness.addListener(colorManager, &ColorManager::setBrightness);
-    m_parameters.add(m_brightness);
+	m_presets.add(m_brightness);
     m_postProcessingGroup.add(m_brightness);
     
     m_gamma.set("Gamma", 1.0, 0.0, 2.0);
     m_gamma.addListener(colorManager, &ColorManager::setGamma);
-    m_parameters.add(m_gamma);
+	m_presets.add(m_gamma);
     m_postProcessingGroup.add(m_gamma);
-    
+
+	m_blur.set("Blur", 1.0, 0.0, 10.0);
+	m_blur.addListener(colorManager, &ColorManager::onChangeBlur);
+	m_presets.add(m_blur);
+	m_postProcessingGroup.add(m_blur);
+	
+  
     m_minInput.set("MinInput", 0.0, 0.0, 1.0);
     m_minInput.addListener(colorManager, &ColorManager::setMinInput);
-    m_parameters.add(m_minInput);
+	m_presets.add(m_minInput);
     m_postProcessingGroup.add(m_minInput);
     
     m_maxInput.set("MaxInput", 1.0, 0.0, 1.0);
     m_maxInput.addListener(colorManager, &ColorManager::setMaxInput);
-    m_parameters.add(m_maxInput);
+	m_presets.add(m_maxInput);
     m_postProcessingGroup.add(m_maxInput);
     
     m_minOutput.set("MinOutput", 0.0, 0.0, 1.0);
     m_minOutput.addListener(colorManager, &ColorManager::setMinOutput);
-    m_parameters.add(m_minOutput);
+	m_presets.add(m_minOutput);
     m_postProcessingGroup.add(m_minOutput);
     
     m_maxOutput.set("MaxOutput", 1.0, 0.0, 1.0);
     m_maxOutput.addListener(colorManager, &ColorManager::setMaxOutput);
-    m_parameters.add(m_maxOutput);
+	m_presets.add(m_maxOutput);
     m_postProcessingGroup.add(m_maxOutput);
 }
 
@@ -270,6 +277,54 @@ void GuiManager::setupLedsGui()
     m_ledsGrid.addListener(ledsManager, &LedsManager::setGrid);
     m_ledsGroup.add(m_ledsGrid);
     m_parameters.add(m_ledsGrid);
+}
+
+void GuiManager::setupParticlesGui()
+{
+	auto particlesManager = &AppManager::getInstance().getParticlesManager();
+
+	m_particlesGroup.setName("Particles");
+
+	m_particlesDirection.set("Direction", 0.0, 0.0, 360.0);
+	m_particlesDirection.addListener(particlesManager, &ParticlesManager::setDirecction);
+	m_presets.add(m_particlesDirection);
+	m_particlesGroup.add(m_particlesDirection);
+
+	m_particlesDirectionMag.set("Dir. Mag.", 0.0, 0.0, 2.0);
+	m_particlesDirectionMag.addListener(particlesManager, &ParticlesManager::setDirecctionMag);
+	m_presets.add(m_particlesDirectionMag);
+	m_particlesGroup.add(m_particlesDirectionMag);
+
+	m_particlesSpeed.set("Speed", 0.0, 0.0, 10.0);
+	m_particlesSpeed.addListener(particlesManager, &ParticlesManager::setSpeed);
+	m_presets.add(m_particlesSpeed);
+	m_particlesGroup.add(m_particlesSpeed);
+
+	m_particlesSize.set("Size", 6.0, 0.0, 200.0);
+	m_particlesSize.addListener(particlesManager, &ParticlesManager::setSize);
+	m_presets.add(m_particlesSize);
+	m_particlesGroup.add(m_particlesSize);
+
+	m_particlesNum.set("Num", 800, 0, 1500);
+	m_particlesNum.addListener(particlesManager, &ParticlesManager::setNum);
+	m_presets.add(m_particlesNum);
+	m_particlesGroup.add(m_particlesNum);
+
+	m_particlesFade.set("Fade", 0.0, 0.0, 60.0);
+	m_particlesFade.addListener(particlesManager, &ParticlesManager::setFadeTime);
+	m_presets.add(m_particlesFade);
+	m_particlesGroup.add(m_particlesFade);
+
+	m_particlesVectSpeed.set("Vect. Speed", 0.2, 0.0, 2.0);
+	m_particlesVectSpeed.addListener(particlesManager, &ParticlesManager::setVectorSpeed);
+	m_presets.add(m_particlesVectSpeed);
+	m_particlesGroup.add(m_particlesVectSpeed);
+
+	m_particlesRandomness.set("Randomness", 0.5, 0.0, 5.0);
+	m_particlesRandomness.addListener(particlesManager, &ParticlesManager::setRandonmess);
+	m_presets.add(m_particlesRandomness);
+	m_particlesGroup.add(m_particlesRandomness);
+
 }
 
 
@@ -364,7 +419,7 @@ void GuiManager::drawGui()
                 ofxImGui::AddParameter(m_postProcessingGroup.getFloat("Contrast"));
                 ofxImGui::AddParameter(m_postProcessingGroup.getFloat("Saturation"));
                 ofxImGui::AddParameter(m_postProcessingGroup.getFloat("Brightness"));
-                //ofxImGui::AddParameter(m_postProcessingGroup.getFloat("Blur"));
+                ofxImGui::AddParameter(m_postProcessingGroup.getFloat("Blur"));
                 ofxImGui::AddParameter(m_postProcessingGroup.getFloat("Gamma"));
                 ofxImGui::AddParameter(m_postProcessingGroup.getFloat("MinInput"));
                 ofxImGui::AddParameter(m_postProcessingGroup.getFloat("MaxInput"));
@@ -382,6 +437,13 @@ void GuiManager::drawGui()
                 ofxImGui::AddParameter(m_shadersGroup.getInt("Direction"));
                 ofxImGui::EndTree(mainSettings);
             }
+
+			if (ofxImGui::BeginTree(m_particlesGroup, mainSettings))
+			{
+				//auto & group =
+				ofxImGui::AddGroup(m_particlesGroup, mainSettings);
+				ofxImGui::EndTree(mainSettings);
+			}
             
             
         }

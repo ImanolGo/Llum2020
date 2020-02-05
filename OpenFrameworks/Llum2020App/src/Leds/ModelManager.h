@@ -30,7 +30,7 @@ class ModelManager: public Manager
         //! Destructor
         ~ModelManager();
 
-        //! Setup the Vase Manager
+        //! Setup the Model Manager
         void setup();
 
         //! Update the Model Manager

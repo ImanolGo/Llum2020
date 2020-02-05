@@ -39,6 +39,7 @@ void ColorManager::setup()
 	this->setupFbo();
 	this->setupGradients();
 	this->setupShaders();
+	this->setupBlur();
 	
 	m_shaderColorNames = {"Original", "Hue", "Gradient"};
 
@@ -53,6 +54,14 @@ void ColorManager::setupShaders()
 	this->setupColorCorrectionShader("ColorPassShader");
 	this->setupColorLevelShader();
 }
+void ColorManager::setupBlur()
+{
+	float width = AppManager::getInstance().getSettingsManager().getAppWidth();
+	float height = AppManager::getInstance().getSettingsManager().getAppHeight();
+	m_blur.setup(width, height);
+	//m_blur.setScale(0.05);
+}
+
 
 void ColorManager::setupColorLevelShader()
 {
@@ -119,6 +128,19 @@ void ColorManager::draw()
 {
 	m_mainGradient.draw(300, 300);
 }
+
+void ColorManager::beginBlur()
+{
+	m_blur.begin();
+}
+
+void ColorManager::endBlur()
+{
+	m_blur.end();
+	m_blur.draw();
+}
+
+
 
 void ColorManager::beginColorCorrection()
 {
@@ -221,6 +243,11 @@ void ColorManager::changeGradientIndex(int& index)
 
 	//m_mainGradient = m_gradients[index].second;
 
+}
+
+void ColorManager::onChangeBlur(float& value)
+{
+	m_blur.setScale(value);
 }
 
 

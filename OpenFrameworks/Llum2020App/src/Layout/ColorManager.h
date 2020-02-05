@@ -12,6 +12,7 @@
 #pragma once
 
 #include "Manager.h"
+#include "ofxBlur.h"
 
 //========================== class ColorManager ==============================
 //============================================================================
@@ -64,6 +65,13 @@ public:
 
 	ofTexture & getGradient() { return m_mainGradient; }
 
+	void onChangeBlur(float& value);
+
+	void setupBlur();
+
+	void beginBlur();
+
+	void endBlur();
 
 	void beginColorLevels();
 
@@ -108,6 +116,7 @@ private:
 
 private:
 
+	ofxBlur							m_blur;
 	bool							m_useHueCorrection;
 	ofFloatColor					m_solidColor;
 	vector<pair<string, ofImage>>   m_gradients;

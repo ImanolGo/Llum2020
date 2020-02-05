@@ -22,3 +22,4 @@
 #include "ModelManager.h"
 #include "VideoManager.h"
 #include "ColorManager.h"
+#include "ParticlesManager.h"

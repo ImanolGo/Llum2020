@@ -71,7 +71,6 @@ public:
     
     const string& getCurrentSceneName() const {return m_currentSceneName;}
  
-
     void addVideos();
     
     void setVideoIndex(int value);
@@ -89,7 +88,7 @@ private:
     void createScenes();
     
     //! Set up the fbo that saves the texture.
-    void setupFbo();
+    void setupFbos();
     
     //! Set up the scene timer
     void setupTimer();
