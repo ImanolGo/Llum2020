@@ -7,7 +7,7 @@
 	<Saturation>1</Saturation>
 	<Brightness>1</Brightness>
 	<Gamma>1</Gamma>
-	<Blur>0.756</Blur>
+	<Blur>0</Blur>
 	<MinInput>0</MinInput>
 	<MaxInput>1</MaxInput>
 	<MinOutput>0</MinOutput>

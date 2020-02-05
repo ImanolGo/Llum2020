@@ -63,17 +63,15 @@ void VectorFieldScene::updateVectorField()
 
 void VectorFieldScene::updateFbo()
 {
-    ofEnableAlphaBlending();
     m_fbo.begin();
-    //ofClear(0);
+    ofClear(0);
     this->drawVectorField();
     m_fbo.end();
 }
 
 void VectorFieldScene::draw()
 {
-    ofEnableAlphaBlending();
-    ofClear(0,0,0,255);
+    ofClear(0);
     //ofBackground(color);
     m_fbo.draw(0,0);
 }

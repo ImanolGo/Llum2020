@@ -56,10 +56,12 @@ void ColorManager::setupShaders()
 }
 void ColorManager::setupBlur()
 {
+	ofLogNotice() << "ColorManager::setupBlur";
+
 	float width = AppManager::getInstance().getSettingsManager().getAppWidth();
 	float height = AppManager::getInstance().getSettingsManager().getAppHeight();
 	m_blur.setup(width, height);
-	//m_blur.setScale(0.05);
+	m_blur.setScale(0.0);
 }
 
 

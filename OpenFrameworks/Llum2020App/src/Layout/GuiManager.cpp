@@ -234,7 +234,7 @@ void GuiManager::setupProcessingGroup()
 	m_presets.add(m_gamma);
     m_postProcessingGroup.add(m_gamma);
 
-	m_blur.set("Blur", 1.0, 0.0, 10.0);
+	m_blur.set("Blur", 0.0, 0.0, 10.0);
 	m_blur.addListener(colorManager, &ColorManager::onChangeBlur);
 	m_presets.add(m_blur);
 	m_postProcessingGroup.add(m_blur);

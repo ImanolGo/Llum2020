@@ -13,7 +13,7 @@
 const int VectorFieldVisual::NUM_PARTICLES = 1500;
 
 
-VectorFieldVisual::VectorFieldVisual():m_speed(0.02), m_spacing(20), m_skipFrames(0), m_fadeTime(8), m_size(20), m_isAdditiveBlend(false)
+VectorFieldVisual::VectorFieldVisual():m_speed(0.02), m_spacing(20), m_skipFrames(0), m_fadeTime(8), m_size(20), m_isAdditiveBlend(true)
 {
     //Intentionaly left empty
 }
@@ -39,7 +39,7 @@ void VectorFieldVisual::setupFbo()
 {
     float width = AppManager::getInstance().getSettingsManager().getAppWidth();
     float height  = AppManager::getInstance().getSettingsManager().getAppHeight();
-    m_fbo.allocate(width,height, GL_RGBA32F);
+    m_fbo.allocate(width,height, GL_RGBA32F_ARB);
     m_fbo.begin(); ofClear(0); m_fbo.end();
 }
 
@@ -131,36 +131,27 @@ void VectorFieldVisual::updateParticles()
 
 void VectorFieldVisual::updateFbo()
 {
-    float fClearOpacity =  1.0;
-    float framesToDie = 255/fClearOpacity;
-    float dt = ofGetLastFrameTime();
-    //float fadeTime = 2.0;
-    int numSkipFrames = m_fadeTime/(framesToDie*dt);
-    m_skipFrames++;
+	float fadeAmnt = 10.0;
+	float framesToDie = 255.0 / fadeAmnt;
+	float dt = ofGetLastFrameTime();
+	int numSkipFrames = m_fadeTime / (framesToDie*dt);
+	m_skipFrames++;
     
+	ofEnableAlphaBlending();
+	//ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+
     m_fbo.begin();
     
   
     
 	if (m_skipFrames >= numSkipFrames) {
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_ONE, GL_ONE);
-		glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
-
-		//auto color = AppManager::getInstance().getGuiManager().getColor(0);
-
-		// ofSetColor(color.r, color.g, color.b, (int)fClearOpacity);
-		ofSetColor(0, (int)fClearOpacity);
+		
+		ofSetColor(0, fadeAmnt);
 		ofFill();
 		ofDrawRectangle(0, 0, m_fbo.getWidth(), m_fbo.getHeight());
-
 		m_skipFrames = 0;
 	}
 
-		glDisable(GL_BLEND);
-		glBlendEquation(GL_FUNC_ADD);
-		glBlendFunc(GL_SRC_COLOR, GL_DST_COLOR);
-    
         this->drawParticles();
    
      m_fbo.end();
@@ -190,8 +181,7 @@ void VectorFieldVisual::drawParticles()
         for( int i=0; i<m_numParticles; i++){
             m_particles[i].draw();
         }
-         ofDisableBlendMode();
-         ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+  
     }
     else{
         //m_thickLineShader.begin();

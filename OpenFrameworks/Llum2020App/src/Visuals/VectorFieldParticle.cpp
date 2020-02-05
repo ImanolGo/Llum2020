@@ -12,7 +12,7 @@
 
 const float VectorFieldParticle:: SCREEN_OFFSET = 2;
 
-VectorFieldParticle::VectorFieldParticle(): m_maxSpeed(2), m_height(10), m_randomness(0.5), m_isUsingTexture(false)
+VectorFieldParticle::VectorFieldParticle(): m_maxSpeed(2), m_height(10), m_randomness(0.5), m_isUsingTexture(false), m_color(ofColor(10))
 {
     this->setup();
 }

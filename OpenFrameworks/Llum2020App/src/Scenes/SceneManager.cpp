@@ -194,9 +194,11 @@ void SceneManager::updateFbo()
 
     m_fbo.begin();
 		ofClear(0, 0, 0, 255);
-		AppManager::getInstance().getColorManager().beginColorLevels();
-        m_fboColor.draw(0,0);
-		AppManager::getInstance().getColorManager().endColorLevels();
+		//AppManager::getInstance().getColorManager().beginColorLevels();
+  //      m_fboColor.draw(0,0);
+		//AppManager::getInstance().getColorManager().endColorLevels();
+
+		m_mySceneManager->draw();
    
     m_fbo.end();
 }
