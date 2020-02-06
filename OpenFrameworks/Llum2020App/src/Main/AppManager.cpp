@@ -105,6 +105,7 @@ void AppManager::setupManagers()
     m_sceneManager.setup();
   
     m_guiManager.setup();
+	m_guiManager.loadPresets("BlankScene");
 }
 
 void AppManager::update()
@@ -114,6 +115,7 @@ void AppManager::update()
     
     
     m_visualEffectsManager.update();
+	m_guiManager.update();
     //m_viewManager.update();
    // m_videoManager.update();
 	m_particlesManager.update();
@@ -121,7 +123,7 @@ void AppManager::update()
     m_ledsManager.update();
     m_modelManager.update();
     m_layoutManager.update();
-    m_guiManager.update();
+   
 }
 
 
@@ -133,7 +135,9 @@ void AppManager::draw()
     
     ofBackground(17,17,17);
     m_layoutManager.draw();
+	//m_sceneManager.draw();
     m_guiManager.draw();  
+	//ofDisableArbTex();
 }	
 
 void AppManager::toggleDebugMode()

@@ -90,6 +90,8 @@ void TestScene::draw()
     float height = AppManager::getInstance().getSettingsManager().getAppHeight();
 
     ofClear(0);
+	ofSetColor(0);
+	ofDrawRectangle(0, 0, width, height);
     this->drawRectangles();
 }
 

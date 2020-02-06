@@ -33,7 +33,6 @@ void SceneManager::setup()
 
     this->createScenes();
     this->setupFbos();
-	
     ofLogNotice() <<"SceneManager::initialized";
 
 }
@@ -110,12 +109,15 @@ void SceneManager::createScenes()
     
     float width = AppManager::getInstance().getSettingsManager().getAppWidth();
     float height = AppManager::getInstance().getSettingsManager().getAppHeight();
+	this->onTransitionTimeChange(m_transitionTime);
     
     m_mySceneManager->run(width, height);
-    this->onTransitionTimeChange(m_transitionTime);
+    
     
     ofLogNotice() <<"SceneManager::createScenes-> w = " << width << ", h = " << height;
     ofLogNotice() <<"SceneManager::createScenes-> transition time = " << m_transitionTime << "s";
+
+
 }
 
 
@@ -130,13 +132,13 @@ void SceneManager::setupFbos()
     //float width = ofGetWidth();
     //float height = ofGetHeight();
 
-    m_fbo.allocate(width, height, GL_RGBA);
+    m_fbo.allocate(width, height, GL_RGB);
     m_fbo.begin(); ofClear(0); m_fbo.end();
     
-    m_fboColor.allocate(width, height, GL_RGBA);
-    m_fboColor.begin(); ofClear(0); m_fboColor.end();
+    m_fboColor.allocate(width, height, GL_RGB);
+    m_fboColor.begin(); ofClear(0, 255); m_fboColor.end();
 
-	m_fboScene.allocate(width, height, GL_RGBA);
+	m_fboScene.allocate(width, height, GL_RGB);
 	m_fboScene.begin(); ofClear(0); m_fboScene.end();
      
 }
@@ -169,37 +171,32 @@ void SceneManager::update()
 
 void SceneManager::updateFbo()
 {
-	bool useHue = AppManager::getInstance().getColorManager().getUseHueCorrection();
 
 	ofEnableAlphaBlending();
 
 	m_fboScene.begin();
-		ofClear(0, 0, 0, 255);
-		ofSetColor(255);
-		AppManager::getInstance().getColorManager().beginBlur();
-		m_mySceneManager->draw();
-		AppManager::getInstance().getColorManager().endBlur();
+		//AppManager::getInstance().getColorManager().beginBlur();
+		//m_mySceneManager->draw();
+		//AppManager::getInstance().getColorManager().endBlur();
+
+		ofSetColor(0);
+		ofDrawRectangle(0, 0, m_fbo.getWidth(), m_fbo.getHeight());
 	m_fboScene.end();
 
 
-	m_fboColor.begin();
-        ofClear(0,0,0,255);
-		ofSetColor(255);
-		AppManager::getInstance().getColorManager().beginColorCorrection();
-		 m_fboScene.draw(0,0);
-		AppManager::getInstance().getColorManager().endColorCorrection();
-	m_fboColor.end();
+	//m_fboColor.begin();
+ //       ofClear(0);
+	//	AppManager::getInstance().getColorManager().beginColorCorrection();
+	//	 m_fboScene.draw(0,0);
+	//	AppManager::getInstance().getColorManager().endColorCorrection();
+	//m_fboColor.end();
     
     
-
     m_fbo.begin();
-		ofClear(0, 0, 0, 255);
-		//AppManager::getInstance().getColorManager().beginColorLevels();
-  //      m_fboColor.draw(0,0);
-		//AppManager::getInstance().getColorManager().endColorLevels();
-
-		m_mySceneManager->draw();
-   
+		ofClear(0);
+		AppManager::getInstance().getColorManager().beginColorLevels();
+		m_fboScene.draw(0,0);
+		AppManager::getInstance().getColorManager().endColorLevels();
     m_fbo.end();
 }
 

@@ -22,8 +22,12 @@ void BlankScene::update() {
 }
 
 void BlankScene::draw() {
-    ofBackground(0);
-    //ofBackgroundGradient( ofColor(255,0,0), ofColor(0,255,0), OF_GRADIENT_CIRCULAR );
+
+	float width = AppManager::getInstance().getSettingsManager().getAppWidth();
+	float height = AppManager::getInstance().getSettingsManager().getAppHeight();
+	ofClear(0);
+	ofSetColor(0);
+	ofDrawRectangle(0, 0, width, height);
 }
 
 void BlankScene::willFadeIn() {

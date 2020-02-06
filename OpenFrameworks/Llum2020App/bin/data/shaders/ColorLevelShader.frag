@@ -4,15 +4,15 @@ uniform sampler2DRect inputTexture;
 
 varying vec2 texCoordVarying;
 
-uniform float contrast;
-uniform float saturation;
-uniform float brightness;
+uniform float contrast = 1.0;
+uniform float saturation= 1.0;
+uniform float brightness= 1.0;
 
-uniform float gamma;
-uniform float minInput;
-uniform float maxInput;
-uniform float minOutput;
-uniform float maxOutput;
+uniform float gamma = 1.0;
+uniform float minInput= 0.0;
+uniform float maxInput = 1.0;
+uniform float minOutput= 0.0;
+uniform float maxOutput= 1.0;
 
 
 /*

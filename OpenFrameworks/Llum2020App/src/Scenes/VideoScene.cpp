@@ -69,7 +69,9 @@ void VideoScene::updateVideo()
 void VideoScene::draw()
 {
     ofBackground(0,0,0);
-    this->drawVideo();
+	AppManager::getInstance().getColorManager().beginColorCorrection();
+	this->drawVideo();
+	AppManager::getInstance().getColorManager().endColorCorrection();
 }
 
 void VideoScene::drawVideo()

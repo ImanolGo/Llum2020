@@ -60,6 +60,17 @@ void VectorFieldScene::updateVectorField()
     m_vectorField.update();
 }
 
+void VectorFieldScene::setColors()
+{
+	int numParticles = m_vectorField.getNumParticles();
+	for (int i = 0; i < numParticles; i++) {
+		int index = floor(ofRandom(1, 5));
+		//int index = 1;
+		//auto color = AppManager::getInstance().getGuiManager().getColor(index);
+		ofColor color = ofColor(50, 50, 50);
+		m_vectorField.setColor(i, color);
+	}
+}
 
 void VectorFieldScene::updateFbo()
 {
@@ -73,7 +84,9 @@ void VectorFieldScene::draw()
 {
     ofClear(0);
     //ofBackground(color);
-    m_fbo.draw(0,0);
+	AppManager::getInstance().getColorManager().beginColorCorrection();
+	m_fbo.draw(0, 0);
+	AppManager::getInstance().getColorManager().endColorCorrection();
 }
 
 void VectorFieldScene::drawVectorField()
@@ -89,6 +102,7 @@ void VectorFieldScene::drawVectorField()
 void VectorFieldScene::willFadeIn() {
     ofLogNotice("VectorFieldScene::willFadeIn");
 	AppManager::getInstance().getGuiManager().loadPresets(this->getName());
+	this->setColors();
     m_vectorField.resetParticles();
     
 }

@@ -268,7 +268,7 @@ void GuiManager::setupLedsGui()
     auto sceneManager = &AppManager::getInstance().getSceneManager();
     
     m_ledsGroup.setName("Leds");
-    m_ledsSize.set("Size", 1.0, 0.0, 20.0);
+    m_ledsSize.set("LedSize", 1.0, 0.0, 20.0);
     m_ledsSize.addListener(ledsManager, &LedsManager::setSize);
     m_ledsGroup.add(m_ledsSize);
     m_parameters.add(m_ledsSize);
@@ -285,7 +285,7 @@ void GuiManager::setupParticlesGui()
 
 	m_particlesGroup.setName("Particles");
 
-	m_particlesDirection.set("Direction", 0.0, 0.0, 360.0);
+	m_particlesDirection.set("Field Direction", 0.0, 0.0, 360.0);
 	m_particlesDirection.addListener(particlesManager, &ParticlesManager::setDirecction);
 	m_presets.add(m_particlesDirection);
 	m_particlesGroup.add(m_particlesDirection);
@@ -295,17 +295,17 @@ void GuiManager::setupParticlesGui()
 	m_presets.add(m_particlesDirectionMag);
 	m_particlesGroup.add(m_particlesDirectionMag);
 
-	m_particlesSpeed.set("Speed", 0.0, 0.0, 10.0);
+	m_particlesSpeed.set("Field Speed", 0.0, 0.0, 10.0);
 	m_particlesSpeed.addListener(particlesManager, &ParticlesManager::setSpeed);
 	m_presets.add(m_particlesSpeed);
 	m_particlesGroup.add(m_particlesSpeed);
 
-	m_particlesSize.set("Size", 6.0, 0.0, 200.0);
+	m_particlesSize.set("Particle Size", 6.0, 0.0, 200.0);
 	m_particlesSize.addListener(particlesManager, &ParticlesManager::setSize);
 	m_presets.add(m_particlesSize);
 	m_particlesGroup.add(m_particlesSize);
 
-	m_particlesNum.set("Num", 800, 0, 1500);
+	m_particlesNum.set("NumParticles", 800, 0, 1500);
 	m_particlesNum.addListener(particlesManager, &ParticlesManager::setNum);
 	m_presets.add(m_particlesNum);
 	m_particlesGroup.add(m_particlesNum);

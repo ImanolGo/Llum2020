@@ -54,6 +54,8 @@ private:
     void updateVectorField();
     
     void drawVectorField();
+
+	void setColors();
    
     
 private:

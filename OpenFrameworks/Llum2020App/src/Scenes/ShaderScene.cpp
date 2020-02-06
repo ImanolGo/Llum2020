@@ -88,7 +88,9 @@ void ShaderScene::draw()
 {
      //ofEnableArbTex();
     ofBackground(0,0,0);
+	AppManager::getInstance().getColorManager().beginColorCorrection();
     this->drawFbo();
+	AppManager::getInstance().getColorManager().endColorCorrection();
 }
 
 void ShaderScene::drawFbo()

@@ -50,7 +50,10 @@ void ImageScene::update()
 void ImageScene::draw()
 {
     ofBackground(0,0,0);
-    this->drawImage();
+	AppManager::getInstance().getColorManager().beginColorCorrection();
+	this->drawImage();
+	AppManager::getInstance().getColorManager().endColorCorrection();
+ 
 }
 
 void ImageScene::drawImage()
