@@ -36,7 +36,7 @@ public:
     //! Draw the Vector Field Particle
     void draw();
     
-    void addForce(const ofVec2f& dir);
+    void addForce(const glm::vec3& dir);
     
     void setRandomness(float value) {m_randomness = value;}
     
@@ -44,13 +44,17 @@ public:
     
     void setSize(float size);
     
-    ofVec2f getPos() const {return m_pos;}
+    glm::vec3 getPos() const {return m_pos;}
 
 	void reset();
     
     void setColor(ofColor& color) {m_color = color;}
     
     void setUseTexture(bool value);
+
+	float getSize() { return m_size; }
+
+	ofColor & getColor() { return m_color; }
     
 private:
     
@@ -62,14 +66,16 @@ private:
     bool isOffScreen();
     
     void stayOnScreen();
+
+	void VectorFieldParticle::limit(glm::vec3& vec, float max);
     
 private:
     
-    ofVec2f     m_pos;
-    ofVec2f     m_prevPos;
-    ofVec2f     m_vel;
-    ofVec2f     m_acc;
-    float       m_maxSpeed;
+    glm::vec3     m_pos;
+	glm::vec3     m_prevPos;
+	glm::vec3     m_vel;
+	glm::vec3     m_acc;
+    float		  m_maxSpeed;
     
     ofColor     m_color;
     ImageVisual m_brush;
@@ -78,6 +84,6 @@ private:
     
     
     int     m_duration;
-    float   m_height;
+    float   m_size;
     float   m_randomness;
 };

@@ -28,9 +28,9 @@ VectorFieldVisual::~VectorFieldVisual()
 void VectorFieldVisual::setup()
 {
     this->setupFbo();
+	this->setupShader();
     this->setupVectorField();
     this->setupParticles();
-    this->setupBlur();
 }
 
 
@@ -42,6 +42,22 @@ void VectorFieldVisual::setupFbo()
     m_fbo.begin(); ofClear(0); m_fbo.end();
 }
 
+void VectorFieldVisual::setupShader()
+{
+	ofLogNotice() << "LedGroup::setupShader ";
+	ofFile file;
+	string texture1 = "images/general/brush.png";
+	if (!file.doesFileExist(texture1)) {
+		texture1 = "images/general/brush.png";
+	}
+
+	
+	m_vboShader.load("shaders/vboShader");
+
+	ofDisableArbTex();
+	ofLoadImage(m_texture, texture1);
+	ofEnableArbTex();
+}
 
 void VectorFieldVisual::setupVectorField()
 {
@@ -62,30 +78,36 @@ void VectorFieldVisual::setupVectorField()
 
 void VectorFieldVisual::setupParticles()
 {
+	m_points.clear();
+	m_sizes.clear();
+	m_colors.clear();
+
     for( int i=0; i<NUM_PARTICLES; i++)
     {
         m_particles.push_back(VectorFieldParticle());
+		m_sizes.push_back(glm::vec3(m_particles.back().getSize()));
+		m_points.push_back(m_particles.back().getPos());
+		m_colors.push_back(m_particles.back().getColor());
     }
+
+	// upload the data to the vbo
+	int total = (int)m_points.size();
+	m_vbo.setVertexData(&m_points[0], total, GL_STATIC_DRAW);
+	m_vbo.setNormalData(&m_sizes[0], total, GL_STATIC_DRAW);
+	m_vbo.setColorData(&m_colors[0], total, GL_DYNAMIC_DRAW);
 }
 
 void VectorFieldVisual::resetParticles()
 {
-    m_fbo.begin(); ofClear(0); m_fbo.end();
-    
-	for (int i = 0; i<m_particles.size(); i++)
+	m_fbo.begin(); ofClear(0); m_fbo.end();
+
+	for (int i = 0; i < m_particles.size(); i++)
 	{
 		m_particles[i].reset();
 	}
+}
     
-    this->setupBlur();
-}
-void VectorFieldVisual::setupBlur()
-{
-    float width = AppManager::getInstance().getSettingsManager().getAppWidth();
-    float height  = AppManager::getInstance().getSettingsManager().getAppHeight();
-    m_blur.setup(width, height);
-    //m_blur.setScale(0.05);
-}
+
 
 void VectorFieldVisual::update()
 {
@@ -106,10 +128,22 @@ void VectorFieldVisual::updateParticles()
     
     for( int i=0; i<m_particles.size(); i++)
     {
-        auto force = m_vectorField.getVectorInterpolated(m_particles[i].getPos().x, m_particles[i].getPos().y, width, height*1.2);
-        m_particles[i].addForce(force);
-        m_particles[i].update();
+		if (i< m_numParticles) {
+			auto force = m_vectorField.getVectorInterpolated(m_particles[i].getPos().x, m_particles[i].getPos().y, width, height*1.2);
+			m_particles[i].addForce(glm::vec3(force.x, force.y, 0.0));
+			m_particles[i].update();
+			m_points[i] = m_particles[i].getPos();
+			m_sizes[i] = glm::vec3(m_particles[i].getSize());
+			m_colors[i] = m_particles[i].getColor();
+		}
+		else {
+			m_sizes[i] = glm::vec3(0);
+		}
     }
+
+	m_vbo.setVertexData(&m_points[0], m_points.size(), GL_STATIC_DRAW);
+	m_vbo.setNormalData(&m_sizes[0], m_sizes.size(), GL_STATIC_DRAW);
+	m_vbo.setColorData(&m_colors[0], m_colors.size(), GL_DYNAMIC_DRAW);
 }
 
 void VectorFieldVisual::updateFbo()
@@ -171,7 +205,20 @@ void VectorFieldVisual::drawParticles()
             m_particles[i].draw();
         }
     }
-    
+
+	//if (m_isAdditiveBlend) {
+	//	ofEnableBlendMode(OF_BLENDMODE_ADD);
+	//}
+
+	//ofEnablePointSprites();
+	//m_shader.begin();
+	//m_texture.bind();
+	//m_vbo.draw(GL_POINTS, 0, (int)m_points.size());
+	//m_texture.unbind();
+	//m_shader.end();
+	//ofDisablePointSprites();
+	//ofDisableBlendMode();
+
 	ofDisableBlendMode();
 }
 
@@ -187,12 +234,10 @@ void VectorFieldVisual::addParameters(ParticleParameters& parameters)
         m_particles[i].setRandomness(parameters.randomness);
         
     }
-    
-   
+  
     m_numParticles = (int) ofClamp(parameters.num, 0, m_particles.size());
     m_fadeTime = parameters.fadeTime;
     //m_speed = parameters.vectorSpeed;
-    m_blur.setScale(parameters.blur);
 }
 
 void VectorFieldVisual::setColor(int index, ofColor& color)
@@ -205,7 +250,7 @@ void VectorFieldVisual::setColor(int index, ofColor& color)
     
 }
 
-void VectorFieldVisual::addForce(const ofVec2f& force)
+void VectorFieldVisual::addForce(const glm::vec3& force)
 {
     for( int i=0; i<m_particles.size(); i++){
         m_particles[i].addForce(force);

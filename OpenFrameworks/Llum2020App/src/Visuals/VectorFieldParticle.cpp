@@ -12,7 +12,7 @@
 
 const float VectorFieldParticle:: SCREEN_OFFSET = 2;
 
-VectorFieldParticle::VectorFieldParticle(): m_maxSpeed(2), m_height(10), m_randomness(0.5), m_isUsingTexture(false)
+VectorFieldParticle::VectorFieldParticle(): m_maxSpeed(2), m_size(10), m_randomness(0.5), m_isUsingTexture(false)
 {
     this->setup();
 }
@@ -45,8 +45,8 @@ void VectorFieldParticle::reset()
 	m_pos.x = ofRandom(0, width);
 	m_pos.y = ofRandom(0, height);
 	m_prevPos = m_pos;
-	m_vel = ofVec2f(0);
-	m_acc = ofVec2f(0);
+	m_vel = glm::vec3(0);
+	m_acc = glm::vec3(0);
 
 }
 
@@ -54,17 +54,17 @@ void VectorFieldParticle::setupBrush()
 {
     m_brush.setResource("Dot");
     m_brush.setCentred(true);
-    m_brush.setWidth(m_height,true);
+    m_brush.setWidth(m_size,true);
 }
 
 
 void VectorFieldParticle::setSize(float size)
 {
-     m_height = size;
-     m_brush.setWidth(m_height,true);
+	m_size = size;
+     m_brush.setWidth(m_size,true);
 }
 
-void VectorFieldParticle::addForce(const ofVec2f& dir)
+void VectorFieldParticle::addForce(const glm::vec3& dir)
 {
     m_acc += dir;
 }
@@ -76,10 +76,12 @@ void VectorFieldParticle::update()
     //float height  = AppManager::getInstance().getSettingsManager().getAppHeight();
     
     m_vel+=m_acc;
-    m_vel.limit(m_maxSpeed);
+	//m_vel = glm::clamp(m_vel, glm::vec3(0), glm::vec3(m_maxSpeed));
+	this->limit(m_vel, m_maxSpeed);
+    //m_vel.limit(m_maxSpeed);
     m_prevPos = m_pos;
-    m_pos+= (m_vel + ofVec2f(ofRandom(-m_randomness,m_randomness),ofRandom(-m_randomness,m_randomness)));
-    m_acc = ofVec2f(0);
+    m_pos+= (m_vel + glm::vec3(ofRandom(-m_randomness,m_randomness),ofRandom(-m_randomness,m_randomness), 0.0));
+    m_acc = glm::vec3(0);
     
     
     if(this->isOffScreen()){
@@ -92,6 +94,16 @@ void VectorFieldParticle::update()
     m_brush.setPosition(m_pos);
     m_brush.setColor(m_color);
 }
+
+void VectorFieldParticle::limit(glm::vec3& vec, float max) {
+	float lengthSquared = glm::length(vec);
+	if (lengthSquared > max*max && lengthSquared > 0) {
+		float ratio = max / (float)sqrt(lengthSquared);
+		vec *= ratio;
+	}
+}
+
+
 
 void VectorFieldParticle::draw(){
     ofPushMatrix();

@@ -50,7 +50,7 @@ void VectorFieldScene::updateVectorField()
     auto parameters = AppManager::getInstance().getParticlesManager().getParameters();
     float angleRadiands = degree2radian(parameters.direction);
 
-    ofVec2f force;
+    glm::vec3 force;
     force.x = -parameters.directionMag*sin(angleRadiands);
     force.y = parameters.directionMag*cos(angleRadiands);
     m_vectorField.addForce(force);

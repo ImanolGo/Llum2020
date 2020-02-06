@@ -1,4 +1,3 @@
-
 // ----------------------------------------------------------------
 // ofxVectorField
 // a vector field generator & animator
@@ -11,18 +10,18 @@
 
 #include "ofMain.h"
 
-#define OFX_VECFIELD_DEFALT_SPACING			5
+#define OFX_VECFIELD_DEFAULT_SPACING			5
 
 class ofxVectorField {
-	
+
 public:
-	
+
 	ofxVectorField();
 	~ofxVectorField();
-	
+
 	void setup(int w, int h, int spacing);
 	void deallocate();
-	
+
 	// draw for debugging
 	void draw();
 
@@ -30,29 +29,29 @@ public:
 	void setFromImage(ofImage & image);
 	void randomize();
 	void animate(float speed = 0.002);
-	
+
 	// getting values from the vector field
-	ofVec2f getVector(int x, int y);
-	ofVec2f getVectorInterpolated(int x, int y, int gridW, int gridH);
-	
+	glm::vec2 getVector(int x, int y);
+	glm::vec2 getVectorInterpolated(int x, int y, int gridW, int gridH);
+
 	// adjusting the vector field
-	void normalize(bool individually=false);
+	void normalize(bool individually = false);
 	void map(float min, float max, bool normalize);
 	void scale(float amt);
 	void bias(float amt);
 	void bias(float xAmt, float yAmt);
 	void blur();
-	void smudge(ofVec2f pos, ofVec2f vector);
-	
+	void smudge(glm::vec2 pos, glm::vec2 vector);
+
 	int width, height;
-	
+
 private:
 
-	ofVec2f * vectorField;
+	glm::vec2 * vectorField;
 
 	int spacing;
 	int numElements;
-	
+
 	bool bIsAllocated;
 };
 

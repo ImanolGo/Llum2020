@@ -10,7 +10,6 @@
 #include "ofxVectorField.h"
 #include "VectorFieldParticle.h"
 #include "ParticlesManager.h"
-#include "ofxBlur.h"
 
 #define radian2degree(a) (a * 57.295779513082)
 #define degree2radian(a) (a * 0.017453292519)
@@ -46,7 +45,7 @@ public:
     //! Draw the Vector Field Visual
     void draw();
     
-    void addForce(const ofVec2f& force);
+    void addForce(const glm::vec3& force);
     
     void addParameters(ParticleParameters& parameters);
     
@@ -73,11 +72,11 @@ public:
 private:
     
     void setupVectorField();
+
+	void setupShader();
     
     void setupFbo();
-    
-    void setupBlur();
-    
+     
     void setupParticles();
     
     void updateFbo();
@@ -95,6 +94,10 @@ private:
     
     ofxVectorField                 m_vectorField;
     vector <VectorFieldParticle>   m_particles;
+
+	vector <glm::vec3>       m_points;
+	vector <glm::vec3>       m_sizes;
+	vector <ofFloatColor>	 m_colors;
     
     float       m_spacing;
     float       m_speed;
@@ -102,12 +105,15 @@ private:
     int         m_skipFrames;
     
     ofFbo       m_fbo;
-    ofxBlur     m_blur;
     int         m_numParticles;
     float       m_size;
     bool        m_isAdditiveBlend;
-    
-    
+
+	ofVbo                  m_vbo;
+	ofShader               m_shader;
+	ofShader			m_vboShader;
+	ofTexture			m_texture;
+
 };
 
 
