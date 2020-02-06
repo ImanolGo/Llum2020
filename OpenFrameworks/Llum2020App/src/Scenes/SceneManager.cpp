@@ -175,12 +175,9 @@ void SceneManager::updateFbo()
 	ofEnableAlphaBlending();
 
 	m_fboScene.begin();
-		//AppManager::getInstance().getColorManager().beginBlur();
-		//m_mySceneManager->draw();
-		//AppManager::getInstance().getColorManager().endBlur();
-
-		ofSetColor(0);
-		ofDrawRectangle(0, 0, m_fbo.getWidth(), m_fbo.getHeight());
+		AppManager::getInstance().getColorManager().beginBlur();
+		m_mySceneManager->draw();
+		AppManager::getInstance().getColorManager().endBlur();
 	m_fboScene.end();
 
 

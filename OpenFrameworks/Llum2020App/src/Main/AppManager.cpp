@@ -105,7 +105,7 @@ void AppManager::setupManagers()
     m_sceneManager.setup();
   
     m_guiManager.setup();
-	m_guiManager.loadPresets("BlankScene");
+	m_guiManager.loadPresets("Blank");
 }
 
 void AppManager::update()

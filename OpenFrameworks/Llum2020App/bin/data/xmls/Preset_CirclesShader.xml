@@ -16,9 +16,11 @@
 	<Parameter>1</Parameter>
 	<ColorAmount>0</ColorAmount>
 	<Direction>0</Direction>
+	<Field_Direction>0</Field_Direction>
 	<Dir__Mag_>0</Dir__Mag_>
-	<Size>6</Size>
-	<Num>800</Num>
+	<Field_Speed>0</Field_Speed>
+	<Particle_Size>6</Particle_Size>
+	<NumParticles>800</NumParticles>
 	<Fade>0</Fade>
 	<Vect__Speed>0.2</Vect__Speed>
 	<Randomness>0.5</Randomness>
