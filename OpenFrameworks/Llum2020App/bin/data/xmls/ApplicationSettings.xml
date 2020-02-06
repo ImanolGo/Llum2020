@@ -6,6 +6,7 @@
       <window title="Llum 2020 App" x="0" y="0" width="1280" height="720" fullscreen="0" showCursor="1"/>
       <debug showCursor="1" setVerbose="0" logToFile = "0"/>
       <network ip="10.0.0.2"  portUdpSend="2390" portUdpReceive="2391" portOscSend = "7002" portOscReceive= "7003" />
+      <app request_time_ms="2000"  sceneTimer="180"/>
 
   </of_settings>
 

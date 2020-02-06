@@ -60,6 +60,10 @@ public:
     int getTcpPortReceive() const {return m_portTcpReceive;}
     
     const string& getIpAddress() const {return m_ipAddress;}
+
+	float getSceneTimer() const { return m_sceneTimer; }
+
+	int getRequestTime() const { return m_requestTimeMs; }
     
    
 private:
@@ -84,6 +88,9 @@ private:
     
     //! Loads all the textures settings
     void loadTextureSettings();
+
+	//! Loads all the app settings
+	void loadAppSettings();
     
 
     
@@ -105,6 +112,8 @@ private:
     int                     m_portOscReceive;       ///< stores the UDP port used for for the OSC receiving communications
     int                     m_portTcpReceive;       ///< stores the TCP receiving port
     string                  m_ipAddress;            ///< stores the Ip Address used for the Network communications
+	float                   m_sceneTimer;           ///< time between scenes
+	int                     m_requestTimeMs;        ///< stores the request time between checking new instagram feeds
 
 };
 

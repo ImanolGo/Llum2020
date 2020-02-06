@@ -103,6 +103,10 @@ void GuiManager::setupScenesGui()
     m_sceneTransitionTime.addListener(scenesManager, &SceneManager::onTransitionTimeChange);
     m_parameters.add(m_sceneTransitionTime);
 
+	m_sceneTimer.set("ScenesTimer", 120, 10, 240.0);
+	m_sceneTimer.addListener(scenesManager, &SceneManager::onChangeSceneDuration);
+	m_parameters.add(m_sceneTimer);
+
 }
 
 void GuiManager::setupColorsGui()
@@ -151,6 +155,18 @@ void GuiManager::onSceneChange(int sceneIndex)
         m_sceneMode = sceneIndex;
         ofLogNotice() <<"GuiManager::onSceneChange << m_sceneMode -> " << m_sceneMode;
     }
+}
+
+void GuiManager::onSceneChange(const string &sceneName)
+{
+	ofLogNotice() << "GuiManager::onSceneChange << looking for scene: " << sceneName;
+
+	for (int i = 0; i < m_sceneNames.size(); i++) {
+		if (m_sceneNames[i] == sceneName) {
+			ofLogNotice() << "GuiManager::onSceneChange << Changing to scene: " << sceneName;
+			this->onSceneChange(i);
+		}
+	}
 }
 
 
@@ -373,6 +389,7 @@ void GuiManager::drawGui()
             if (ofxImGui::BeginTree(m_scenesGroup, mainSettings))
             {
                 ofxImGui::AddParameter(m_sceneTransitionTime);
+				ofxImGui::AddParameter(m_sceneTimer);
                 ofxImGui::AddCombo(m_sceneMode, m_sceneNames);
                 ofxImGui::EndTree(mainSettings);
             }

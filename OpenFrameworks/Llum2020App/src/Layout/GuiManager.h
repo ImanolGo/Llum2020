@@ -66,6 +66,8 @@ public:
     void setupScenesGui();
     
     void onSceneChange(int sceneIndex);
+
+	void onSceneChange(const string& sceneName);
     
     void onVideoChange(int videoIndex);
     
@@ -129,6 +131,7 @@ private:
     ofParameterGroup m_communicationsGroup;
     
     ofParameter<float>      m_sceneTransitionTime;
+	ofParameter<float>      m_sceneTimer;
     ofParameter<float>      m_shaderSpeed;
     ofParameter<float>      m_shaderParameter;
     ofParameter<float>      m_colorAmount;

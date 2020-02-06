@@ -81,7 +81,7 @@ public:
     
     bool getCurrentStatus() const {return m_status;}
     
-    
+
 private:
     
     //! Create the scenes
@@ -92,6 +92,9 @@ private:
     
     //! Set up the scene timer
     void setupTimer();
+
+	//! Initializes the scene list
+	void initializeSceneList();
     
     //! Update the scene timer
     void updateTimer();
@@ -110,6 +113,12 @@ private:
     void removeVideos();
     
     void removeScenes();
+
+	//! next scene
+	void nextScene();
+
+	//! stop scenes
+	void stopScenes();
     
 private:
 

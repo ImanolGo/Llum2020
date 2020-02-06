@@ -16,7 +16,7 @@
 const string SettingsManager::APPLICATION_SETTINGS_FILE_NAME = "xmls/ApplicationSettings.xml";
 
 
-SettingsManager::SettingsManager(): Manager(), m_appHeight(0.0), m_appWidth(0.0)
+SettingsManager::SettingsManager(): Manager(), m_appHeight(0.0), m_appWidth(0.0), m_sceneTimer(0.0)
 {
     //Intentionally left empty
 }
@@ -46,6 +46,7 @@ void SettingsManager::loadAllSettings()
 {
     this->setWindowProperties();
     this->setDebugProperties();
+	this->loadAppSettings();
     this->setNetworkProperties();
     this->loadTextureSettings();
     this->loadColors();
@@ -121,6 +122,25 @@ void SettingsManager::setNetworkProperties()
     
     ofLogNotice() <<"SettingsManager::setNetworkProperties->  path not found: " << path ;
 }
+
+void SettingsManager::loadAppSettings()
+{
+	string path = "//of_settings/app";
+	auto xml = m_xml.findFirst(path);
+	if (m_xml) {
+
+		m_requestTimeMs = xml.getAttribute("request_time_ms").getIntValue();
+
+		m_sceneTimer = xml.getAttribute("sceneTimer").getFloatValue(); 
+
+			ofLogNotice() << "SettingsManager::loadAppSettings->  request time = " << m_requestTimeMs << "ms" << ", scene time = " << m_sceneTimer << "s";
+		ofLogNotice() << "SettingsManager::loadAppSettings->  successfully loaded the app settings";
+		return;
+	}
+
+	ofLogNotice() << "SettingsManager::loadAppSettings->  path not found: " << path;
+}
+
 
 void SettingsManager::setWindowProperties()
 {

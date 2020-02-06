@@ -146,27 +146,21 @@ void SceneManager::setupFbos()
 
 void SceneManager::setupTimer()
 {
-    
-    m_sceneTimer.setup( 1000 );
-    m_sceneTimer.start( false ) ;
-    ofAddListener( m_sceneTimer.TIMER_COMPLETE , this, &SceneManager::sceneTimerCompleteHandler ) ;
-    
-    ofLogNotice() <<"SceneManager::setupTimer << Time = : " << time << "s";
+	auto time = AppManager::getInstance().getSettingsManager().getSceneTimer();
+	m_sceneTimer.setup(time * 1000);
+	m_sceneTimer.start(false);
+	ofAddListener(m_sceneTimer.TIMER_COMPLETE, this, &SceneManager::sceneTimerCompleteHandler);
+
+	ofLogNotice() << "SceneManager::setupTimer << Time = : " << time << "s";
 }
 
-void SceneManager::onChangeSceneDuration(float& value)
-{
-    m_sceneTimer.setup( value*1000 );
-    m_sceneTimer.start( false ) ;
-    ofLogNotice() <<"SceneManager::setupTimer << Time = : " << value << "s";
-}
 
 void SceneManager::update()
 {
     this->updateScenes();
     this->updateFbo();
     this->updatePixels();
-    //this->updateTimer();
+    this->updateTimer();
 }
 
 void SceneManager::updateFbo()
@@ -384,10 +378,23 @@ int SceneManager::getIndex(string& sceneName)
 
 void SceneManager::sceneTimerCompleteHandler( int &args )
 {
-    m_sceneTimer.start(false);
+	this->nextScene();
 
 }
 
+void SceneManager::nextScene()
+{
+	m_sceneTimer.start(false);
+
+	if (m_sceneList.empty()) {
+		this->initializeSceneList();
+	}
+
+	string sceneName = m_sceneList.back();  m_sceneList.pop_back();
+	AppManager::getInstance().getGuiManager().onSceneChange(sceneName);
+
+	ofLogNotice() << "SceneManager::nextScene << Change Scene: " << sceneName;
+}
 
 void SceneManager::sendSceneChange()
 {
@@ -400,7 +407,17 @@ void SceneManager::sendSceneChange()
   
 }
 
+void SceneManager::onChangeSceneDuration(float& value)
+{
+	m_sceneTimer.setup(value * 1000);
+	ofLogNotice() << "SceneManager::setupTimer << Time = : " << time << "s";
+}
 
+void SceneManager::stopScenes()
+{
+	m_sceneTimer.stop();
+	ofLogNotice() << "SceneManager::nextScene << Stop Scenes!";
+}
 
 
 int SceneManager::getNumberScenes(){
@@ -409,4 +426,10 @@ int SceneManager::getNumberScenes(){
         return m_mySceneManager->scenes.size();
     }
     return 0;
+}
+
+void SceneManager::initializeSceneList()
+{
+	m_sceneList.clear();
+	m_sceneList = { "Noise","Ecstatic"};
 }
