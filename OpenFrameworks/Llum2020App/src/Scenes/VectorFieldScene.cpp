@@ -75,7 +75,7 @@ void VectorFieldScene::setColors()
 void VectorFieldScene::updateFbo()
 {
     m_fbo.begin();
-    ofClear(0);
+    ofClear(0,255);
     this->drawVectorField();
     m_fbo.end();
 }
@@ -102,7 +102,7 @@ void VectorFieldScene::drawVectorField()
 void VectorFieldScene::willFadeIn() {
     ofLogNotice("VectorFieldScene::willFadeIn");
 	AppManager::getInstance().getGuiManager().loadPresets(this->getName());
-	this->setColors();
+	//this->setColors();
     m_vectorField.resetParticles();
     
 }

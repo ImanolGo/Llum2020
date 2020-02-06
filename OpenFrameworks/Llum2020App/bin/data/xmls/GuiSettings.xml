@@ -1,15 +1,7 @@
 <?xml version="1.0"?>
 <group>
 	<TransitionTime>1.723</TransitionTime>
-	<Size>8.403</Size>
+	<LedSize>9.58</LedSize>
 	<Grid>0</Grid>
 	<VideoPath>/media/imanolgo/DATA/GoogleDrive/Freelancing/2020/KontrastMoment/KontrastMomentDress/Software/OpenFrameworks/KontrastMomentDressApp/bin/data/images</VideoPath>
-	<Contrast>1</Contrast>
-	<Saturation>1</Saturation>
-	<Brightness>1</Brightness>
-	<Gamma>0.496</Gamma>
-	<MinInput>0</MinInput>
-	<MaxInput>1</MaxInput>
-	<MinOutput>0</MinOutput>
-	<MaxOutput>1</MaxOutput>
 </group>
