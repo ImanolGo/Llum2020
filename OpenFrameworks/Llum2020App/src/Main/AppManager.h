@@ -76,6 +76,9 @@ public:
 
 	//! Returns the particles manager
 	ParticlesManager&  getParticlesManager() { return m_particlesManager; }
+
+	//! Returns the audio manager
+	AudioManager&  getAudioManager() { return m_audioManager; }
     
     void changeFrameRate(int& fps);
 
@@ -126,6 +129,7 @@ private:
     VideoManager             m_videoManager;             ///< Manages the video playback
 	ColorManager             m_colorManager;             ///< Manages the colors and gradients
 	ParticlesManager         m_particlesManager;         ///< Manages all the particles parameters
+	AudioManager			 m_audioManager;			 ///< Manages the audio, processing RMS and FFT
    
     bool                     m_debugMode;
     bool                     m_initialized;

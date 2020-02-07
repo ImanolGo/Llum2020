@@ -51,6 +51,7 @@ void GuiManager::setup()
     this->setupProcessingGroup();
     this->setupShadersGui();
 	this->setupParticlesGui();
+	this->setupAudioGui();
 	this->loadGuiValues();
     
     //this->drawGui();
@@ -344,6 +345,46 @@ void GuiManager::setupParticlesGui()
 }
 
 
+void GuiManager::setupAudioGui()
+{
+	auto audioManager = &AppManager::getInstance().getAudioManager();
+
+	m_audioGroup.setName("Audio");
+
+	m_audioVolume.set("Volume", 1.0, 0.0, 10.0);
+	m_audioVolume.addListener(audioManager, &AudioManager::onChangeVolume);
+	m_parameters.add(m_audioVolume);
+	m_audioGroup.add(m_audioVolume);
+
+	m_audioThreshold.set("Threshold", 0.5, 0.0, 1.0);
+	m_audioThreshold.addListener(audioManager, &AudioManager::onChangeThreshold);
+	m_parameters.add(m_audioThreshold);
+	m_audioGroup.add(m_audioThreshold);
+
+	m_audioSmoothing.set("Smoothing", 0.5, 0.0, 1.0);
+	m_audioSmoothing.addListener(audioManager, &AudioManager::onChangeSmoothing);
+	m_parameters.add(m_audioSmoothing);
+	m_audioGroup.add(m_audioSmoothing);
+
+	m_audioLow.set("Low", 0.0, 0.0, 1.0);
+	m_audioGroup.add(m_audioLow);
+
+	m_audioMid.set("Mid", 0.0, 0.0, 1.0);
+	m_audioGroup.add(m_audioMid);
+
+	m_audioHigh.set("High", 0.0, 0.0, 1.0);
+	m_audioGroup.add(m_audioHigh);
+
+	m_audioLowOnset.set("Low", false);
+	m_audioGroup.add(m_audioLowOnset);
+
+	m_audioMidOnset.set("Mid", false);
+	m_audioGroup.add(m_audioMidOnset);
+
+	m_audioHighOnset.set("High", false);
+	m_audioGroup.add(m_audioHighOnset);
+}
+
 void GuiManager::update()
 {
     //m_gui.update();
@@ -423,8 +464,7 @@ void GuiManager::drawGui()
             
             if (ofxImGui::BeginTree(m_ledsGroup, mainSettings))
             {
-                ofxImGui::AddParameter(m_ledsGrid);
-                ofxImGui::AddParameter(m_ledsSize);
+				ofxImGui::AddGroup(m_ledsGroup, mainSettings);
                 ofxImGui::EndTree(mainSettings);
             }
 
@@ -432,28 +472,23 @@ void GuiManager::drawGui()
             if (ofxImGui::BeginTree(m_postProcessingGroup, mainSettings))
             {
                 //auto & group =
-                
-                ofxImGui::AddParameter(m_postProcessingGroup.getFloat("Contrast"));
-                ofxImGui::AddParameter(m_postProcessingGroup.getFloat("Saturation"));
-                ofxImGui::AddParameter(m_postProcessingGroup.getFloat("Brightness"));
-                ofxImGui::AddParameter(m_postProcessingGroup.getFloat("Blur"));
-                ofxImGui::AddParameter(m_postProcessingGroup.getFloat("Gamma"));
-                ofxImGui::AddParameter(m_postProcessingGroup.getFloat("MinInput"));
-                ofxImGui::AddParameter(m_postProcessingGroup.getFloat("MaxInput"));
-                ofxImGui::AddParameter(m_postProcessingGroup.getFloat("MinOutput"));
-                ofxImGui::AddParameter(m_postProcessingGroup.getFloat("MaxOutput"));
+				ofxImGui::AddGroup(m_postProcessingGroup, mainSettings);
                 ofxImGui::EndTree(mainSettings);
             }
             
             if (ofxImGui::BeginTree(m_shadersGroup, mainSettings))
             {
                 //auto & group =
-                ofxImGui::AddParameter(m_shadersGroup.getFloat("Speed"));
-                ofxImGui::AddParameter(m_shadersGroup.getFloat("ColorAmount"));
-                ofxImGui::AddParameter(m_shadersGroup.getFloat("Parameter"));
-                ofxImGui::AddParameter(m_shadersGroup.getInt("Direction"));
+				ofxImGui::AddGroup(m_shadersGroup, mainSettings);           
                 ofxImGui::EndTree(mainSettings);
             }
+
+			if (ofxImGui::BeginTree(m_audioGroup, mainSettings))
+			{
+				//auto & group =
+				ofxImGui::AddGroup(m_audioGroup, mainSettings);
+				ofxImGui::EndTree(mainSettings);
+			}
 
 			if (ofxImGui::BeginTree(m_particlesGroup, mainSettings))
 			{

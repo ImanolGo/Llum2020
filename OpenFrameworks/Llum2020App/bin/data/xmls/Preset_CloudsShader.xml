@@ -1,8 +1,27 @@
 <?xml version="1.0"?>
 <group>
+	<Gradient>0</Gradient>
 	<Color>0.847629, 0.0552995, 1, 1</Color>
+	<Correction>1</Correction>
+	<Contrast>1</Contrast>
+	<Saturation>1</Saturation>
+	<Brightness>1</Brightness>
+	<Gamma>1</Gamma>
+	<Blur>0</Blur>
+	<MinInput>0</MinInput>
+	<MaxInput>1</MaxInput>
+	<MinOutput>0</MinOutput>
+	<MaxOutput>1</MaxOutput>
 	<Speed>0.235</Speed>
 	<Parameter>0.672</Parameter>
 	<ColorAmount>0.143</ColorAmount>
 	<Direction>0</Direction>
+	<Field_Direction>0</Field_Direction>
+	<Dir__Mag_>0</Dir__Mag_>
+	<Field_Speed>0</Field_Speed>
+	<Particle_Size>6</Particle_Size>
+	<NumParticles>800</NumParticles>
+	<Fade>0</Fade>
+	<Vect__Speed>0.2</Vect__Speed>
+	<Randomness>0.5</Randomness>
 </group>

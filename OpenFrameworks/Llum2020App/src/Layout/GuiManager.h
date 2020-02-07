@@ -83,6 +83,18 @@ public:
 
     void setColorCorrectionType(int value){m_shaderColorMode = value;}
 
+	void setAudioLow(float value) { m_audioLow = value; }
+
+	void setAudioMid(float value) { m_audioMid = value; }
+
+	void setAudioHigh(float value) { m_audioHigh = value; }
+
+	void setAudioLowOnset(bool value) { m_audioLowOnset = value; }
+
+	void setAudioMidOnset(bool value) { m_audioMidOnset = value; }
+
+	void setAudioHighOnset(bool value) { m_audioHighOnset = value; }
+
 private:
     
     void setupGuiParameters();
@@ -90,6 +102,8 @@ private:
     void drawRectangle();
     
     void drawGui();
+
+	void setupAudioGui();
     
     void setupVideoGui();
 
@@ -128,6 +142,7 @@ private:
     ofParameterGroup m_postProcessingGroup;
     ofParameterGroup m_shadersGroup;
 	ofParameterGroup m_particlesGroup;
+	ofParameterGroup m_audioGroup;
     ofParameterGroup m_communicationsGroup;
     
     ofParameter<float>      m_sceneTransitionTime;
@@ -136,6 +151,16 @@ private:
     ofParameter<float>      m_shaderParameter;
     ofParameter<float>      m_colorAmount;
     ofParameter<int>        m_shaderDirection;
+
+	ofParameter<float>      m_audioSmoothing;
+	ofParameter<float>      m_audioThreshold;
+	ofParameter<float>      m_audioVolume;
+	ofParameter<float>      m_audioLow;
+	ofParameter<float>      m_audioMid;
+	ofParameter<float>      m_audioHigh;
+	ofParameter<bool>       m_audioLowOnset;
+	ofParameter<bool>       m_audioMidOnset;
+	ofParameter<bool>       m_audioHighOnset;
     
     
     ofParameter<string>     m_videoPath;

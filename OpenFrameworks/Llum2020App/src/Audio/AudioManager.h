@@ -42,21 +42,55 @@ public:
     //! Draw the Audio Manager
     void draw();
     
-    float getMaxSound();
-    
     void onChangeVolume(float& value);
     
-    void onChangeNumPeaks(int& value){m_numPeaks = value;}
+    void onChangeSmoothing(float& value){m_smoothing = value;}
+
+	void onChangeThreshold(float& value) { m_onsetThreshold = value; }
+
+	void onChangeLowLimit(int & value) { m_lowLimit; }
+
+	void onChangeHighLimit(int & value) { m_highLimit; }
+
+	bool getLowOnset() { return m_lowOnset; }
+	
+	bool getMidOnset() { return m_midOnset; }
+
+	bool getHighOnset() { return m_highOnset; }
+
+	float getLow() { return m_low; }
+
+	float getMid() { return m_mid; }
+
+	float getHigh() { return m_high; }
+
     
 private:
     
     void setupFFT();
+
+	void updateBands();
+
+	void updateOnsets();
+
+	void drawBands();
+
+	void drawFFT();
     
     
 private:
     
     float           m_volume;
-    int             m_numPeaks;
+    int             m_lowLimit, m_highLimit;
+	float			m_smoothing;
+	float			m_lastLow, m_lastMid, m_lastHigh;
+	float			m_low, m_mid, m_high;
+	float			m_lowFlux, m_midFlux, m_highFlux;
+	float			m_onsetThreshold;
+	bool			m_lowOnset, m_highOnset, m_midOnset;
+	float			m_width, m_height;
+
+
     ofxFFTLive      m_fft;
     
 };

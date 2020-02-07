@@ -94,6 +94,7 @@ void AppManager::setupManagers()
     m_settingsManager.setup();
     m_resourceManager.setup();
     //m_viewManager.setup();
+	m_audioManager.setup();
     m_visualEffectsManager.setup();
     m_layoutManager.setup();
     m_videoManager.setup();
@@ -118,6 +119,7 @@ void AppManager::update()
 	m_guiManager.update();
     //m_viewManager.update();
    // m_videoManager.update();
+	m_audioManager.update();
 	m_particlesManager.update();
     m_sceneManager.update();
     m_ledsManager.update();
@@ -137,6 +139,7 @@ void AppManager::draw()
     m_layoutManager.draw();
 	//m_sceneManager.draw();
     m_guiManager.draw();  
+	//m_audioManager.draw();
 	//ofDisableArbTex();
 }	
 

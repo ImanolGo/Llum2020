@@ -23,3 +23,4 @@
 #include "VideoManager.h"
 #include "ColorManager.h"
 #include "ParticlesManager.h"
+#include "AudioManager.h"

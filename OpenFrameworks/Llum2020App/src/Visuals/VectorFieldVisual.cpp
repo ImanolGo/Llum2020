@@ -31,6 +31,8 @@ void VectorFieldVisual::setup()
 	this->setupShader();
     this->setupVectorField();
     this->setupParticles();
+
+	ofLogNotice() << "VectorFieldVisual::setup"; 
 }
 
 
@@ -46,10 +48,7 @@ void VectorFieldVisual::setupShader()
 {
 	ofLogNotice() << "LedGroup::setupShader ";
 	ofFile file;
-	string texture1 = "images/general/brush.png";
-	if (!file.doesFileExist(texture1)) {
-		texture1 = "images/general/brush.png";
-	}
+	string texture1 = "images/general/dot.png";
 
 	
 	m_vboShader.load("shaders/vboShader");
@@ -82,10 +81,34 @@ void VectorFieldVisual::setupParticles()
 	m_sizes.clear();
 	m_colors.clear();
 
-    for( int i=0; i<NUM_PARTICLES; i++)
+	//int   num = 500;
+	//float radius = 1000;
+	//for (int i = 0; i < num; i++) {
+
+	//	float theta1 = ofRandom(0, TWO_PI);
+	//	float theta2 = ofRandom(0, TWO_PI);
+
+	//	glm::vec3 p;
+	//	p.x = cos(theta1) * cos(theta2);
+	//	p.y = sin(theta1);
+	//	p.z = cos(theta1) * sin(theta2);
+	//	p *= radius;
+
+
+	//	m_points.push_back(p);
+	//	 we are passing the size in as a normal x position
+	//	float size = ofRandom(5, 50);
+
+	//	m_sizes.push_back(glm::vec3(size));
+
+	//}
+
+
+
+   for( int i=0; i<NUM_PARTICLES; i++)
     {
         m_particles.push_back(VectorFieldParticle());
-		m_sizes.push_back(glm::vec3(m_particles.back().getSize()));
+		m_sizes.push_back(ofVec3f(m_particles.back().getSize()));
 		m_points.push_back(m_particles.back().getPos());
 		m_colors.push_back(m_particles.back().getColor());
     }
@@ -94,7 +117,7 @@ void VectorFieldVisual::setupParticles()
 	int total = (int)m_points.size();
 	m_vbo.setVertexData(&m_points[0], total, GL_STATIC_DRAW);
 	m_vbo.setNormalData(&m_sizes[0], total, GL_STATIC_DRAW);
-	m_vbo.setColorData(&m_colors[0], total, GL_DYNAMIC_DRAW);
+	m_vbo.setColorData(&m_colors[0], total, GL_STATIC_DRAW);
 }
 
 void VectorFieldVisual::resetParticles()
@@ -125,7 +148,8 @@ void VectorFieldVisual::updateParticles()
 {
     float width = AppManager::getInstance().getSettingsManager().getAppWidth();
     float height  = AppManager::getInstance().getSettingsManager().getAppHeight();
-    
+
+
     for( int i=0; i<m_particles.size(); i++)
     {
 		if (i< m_numParticles) {
@@ -133,17 +157,17 @@ void VectorFieldVisual::updateParticles()
 			m_particles[i].addForce(glm::vec3(force.x, force.y, 0.0));
 			m_particles[i].update();
 			m_points[i] = m_particles[i].getPos();
-			m_sizes[i] = glm::vec3(m_particles[i].getSize());
+			m_sizes[i] = ofVec3f(m_particles[i].getSize());
 			m_colors[i] = m_particles[i].getColor();
 		}
 		else {
-			m_sizes[i] = glm::vec3(0);
+			m_sizes[i] = ofVec3f(0);
 		}
     }
 
-	m_vbo.setVertexData(&m_points[0], m_points.size(), GL_STATIC_DRAW);
-	m_vbo.setNormalData(&m_sizes[0], m_sizes.size(), GL_STATIC_DRAW);
-	m_vbo.setColorData(&m_colors[0], m_colors.size(), GL_DYNAMIC_DRAW);
+	m_vbo.setVertexData(&m_points[0], (int)m_points.size(), GL_STATIC_DRAW);
+	m_vbo.setNormalData(&m_sizes[0], (int)m_sizes.size(), GL_STATIC_DRAW);
+	m_vbo.setColorData(&m_colors[0], (int)m_colors.size(), GL_STATIC_DRAW);
 }
 
 void VectorFieldVisual::updateFbo()
@@ -158,9 +182,7 @@ void VectorFieldVisual::updateFbo()
 	//ofEnableBlendMode(OF_BLENDMODE_ALPHA);
 
     m_fbo.begin();
-    
-  
-    
+ 
 	if (m_skipFrames >= numSkipFrames) {
 		
 		ofSetColor(0, fadeAmnt);
