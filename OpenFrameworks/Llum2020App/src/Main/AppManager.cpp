@@ -96,6 +96,7 @@ void AppManager::setupManagers()
     //m_viewManager.setup();
 	m_audioManager.setup();
     m_visualEffectsManager.setup();
+	m_oscManager.setup();
     m_layoutManager.setup();
     m_videoManager.setup();
     m_ledsManager.setup();
@@ -116,6 +117,7 @@ void AppManager::update()
     
     
     m_visualEffectsManager.update();
+	m_oscManager.update();
 	m_guiManager.update();
     //m_viewManager.update();
    // m_videoManager.update();

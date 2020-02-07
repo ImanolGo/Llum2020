@@ -79,6 +79,9 @@ public:
 
 	//! Returns the audio manager
 	AudioManager&  getAudioManager() { return m_audioManager; }
+
+	//! Returns the osc manager
+	OscManager&  getOscManager() { return m_oscManager; }
     
     void changeFrameRate(int& fps);
 
@@ -130,6 +133,7 @@ private:
 	ColorManager             m_colorManager;             ///< Manages the colors and gradients
 	ParticlesManager         m_particlesManager;         ///< Manages all the particles parameters
 	AudioManager			 m_audioManager;			 ///< Manages the audio, processing RMS and FFT
+	OscManager			     m_oscManager;			     ///< Manages all the OSC messages
    
     bool                     m_debugMode;
     bool                     m_initialized;
