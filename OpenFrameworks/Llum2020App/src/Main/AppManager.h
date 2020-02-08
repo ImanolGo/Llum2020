@@ -82,6 +82,9 @@ public:
 
 	//! Returns the osc manager
 	OscManager&  getOscManager() { return m_oscManager; }
+
+	//! Returns the midi manager
+	MidiManager&  getMidiManager() { return m_midiManager; }
     
     void changeFrameRate(int& fps);
 
@@ -134,6 +137,7 @@ private:
 	ParticlesManager         m_particlesManager;         ///< Manages all the particles parameters
 	AudioManager			 m_audioManager;			 ///< Manages the audio, processing RMS and FFT
 	OscManager			     m_oscManager;			     ///< Manages all the OSC messages
+	MidiManager			     m_midiManager;			     ///< Manages all the MIDI messages
    
     bool                     m_debugMode;
     bool                     m_initialized;

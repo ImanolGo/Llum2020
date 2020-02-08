@@ -97,6 +97,7 @@ void AppManager::setupManagers()
 	m_audioManager.setup();
     m_visualEffectsManager.setup();
 	m_oscManager.setup();
+	m_midiManager.setup();
     m_layoutManager.setup();
     m_videoManager.setup();
     m_ledsManager.setup();

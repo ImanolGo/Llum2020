@@ -25,3 +25,4 @@
 #include "ParticlesManager.h"
 #include "AudioManager.h"
 #include "OscManager.h"
+#include "MidiManager.h"
