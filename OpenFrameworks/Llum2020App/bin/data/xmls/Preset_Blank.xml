@@ -18,7 +18,7 @@
 	<Direction>0</Direction>
 	<Field_Direction>0</Field_Direction>
 	<Dir__Mag_>0</Dir__Mag_>
-	<Field_Speed>0</Field_Speed>
+	<Field_Speed>1.765</Field_Speed>
 	<Particle_Size>6</Particle_Size>
 	<NumParticles>800</NumParticles>
 	<Fade>0</Fade>

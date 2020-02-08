@@ -52,6 +52,8 @@ private:
     void updateFbo();
     
     void updateVectorField();
+
+	void updateSpeed();
     
     void drawVectorField();
 
@@ -62,6 +64,8 @@ private:
     
     VectorFieldVisual       m_vectorField;
     ofFbo                   m_fbo;
+	float					m_addedSpeed;
+	float					m_targetAddedSpeed;
     
     
     

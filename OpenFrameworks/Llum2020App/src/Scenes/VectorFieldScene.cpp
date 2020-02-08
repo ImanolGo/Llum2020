@@ -11,7 +11,7 @@
 #include "AppManager.h"
 #include "VectorFieldScene.h"
 
-VectorFieldScene::VectorFieldScene(string name): ofxScene(name)
+VectorFieldScene::VectorFieldScene(string name): ofxScene(name), m_targetAddedSpeed(0.0), m_addedSpeed(0.0)
 {
      //Intentionally left empty
 }
@@ -38,16 +38,32 @@ void VectorFieldScene::setupFbo()
 }
 
 
-void VectorFieldScene::update() {
+void VectorFieldScene::update()
+{
     
+	this->updateSpeed();
     this->updateVectorField();
     this->updateFbo();
     
 }
+void VectorFieldScene::updateSpeed() 
+{
+	bool isOnset = AppManager::getInstance().getAudioManager().getLowOnset();
+	auto parameters = AppManager::getInstance().getParticlesManager().getParameters();
+	if (isOnset) {
+		m_addedSpeed = parameters.speed * 2.0 ;
+	}
+
+	m_addedSpeed = m_addedSpeed + (m_targetAddedSpeed - m_addedSpeed)*0.08f;
+	
+}
+
 
 void VectorFieldScene::updateVectorField()
 {
     auto parameters = AppManager::getInstance().getParticlesManager().getParameters();
+	parameters.speed += m_addedSpeed;
+
     float angleRadiands = degree2radian(parameters.direction);
 
     glm::vec3 force;
@@ -55,9 +71,10 @@ void VectorFieldScene::updateVectorField()
     force.y = parameters.directionMag*cos(angleRadiands);
     m_vectorField.addForce(force);
 
-
     m_vectorField.addParameters(parameters);    
     m_vectorField.update();
+
+	//ofLogNotice() << " speed = " << parameters.speed;
 }
 
 void VectorFieldScene::setColors()
