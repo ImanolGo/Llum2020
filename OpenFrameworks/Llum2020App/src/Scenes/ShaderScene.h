@@ -48,6 +48,8 @@ private:
     void setupFbo();
     
     void updateTime();
+
+	void updateSpeed();
     
     void updateFbo();
     
@@ -62,6 +64,8 @@ private:
     ofFbo       m_fbo;
     float       m_elapsedTime;
     bool        m_initialized;
+	float	    m_addedSpeed;
+	float	    m_targetAddedSpeed;
 
 };
 

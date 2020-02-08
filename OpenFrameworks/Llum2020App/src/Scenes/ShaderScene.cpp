@@ -9,7 +9,7 @@
 #include "ShaderScene.h"
 #include "AppManager.h"
 
-ShaderScene::ShaderScene(std::string name): ofxScene(name), m_initialized(false), m_elapsedTime(0.0)
+ShaderScene::ShaderScene(std::string name): ofxScene(name), m_initialized(false), m_elapsedTime(0.0), m_targetAddedSpeed(0.0), m_addedSpeed(0.0)
 {
     //Intentionally left empty
 }
@@ -62,14 +62,27 @@ void ShaderScene::setupShader()
 
 void ShaderScene::update()
 {
+	this->updateSpeed();
     this->updateTime();
     this->updateFbo();
+}
+
+
+void ShaderScene::updateSpeed()
+{
+	bool isOnset = AppManager::getInstance().getAudioManager().getLowOnset();
+	float speed = AppManager::getInstance().getGuiManager().getShaderSpeed();
+	if (isOnset) {
+		m_addedSpeed = speed*8;
+	}
+	
+	m_addedSpeed = m_addedSpeed + (m_targetAddedSpeed - m_addedSpeed)*0.02f;
 }
 
 void ShaderScene::updateTime()
 {
     float speed = AppManager::getInstance().getGuiManager().getShaderSpeed();
-    m_elapsedTime += (ofGetLastFrameTime()* speed);
+    m_elapsedTime += (ofGetLastFrameTime()* (speed + m_addedSpeed));
     if(m_elapsedTime<0){
         m_elapsedTime = 0;
     }
