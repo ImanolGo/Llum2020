@@ -3,7 +3,7 @@
 	<Gradient>0</Gradient>
 	<Color>0.847629, 0.0552995, 1, 1</Color>
 	<Correction>1</Correction>
-	<Contrast>1</Contrast>
+	<Contrast>1.345</Contrast>
 	<Saturation>1</Saturation>
 	<Brightness>1</Brightness>
 	<Gamma>1</Gamma>
@@ -13,7 +13,7 @@
 	<MinOutput>0</MinOutput>
 	<MaxOutput>1</MaxOutput>
 	<Speed>0.235</Speed>
-	<Parameter>0.672</Parameter>
+	<Parameter>0.273</Parameter>
 	<ColorAmount>0.143</ColorAmount>
 	<Direction>0</Direction>
 	<Field_Direction>0</Field_Direction>

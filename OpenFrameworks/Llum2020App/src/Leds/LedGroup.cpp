@@ -117,11 +117,8 @@ bool LedGroup::addLedPair(string& pathTwoD, string& pathThreeD)
         
         if(!line2D.empty() && parseLedLine(line2D,ledPosition2D) &&  !line3D.empty() && parseLedLine(line3D,ledPosition3D))
         {
-            // ledPosition2D.y = ledPosition2D.z;
-            // ledPosition2D.z = 0.0;
-
-            // ledPosition3D.z = ledPosition3D.y;
-            // ledPosition3D.y = 0.0;
+			//ledPosition2D.y = -ledPosition2D.z;
+			ledPosition2D.z = 0.0;
             this->createLedPair(ledPosition2D, ledPosition3D);
         }
         
@@ -285,8 +282,7 @@ bool LedGroup::parseLedLine(string& line, glm::vec3& position)
         return false;
     }
     
-    char chars[] = "{}";
-    removeCharsFromString(line, chars);
+
     vector <string> positionsStrings = ofSplitString(line, "," );
     
     if(positionsStrings.size()!=3){

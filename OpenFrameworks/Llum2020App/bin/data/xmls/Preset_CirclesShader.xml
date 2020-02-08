@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <group>
-	<Gradient>1</Gradient>
+	<Gradient>0</Gradient>
 	<Color>0.0228291, 0.147735, 0.990783, 1</Color>
-	<Correction>1</Correction>
+	<Correction>2</Correction>
 	<Contrast>1</Contrast>
 	<Saturation>1</Saturation>
 	<Brightness>1</Brightness>
