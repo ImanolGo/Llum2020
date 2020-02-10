@@ -26,7 +26,7 @@ public:
     ImageVisual();
     
     //! Constructor
-    ImageVisual(const ofVec3f& pos, const string& resourceName, bool centred = false);
+    ImageVisual(const glm::vec3& pos, const string& resourceName, bool centred = false);
 
     //! Destructor
     virtual ~ImageVisual();

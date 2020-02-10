@@ -18,7 +18,7 @@ ImageVisual::ImageVisual(): BasicVisual(), m_centred(false)
 }
 
 
-ImageVisual::ImageVisual(const ofVec3f& pos, const string& resourceName,bool centred):
+ImageVisual::ImageVisual(const glm::vec3& pos, const string& resourceName,bool centred):
     BasicVisual(pos, 0, 0), m_centred(centred)
 {
     this->setResource(resourceName, true);

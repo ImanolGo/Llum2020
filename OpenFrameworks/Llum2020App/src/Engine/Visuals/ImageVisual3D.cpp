@@ -7,7 +7,7 @@
 
 #include "ImageVisual3D.h"
 
-ImageVisual3D::ImageVisual3D(const ofVec3f& pos, const string& resourceName):
+ImageVisual3D::ImageVisual3D(const glm::vec3& pos, const string& resourceName):
     ImageVisual(pos, resourceName, true)
 {
     m_plane = ofPtr<ofPlanePrimitive>(new ofPlanePrimitive());

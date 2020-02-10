@@ -51,7 +51,7 @@ void ResourceManager::loadTextures()
         string textureName = it->first;
         string texturePath = it->second;
 
-        ofPtr<ofTexture> texture = ofPtr<ofTexture>(new ofTexture());
+        shared_ptr<ofTexture> texture = make_shared<ofTexture>();
 
         if(ofLoadImage(*texture,texturePath)){
             m_textures[textureName] = texture;
@@ -66,7 +66,7 @@ void ResourceManager::loadTextures()
 }
 
 
-ofPtr<ofTexture> ResourceManager::getTexture(const string& name) const
+shared_ptr<ofTexture> ResourceManager::getTexture(const string& name) const
 {
     if(this->containsTexture(name)) {
 		return m_textures.at(name);
@@ -77,7 +77,7 @@ ofPtr<ofTexture> ResourceManager::getTexture(const string& name) const
 void ResourceManager::createDefaultResource()
 {
     int resourceSize = 256;
-    m_defaultTexture = ofPtr<ofTexture>(new ofTexture());
+    m_defaultTexture = make_shared<ofTexture>();
     m_defaultTexture->allocate(DEFAULT_IMAGE_SIZE,DEFAULT_IMAGE_SIZE,GL_RGB);
 }
 
@@ -93,7 +93,7 @@ bool ResourceManager::containsTexture(const string& name) const
 
 bool ResourceManager::addTexture(string name, string path)
 {
-    ofPtr<ofTexture> texture = ofPtr<ofTexture>(new ofTexture());
+    shared_ptr<ofTexture> texture = make_shared<ofTexture>();
     
     if(ofLoadImage(*texture,path)){
         m_textures[name] = texture;

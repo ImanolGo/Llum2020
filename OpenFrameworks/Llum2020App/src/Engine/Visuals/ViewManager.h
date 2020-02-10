@@ -41,16 +41,16 @@ public:
     void update();
     
     //! Adds a visual to the 3D environment
-    void addVisual(ofPtr<BasicVisual> visual);
+    void addVisual(shared_ptr<BasicVisual> visual);
     
     //! Removes a visual to the list of elements that are rendered
-    void removeVisual(ofPtr<BasicVisual>visual);
+    void removeVisual(shared_ptr<BasicVisual>visual);
 
     //! Adds a visual as an overlay with the specified z-ordering.
-    void addOverlay(ofPtr<BasicVisual> visual,  int zOrder = 0);
+    void addOverlay(shared_ptr<BasicVisual> visual,  int zOrder = 0);
 
     //! Removes an overlay to the list of elements that are rendered
-    void removeOverlay(ofPtr<BasicVisual> visual);
+    void removeOverlay(shared_ptr<BasicVisual> visual);
     
     void showDebugMode(bool show){m_showDebugInfo=show;}
 
@@ -77,22 +77,22 @@ private:
     void setupTextVisuals();
 
     //! Returns if the overlay has already been added
-    bool isOverlayAlreadyAdded(ofPtr<BasicVisual> visual);
+    bool isOverlayAlreadyAdded(shared_ptr<BasicVisual> visual);
     
     //! Returns if the visual has already been added
-    bool isVisualAlreadyAdded(ofPtr<BasicVisual> visual);
+    bool isVisualAlreadyAdded(shared_ptr<BasicVisual> visual);
     
     
 
 private:
 
-    typedef std::pair<int, ofPtr<BasicVisual> >   Overlay;        ///< pair<zOrder,ofPtr<BasicVisual>> defines an overlay elemet
+    typedef std::pair<int, shared_ptr<BasicVisual> >   Overlay;        ///< pair<zOrder,shared_ptr<BasicVisual>> defines an overlay elemet
     typedef std::list<Overlay>                    OverlayList;    ///< list of overlay elements
-    typedef std::vector<ofPtr<BasicVisual> >      VisualList;    ///< list of visual elements
+    typedef std::vector<shared_ptr<BasicVisual> >      VisualList;    ///< list of visual elements
 
     OverlayList             m_overlays;         ///< list of all overlays that are rendered each frame
     VisualList              m_visuals;            ///< list of all overlays that are rendered each frame
-    ofPtr<TextVisual>       m_frameRateText;    ///< font displaying the frame rate
+    shared_ptr<TextVisual>       m_frameRateText;    ///< font displaying the frame rate
 
     bool                    m_showDebugInfo;    ///< it tells if you should or should not show debug information
     

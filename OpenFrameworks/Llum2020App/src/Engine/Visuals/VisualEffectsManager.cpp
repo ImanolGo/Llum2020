@@ -45,7 +45,7 @@ void VisualEffectsManager::update()
     }
 }
 
-void VisualEffectsManager::addVisualEffect(ofPtr<VisualEffect> visualEffect)
+void VisualEffectsManager::addVisualEffect(shared_ptr<VisualEffect> visualEffect)
 {
     if(!visualEffect)
         return;
@@ -58,7 +58,7 @@ void VisualEffectsManager::addVisualEffect(ofPtr<VisualEffect> visualEffect)
     m_visualEffects.push_back(visualEffect);
 }
 
-void VisualEffectsManager::removeVisualEffect(ofPtr<VisualEffect> visualEffect)
+void VisualEffectsManager::removeVisualEffect(shared_ptr<VisualEffect> visualEffect)
 {
     if(!visualEffect)
         return;
@@ -74,7 +74,7 @@ void VisualEffectsManager::removeVisualEffect(ofPtr<VisualEffect> visualEffect)
     }
 }
 
-void VisualEffectsManager::removeAllVisualEffects(ofPtr<BasicVisual> visual)
+void VisualEffectsManager::removeAllVisualEffects(shared_ptr<BasicVisual> visual)
 {
     for(VisualEffectVector::iterator it = m_visualEffects.begin(); it != m_visualEffects.end();) {
         if((*it)->getVisual() == visual) {
@@ -86,7 +86,7 @@ void VisualEffectsManager::removeAllVisualEffects(ofPtr<BasicVisual> visual)
     }
 }
 
-void VisualEffectsManager::removeVisualEffects(ofPtr<BasicVisual> visual, const string& visualEffectName)
+void VisualEffectsManager::removeVisualEffects(shared_ptr<BasicVisual> visual, const string& visualEffectName)
 {
     for(VisualEffectVector::iterator it = m_visualEffects.begin(); it != m_visualEffects.end();) {
         if((*it)->getVisual() == visual && (*it)->getName() == visualEffectName) {
@@ -98,34 +98,34 @@ void VisualEffectsManager::removeVisualEffects(ofPtr<BasicVisual> visual, const 
     }
 }
 
-void VisualEffectsManager::createFadeEffect(ofPtr<BasicVisual> visual, double startAlpha,double endAlpha, EffectSettings& settings)
+void VisualEffectsManager::createFadeEffect(shared_ptr<BasicVisual> visual, double startAlpha,double endAlpha, EffectSettings& settings)
 {
     if(!visual)
         return;
     
-    ofPtr<FadeVisual> fadeVisual = ofPtr<FadeVisual>(new FadeVisual(visual,settings.function, settings.type));
+    shared_ptr<FadeVisual> fadeVisual = shared_ptr<FadeVisual>(new FadeVisual(visual,settings.function, settings.type));
     fadeVisual->setParameters(startAlpha,endAlpha,settings.animationTime);
     fadeVisual->start(settings.startAnimation);
     this->addVisualEffect(fadeVisual);
 }
 
-void VisualEffectsManager::createFadeEffect(ofPtr<BasicVisual> visual, double endAlpha, EffectSettings& settings)
+void VisualEffectsManager::createFadeEffect(shared_ptr<BasicVisual> visual, double endAlpha, EffectSettings& settings)
 {
     if(!visual)
         return;
     
-    ofPtr<FadeVisual> fadeVisual = ofPtr<FadeVisual>(new FadeVisual(visual,settings.function, settings.type));
+    shared_ptr<FadeVisual> fadeVisual = shared_ptr<FadeVisual>(new FadeVisual(visual,settings.function, settings.type));
     fadeVisual->setParameters(endAlpha,settings.animationTime);
     fadeVisual->start(settings.startAnimation);
     this->addVisualEffect(fadeVisual);
 }
 
-void VisualEffectsManager::createValueEffect(ofPtr<BasicVisual> visual, double start,double end, EffectSettings& settings)
+void VisualEffectsManager::createValueEffect(shared_ptr<BasicVisual> visual, double start,double end, EffectSettings& settings)
 {
     if(!visual)
         return;
     
-    ofPtr<ValueEffect> valueEffect = ofPtr<ValueEffect>(new ValueEffect(visual,settings.function, settings.type));
+    shared_ptr<ValueEffect> valueEffect = shared_ptr<ValueEffect>(new ValueEffect(visual,settings.function, settings.type));
     valueEffect->setParameters(start,end,settings.animationTime);
     valueEffect->start(settings.startAnimation);
     this->addVisualEffect(valueEffect);
@@ -133,99 +133,99 @@ void VisualEffectsManager::createValueEffect(ofPtr<BasicVisual> visual, double s
 
 
 
-void VisualEffectsManager::createValueEffect(ofPtr<BasicVisual> visual, double end, EffectSettings& settings)
+void VisualEffectsManager::createValueEffect(shared_ptr<BasicVisual> visual, double end, EffectSettings& settings)
 {
     if(!visual)
         return;
     
-    ofPtr<ValueEffect> valueEffect = ofPtr<ValueEffect>(new ValueEffect(visual,settings.function, settings.type));
+    shared_ptr<ValueEffect> valueEffect = shared_ptr<ValueEffect>(new ValueEffect(visual,settings.function, settings.type));
     valueEffect->setParameters(end,settings.animationTime);
     valueEffect->start(settings.startAnimation);
     this->addVisualEffect(valueEffect);
 }
 
 
-void VisualEffectsManager::createScaleEffect(ofPtr<BasicVisual> visual, const ofVec2f& startScale,const ofVec2f& endScale, EffectSettings& settings)
+void VisualEffectsManager::createScaleEffect(shared_ptr<BasicVisual> visual, const glm::vec3& startScale,const glm::vec3& endScale, EffectSettings& settings)
 {
     if(!visual)
         return;
     
-    ofPtr<ScaleVisual> scaleVisual = ofPtr<ScaleVisual>(new ScaleVisual(visual,settings.function, settings.type));
+    shared_ptr<ScaleVisual> scaleVisual = shared_ptr<ScaleVisual>(new ScaleVisual(visual,settings.function, settings.type));
     scaleVisual->setParameters(startScale,endScale,settings.animationTime);
     scaleVisual->start(settings.startAnimation);
     this->addVisualEffect(scaleVisual);
 }
 
-void VisualEffectsManager::createScaleEffect(ofPtr<BasicVisual> visual, const ofVec2f& endScale, EffectSettings& settings)
+void VisualEffectsManager::createScaleEffect(shared_ptr<BasicVisual> visual, const glm::vec3& endScale, EffectSettings& settings)
 {
     if(!visual)
         return;
     
-    ofPtr<ScaleVisual> scaleVisual = ofPtr<ScaleVisual>(new ScaleVisual(visual, settings.function, settings.type));
+    shared_ptr<ScaleVisual> scaleVisual = shared_ptr<ScaleVisual>(new ScaleVisual(visual, settings.function, settings.type));
     scaleVisual->setParameters(endScale,settings.animationTime);
     scaleVisual->start(settings.startAnimation);
     this->addVisualEffect(scaleVisual);
 }
 
-void VisualEffectsManager::popUpAnimation(ofPtr<BasicVisual> visual, EffectSettings& settings)
+void VisualEffectsManager::popUpAnimation(shared_ptr<BasicVisual> visual, EffectSettings& settings)
 {
     if(!visual)
         return;
     
-    ofVec3f startScale(0,0,0);
-    ofVec3f endScale(1,1,1);
+    glm::vec3 startScale(0,0,0);
+    glm::vec3 endScale(1,1,1);
     
-    ofPtr<ScaleVisual> scaleVisual = ofPtr<ScaleVisual>(new ScaleVisual(visual, settings.function, EASE_IN));
+    shared_ptr<ScaleVisual> scaleVisual = shared_ptr<ScaleVisual>(new ScaleVisual(visual, settings.function, EASE_IN));
     scaleVisual->setParameters(startScale,endScale*1.1,settings.animationTime*0.5);
     scaleVisual->start(settings.startAnimation);
     this->addVisualEffect(scaleVisual);
     
-    scaleVisual = ofPtr<ScaleVisual>(new ScaleVisual(visual, settings.function, EASE_OUT));
+    scaleVisual = shared_ptr<ScaleVisual>(new ScaleVisual(visual, settings.function, EASE_OUT));
     scaleVisual->setParameters(endScale*1.1,endScale,settings.animationTime*0.5);
     scaleVisual->start(settings.startAnimation+settings.animationTime*0.5);
     this->addVisualEffect(scaleVisual);
 }
 
-void VisualEffectsManager::createMoveEffect(ofPtr<BasicVisual> visual, const ofVec3f& startPos,const ofVec3f& endPos, EffectSettings& settings)
+void VisualEffectsManager::createMoveEffect(shared_ptr<BasicVisual> visual, const glm::vec3& startPos,const glm::vec3& endPos, EffectSettings& settings)
 {
     if(!visual)
         return;
     
-    ofPtr<MoveVisual> moveVisual = ofPtr<MoveVisual>(new MoveVisual(visual, settings.function, settings.type));
+    shared_ptr<MoveVisual> moveVisual = shared_ptr<MoveVisual>(new MoveVisual(visual, settings.function, settings.type));
     moveVisual->setParameters(startPos,endPos,settings.animationTime);
     moveVisual->start(settings.startAnimation);
     this->addVisualEffect(moveVisual);
 }
 
-void VisualEffectsManager::createMoveEffect(ofPtr<BasicVisual> visual, const ofVec3f& endPos, EffectSettings& settings)
+void VisualEffectsManager::createMoveEffect(shared_ptr<BasicVisual> visual, const glm::vec3& endPos, EffectSettings& settings)
 {
     if(!visual)
         return;
     
-    ofPtr<MoveVisual> moveVisual = ofPtr<MoveVisual>(new MoveVisual(visual, settings.function, settings.type));
+    shared_ptr<MoveVisual> moveVisual = shared_ptr<MoveVisual>(new MoveVisual(visual, settings.function, settings.type));
     moveVisual->setParameters(endPos,settings.animationTime);
     moveVisual->start(settings.startAnimation);
     this->addVisualEffect(moveVisual);
 }
 
 
-void VisualEffectsManager::createColorEffect(ofPtr<BasicVisual> visual,const ofColor& startColor,const ofColor& endColor, EffectSettings& settings)
+void VisualEffectsManager::createColorEffect(shared_ptr<BasicVisual> visual,const ofColor& startColor,const ofColor& endColor, EffectSettings& settings)
 {
     if(!visual)
         return;
     
-    ofPtr<ColorEffect> colorEffect = ofPtr<ColorEffect>(new ColorEffect(visual, settings.function, settings.type));
+    shared_ptr<ColorEffect> colorEffect = shared_ptr<ColorEffect>(new ColorEffect(visual, settings.function, settings.type));
     colorEffect->setParameters(startColor,endColor,settings.animationTime);
     colorEffect->start(settings.startAnimation);
     this->addVisualEffect(colorEffect);
 }
 
-void VisualEffectsManager::createColorEffect(ofPtr<BasicVisual> visual, const ofColor& endColor, EffectSettings& settings)
+void VisualEffectsManager::createColorEffect(shared_ptr<BasicVisual> visual, const ofColor& endColor, EffectSettings& settings)
 {
     if(!visual)
         return;
     
-    ofPtr<ColorEffect> colorEffect = ofPtr<ColorEffect>(new ColorEffect(visual, settings.function, settings.type));
+    shared_ptr<ColorEffect> colorEffect = shared_ptr<ColorEffect>(new ColorEffect(visual, settings.function, settings.type));
     colorEffect->setParameters(endColor,settings.animationTime);
     colorEffect->start(settings.startAnimation);
     this->addVisualEffect(colorEffect);

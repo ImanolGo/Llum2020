@@ -18,7 +18,7 @@ RectangleVisual::RectangleVisual(): BasicVisual(), m_centred(false)
 }
 
 
-RectangleVisual::RectangleVisual(const ofVec3f& pos, float width, float height, bool centred):
+RectangleVisual::RectangleVisual(const glm::vec3& pos, float width, float height, bool centred):
     BasicVisual(pos, width, height),  m_centred(centred)
 {
     //Intentionally left empty

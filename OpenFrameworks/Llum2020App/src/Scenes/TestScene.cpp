@@ -50,7 +50,7 @@ void TestScene::setupRectangles()
 {
     float width = AppManager::getInstance().getSettingsManager().getAppWidth();
     float height = AppManager::getInstance().getSettingsManager().getAppHeight();
-    auto pos = ofPoint(0);
+    auto pos = glm::vec3(0);
     auto rectangle = make_shared<RectangleVisual>(pos,width,height,false);
     rectangle->setColor(ofColor(255,0,0));
     m_rectangles["Red"] = rectangle;
@@ -63,7 +63,7 @@ void TestScene::setupRectangles()
     rectangle->setColor(ofColor(255,255,255));
     m_rectangles["White"] = rectangle;
     
-    pos = ofPoint(width*0.5, height*0.5);
+    pos = glm::vec3(width*0.5, height*0.5,0.0);
     rectangle = make_shared<RectangleVisual>(pos,width,height,true);
     rectangle->setColor(ofColor(0,0,255));
     m_rectangles["Blue"] = rectangle;
@@ -129,30 +129,30 @@ void TestScene::startAnimations()
     settings.animationTime = m_totalTime/(2*m_rectangles.size());
     
     settings.type = EASE_OUT;
-    m_rectangles["Red"]->setPosition(ofPoint(-width,0));
-    AppManager::getInstance().getVisualEffectsManager().createMoveEffect(m_rectangles["Red"], ofPoint(-width,0), ofPoint(0,0), settings);
+    m_rectangles["Red"]->setPosition(glm::vec3(-width,0, 0));
+    AppManager::getInstance().getVisualEffectsManager().createMoveEffect(m_rectangles["Red"], glm::vec3(-width,0, 0), glm::vec3(0,0, 0), settings);
     
     settings.type = EASE_IN;
     settings.startAnimation += settings.animationTime;
-    AppManager::getInstance().getVisualEffectsManager().createMoveEffect(m_rectangles["Red"], ofPoint(0.0,0.0) , ofPoint(width,0), settings);
+    AppManager::getInstance().getVisualEffectsManager().createMoveEffect(m_rectangles["Red"], glm::vec3(0,0,0) , glm::vec3(width,0, 0), settings);
     
     settings.type = EASE_OUT;
     settings.startAnimation += settings.animationTime;
-    m_rectangles["Green"]->setPosition(ofPoint(0,-height));
-    AppManager::getInstance().getVisualEffectsManager().createMoveEffect(m_rectangles["Green"], ofPoint(0,-height), ofPoint(0,0), settings);
+    m_rectangles["Green"]->setPosition(glm::vec3(0,-height,0));
+    AppManager::getInstance().getVisualEffectsManager().createMoveEffect(m_rectangles["Green"], glm::vec3(0,-height, 0), glm::vec3(0,0, 0), settings);
     
     settings.type = EASE_IN;
     settings.startAnimation += settings.animationTime;
-    AppManager::getInstance().getVisualEffectsManager().createMoveEffect(m_rectangles["Green"], ofPoint(0,0), ofPoint(0,height), settings);
+    AppManager::getInstance().getVisualEffectsManager().createMoveEffect(m_rectangles["Green"], glm::vec3(0,0,0), glm::vec3(0,height, 0), settings);
     
     settings.type = EASE_OUT;
     settings.startAnimation += settings.animationTime;
-    m_rectangles["Blue"]->setScale(ofVec2f(0,0));
-    AppManager::getInstance().getVisualEffectsManager().createScaleEffect(m_rectangles["Blue"], ofVec2f(0,0), ofVec2f(1.0,1.0), settings);
+    m_rectangles["Blue"]->setScale(glm::vec3(0,0,1));
+    AppManager::getInstance().getVisualEffectsManager().createScaleEffect(m_rectangles["Blue"], glm::vec3(0,0,1), glm::vec3(1.0,1.0,1.0), settings);
     
     settings.type = EASE_IN;
     settings.startAnimation += settings.animationTime;
-    AppManager::getInstance().getVisualEffectsManager().createScaleEffect(m_rectangles["Blue"], ofVec2f(1.0,1.0), ofVec2f(0.0,0.0), settings);
+    AppManager::getInstance().getVisualEffectsManager().createScaleEffect(m_rectangles["Blue"], glm::vec3(1.0,1.0, 1.0), glm::vec3(0.0,0.0, 1.0), settings);
     
     settings.function = SINUSOIDAL;
     settings.startAnimation += settings.animationTime;

@@ -8,7 +8,7 @@
 
 #include "TextVisual.h"
 
-TextVisual::TextVisual(ofVec3f pos, float width, float height, bool centred): BasicVisual(pos, width, height),m_fontSize(0), m_centred(centred), m_drawBB(false),m_lineHeight(1.0),m_alignment(OF_TEXT_ALIGN_LEFT)
+TextVisual::TextVisual(glm::vec3& pos, float width, float height, bool centred): BasicVisual(pos, width, height),m_fontSize(0), m_centred(centred), m_drawBB(false),m_lineHeight(1.0),m_alignment(OF_TEXT_ALIGN_LEFT)
 {
     if(m_centred){
         m_alignment = OF_TEXT_ALIGN_CENTER;

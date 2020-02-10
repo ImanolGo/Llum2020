@@ -21,10 +21,10 @@ class BasicVisual
     public:
 
         //! Constructor
-        BasicVisual():m_width(0), m_height(0), m_position(ofVec3f(0,0,0)), m_scale(ofVec3f(1,1,1)) {}
+        BasicVisual():m_width(0), m_height(0), m_position(glm::vec3(0,0,0)), m_scale(glm::vec3(1,1,1)) {}
     
         //! Constructor
-        BasicVisual(const ofVec3f& pos, float width, float height): m_position(pos), m_width(width), m_height(height), m_scale(ofVec3f(1,1,1)) {}
+        BasicVisual(const glm::vec3& pos, float width, float height): m_position(pos), m_width(width), m_height(height), m_scale(glm::vec3(1,1,1)) {}
 
         //! Destructor
         virtual ~BasicVisual(){}
@@ -51,16 +51,16 @@ class BasicVisual
         virtual void setPosition(const ofPoint& pos) {m_position = pos;}
 
         //! Sets the scale factor of the BasicVisual
-        virtual void setScale(const ofVec3f& scale) {m_scale = scale;}
+        virtual void setScale(const glm::vec3& scale) {m_scale = scale;}
 
         //! Gets the scale factor of the BasicVisual
-        virtual const ofVec3f& getScale() const{ return m_scale;}
+        virtual const glm::vec3& getScale() const{ return m_scale;}
 
          //! Sets the rotation of the BasicVisual
-        virtual void setRotation(const ofVec3f& rotation) {m_rotation = rotation;}
+        virtual void setRotation(const glm::vec3& rotation) {m_rotation = rotation;}
 
         //! Gets the rotation of the BasicVisual
-        virtual const ofVec3f& getRotation() const{ return m_rotation;}
+        virtual const glm::vec3& getRotation() const{ return m_rotation;}
 
         //! Get the width
         virtual float getWidth()const {return m_width;}
@@ -82,13 +82,13 @@ class BasicVisual
 
     protected:
 
-        ofVec3f         m_position;     ///< defines the position of the BasicVisual
-        float           m_width;        ///< the width of the BasicVisual
-        float           m_height;       ///< the height of the BasicVisual
-        ofColor         m_color;        ///< color of the BasicVisual
-        ofVec3f         m_scale;        ///< saves the current scale factor
-        ofVec3f         m_rotation;     ///< saves the current rotation
-        float           m_value;        ///< saves a float value for any kind of anmation
+		glm::vec3			m_position;     ///< defines the position of the BasicVisual
+        float				m_width;        ///< the width of the BasicVisual
+        float				m_height;       ///< the height of the BasicVisual
+        ofColor				m_color;        ///< color of the BasicVisual
+		glm::vec3			 m_scale;        ///< saves the current scale factor
+		glm::vec3			m_rotation;     ///< saves the current rotation
+        float				m_value;        ///< saves a float value for any kind of anmation
 
 
     };

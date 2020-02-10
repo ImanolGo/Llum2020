@@ -68,7 +68,7 @@ public:
     
     void windowResized(int w, int h);
     
-    ofPtr<ofRectangle> getWindowRect(string& name) {return m_windowRects[name];}
+    shared_ptr<ofRectangle> getWindowRect(string& name) {return m_windowRects[name];}
     
     void begin(string& name);
     
@@ -139,12 +139,12 @@ private:
 private:
 
 
-    typedef  map<string, ofPtr<TextVisual> >      TextMap;            ///< defines a map of Text attached to an identifier
-    typedef  map<string, ofPtr<ImageVisual>  >    ImageMap;           ///< defines a map of ImageVisual Map attached to an identifier
+    typedef  map<string, shared_ptr<TextVisual> >      TextMap;            ///< defines a map of Text attached to an identifier
+    typedef  map<string, shared_ptr<ImageVisual>  >    ImageMap;           ///< defines a map of ImageVisual Map attached to an identifier
     
-    typedef  map<string, ofPtr<ofFbo>  >    FboMap;           ///< defines a map of Fbos attached to an identifier
-    typedef  map<string, ofPtr<ofRectangle>  >    FboRectangles;           ///< defines a map of ofRectangle attached to an identifier
-    typedef  map<string, ofPtr<RectangleVisual>  >    FboFrames;           ///< defines a map of RectangleVisual attached to an identifier
+    typedef  map<string, shared_ptr<ofFbo>  >    FboMap;           ///< defines a map of Fbos attached to an identifier
+    typedef  map<string, shared_ptr<ofRectangle>  >    FboRectangles;           ///< defines a map of ofRectangle attached to an identifier
+    typedef  map<string, shared_ptr<RectangleVisual>  >    FboFrames;           ///< defines a map of RectangleVisual attached to an identifier
   
     TextMap             m_textVisuals;             ///< map storing the text visuals attached to a name
     ImageMap            m_imageVisuals;            ///< map storing the image visuals attached to a name

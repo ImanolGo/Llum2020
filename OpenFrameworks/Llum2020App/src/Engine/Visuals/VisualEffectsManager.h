@@ -46,57 +46,57 @@ public:
     void update();
     
     //! Removes a certain visual effect from the list
-    void removeVisualEffect(ofPtr<VisualEffect>  visualEffect);
+    void removeVisualEffect(shared_ptr<VisualEffect>  visualEffect);
     
     
     //! Removes all visual effects for the specified visual
-    void removeAllVisualEffects(ofPtr<BasicVisual> visual);
+    void removeAllVisualEffects(shared_ptr<BasicVisual> visual);
     
     //! Removes all visual effects for the specified visual and visual effect
-    void removeVisualEffects(ofPtr<BasicVisual> visual, const string& visualEffectName);
+    void removeVisualEffects(shared_ptr<BasicVisual> visual, const string& visualEffectName);
     
     
     //==========================================================================
     
     //! Creates a certain fading visual effect
-    void createFadeEffect(ofPtr<BasicVisual> visual, double startAlpha,double endAlpha, EffectSettings& settings);
+    void createFadeEffect(shared_ptr<BasicVisual> visual, double startAlpha,double endAlpha, EffectSettings& settings);
     
     //! Creates a certain fading visual effect
-    void createFadeEffect(ofPtr<BasicVisual> visual, double endAlpha, EffectSettings& settings);
+    void createFadeEffect(shared_ptr<BasicVisual> visual, double endAlpha, EffectSettings& settings);
     
     //! Creates a certain value animation effect
-    void createValueEffect(ofPtr<BasicVisual> visual, double start,double end, EffectSettings& settings);
+    void createValueEffect(shared_ptr<BasicVisual> visual, double start,double end, EffectSettings& settings);
     
     //! Creates a certain value animation effect
-    void createValueEffect(ofPtr<BasicVisual> visual, double end, EffectSettings& settings);
+    void createValueEffect(shared_ptr<BasicVisual> visual, double end, EffectSettings& settings);
     
     //! Creates a certain scaling visual effect
-    void createScaleEffect(ofPtr<BasicVisual> visual, const ofVec2f& startScale,const ofVec2f& endScale, EffectSettings& settingse);
+    void createScaleEffect(shared_ptr<BasicVisual> visual, const glm::vec3& startScale,const glm::vec3& endScale, EffectSettings& settingse);
     
     //! Creates a certain scaling visual effect
-    void createScaleEffect(ofPtr<BasicVisual> visual, const ofVec2f& endScale, EffectSettings& settings);
+    void createScaleEffect(shared_ptr<BasicVisual> visual, const glm::vec3& endScale, EffectSettings& settings);
     
     //! Creates a certain moving visual effect
-    void createMoveEffect(ofPtr<BasicVisual> visual, const ofVec3f& startPos,const ofVec3f& endPos, EffectSettings& settings);
+    void createMoveEffect(shared_ptr<BasicVisual> visual, const glm::vec3& startPos,const glm::vec3& endPos, EffectSettings& settings);
     
     //! Creates a certain moving visual effect
-    void createMoveEffect(ofPtr<BasicVisual> visual, const ofVec3f& endPos, EffectSettings& settings);
+    void createMoveEffect(shared_ptr<BasicVisual> visual, const glm::vec3& endPos, EffectSettings& settings);
     
     //! Creates a certain color visual effect
-    void createColorEffect(ofPtr<BasicVisual> visual, const ofColor& endColor, EffectSettings& settings);
+    void createColorEffect(shared_ptr<BasicVisual> visual, const ofColor& endColor, EffectSettings& settings);
     
     //! Creates a certain color visual effect
-    void createColorEffect(ofPtr<BasicVisual> visual,const ofColor& startColor,const ofColor& endColor, EffectSettings& settings);
+    void createColorEffect(shared_ptr<BasicVisual> visual,const ofColor& startColor,const ofColor& endColor, EffectSettings& settings);
     
     //! Creates a certain color visual effect
-    void popUpAnimation(ofPtr<BasicVisual> visual, EffectSettings& settings);
+    void popUpAnimation(shared_ptr<BasicVisual> visual, EffectSettings& settings);
     
     //! Adds a certain visual effect
-    void addVisualEffect(ofPtr<VisualEffect> visualEffect);
+    void addVisualEffect(shared_ptr<VisualEffect> visualEffect);
     
 private:
     
-    typedef std::vector< ofPtr<VisualEffect> >        VisualEffectVector;
+    typedef std::vector< shared_ptr<VisualEffect> >        VisualEffectVector;
     
     VisualEffectVector    m_visualEffects; ///< Vector of all visual effects
     

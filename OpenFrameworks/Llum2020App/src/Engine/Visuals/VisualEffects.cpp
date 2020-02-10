@@ -17,7 +17,7 @@
 //==============================================================================
 
 
-VisualEffect::VisualEffect(ofPtr<BasicVisual> visual, EasingFunction function, EasingType type): m_visual(visual), m_function(function), m_isActive(false), m_animationTime(1000.0), m_elapsedTime(0.0),	m_elaspedTimeToStart(0.0), m_type(type), m_isFinished(true)
+VisualEffect::VisualEffect(shared_ptr<BasicVisual> visual, EasingFunction function, EasingType type): m_visual(visual), m_function(function), m_isActive(false), m_animationTime(1000.0), m_elapsedTime(0.0),	m_elaspedTimeToStart(0.0), m_type(type), m_isFinished(true)
 {
 	// intentionally left empty
 }
@@ -213,7 +213,7 @@ double VisualEffect::function(double t, double from, double to, double duration)
 //================================  FADE VISUAL ================================
 //==============================================================================
 
-FadeVisual::FadeVisual(ofPtr<BasicVisual> visual, EasingFunction function, EasingType type): VisualEffect(visual,function,type),
+FadeVisual::FadeVisual(shared_ptr<BasicVisual> visual, EasingFunction function, EasingType type): VisualEffect(visual,function,type),
     m_alpha(1.0), m_startAlpha(0.0),m_endAlpha(1.0)
 {
 	m_name = "FadeVisual";
@@ -268,15 +268,15 @@ void FadeVisual::update()
 //================================  SCALE VISUAL ================================
 //==============================================================================
 
-ScaleVisual::ScaleVisual(ofPtr<BasicVisual> visual, EasingFunction function, EasingType type): VisualEffect(visual,function,type),
-m_startScale(0.0,0.0),m_endScale(1.0,1.0),m_scale(1.0,1.0)
+ScaleVisual::ScaleVisual(shared_ptr<BasicVisual> visual, EasingFunction function, EasingType type): VisualEffect(visual,function,type),
+m_startScale(0,0,0),m_endScale(1.0,1.0,1.0),m_scale(1.0,1.0,1.0)
 {
 	m_name = "ScaleVisual";
 }
 
 
 
-void ScaleVisual::setParameters(const ofVec3f& endScale, double animationTime)
+void ScaleVisual::setParameters(const glm::vec3& endScale, double animationTime)
 {
 	m_elapsedTime = 0.0;
 	m_startScale = m_visual->getScale();
@@ -284,7 +284,7 @@ void ScaleVisual::setParameters(const ofVec3f& endScale, double animationTime)
 	m_animationTime = animationTime;
 }
 
-void ScaleVisual::setParameters(const ofVec3f& startScale,const ofVec3f& endScale, double animationTime)
+void ScaleVisual::setParameters(const glm::vec3& startScale,const glm::vec3& endScale, double animationTime)
 {
 
     m_elapsedTime = 0.0;
@@ -325,15 +325,15 @@ void ScaleVisual::update()
 //================================  MOVE VISUAL ================================
 //==============================================================================
 
-MoveVisual::MoveVisual(ofPtr<BasicVisual> visual, EasingFunction function, EasingType type): VisualEffect(visual,function,type),
-m_startPos(0.0,0.0),m_endPos(1.0,1.0),m_pos(1.0,1.0)
+MoveVisual::MoveVisual(shared_ptr<BasicVisual> visual, EasingFunction function, EasingType type): VisualEffect(visual,function,type),
+m_startPos(0.0,0.0,0.0),m_endPos(1.0,1.0,1.0),m_pos(1.0,1.0, 1.0)
 {
 	m_name = "MoveVisual";
 }
 
 
 
-void MoveVisual::setParameters(const ofVec3f& endPos, double animationTime)
+void MoveVisual::setParameters(const glm::vec3& endPos, double animationTime)
 {
 	m_elapsedTime = 0.0;
 	m_startPos = m_visual->getPosition();
@@ -341,7 +341,7 @@ void MoveVisual::setParameters(const ofVec3f& endPos, double animationTime)
 	m_animationTime = animationTime;
 }
 
-void MoveVisual::setParameters(const ofVec3f& startPos,const ofVec3f& endPos, double animationTime)
+void MoveVisual::setParameters(const glm::vec3& startPos,const glm::vec3& endPos, double animationTime)
 {
     m_elapsedTime = 0.0;
 	m_startPos = startPos;
@@ -382,7 +382,7 @@ void MoveVisual::update()
 //================================  COLOR EFFECT ================================
 //==============================================================================
 
-ColorEffect::ColorEffect(ofPtr<BasicVisual> visual, EasingFunction function, EasingType type): VisualEffect(visual,function,type),
+ColorEffect::ColorEffect(shared_ptr<BasicVisual> visual, EasingFunction function, EasingType type): VisualEffect(visual,function,type),
 m_startColor(0,0,0),m_endColor(0,0,0),m_color(0,0,0)
 {
 	m_name = "ColorEffect";
@@ -440,7 +440,7 @@ void ColorEffect::update()
 //===============================  VALUE EFFECT ================================
 //==============================================================================
 
-ValueEffect::ValueEffect(ofPtr<BasicVisual> visual, EasingFunction function, EasingType type): VisualEffect(visual,function,type),
+ValueEffect::ValueEffect(shared_ptr<BasicVisual> visual, EasingFunction function, EasingType type): VisualEffect(visual,function,type),
 m_value(0.0), m_start(0.0),m_end(1.0)
 {
     m_name = "ValueEffect";

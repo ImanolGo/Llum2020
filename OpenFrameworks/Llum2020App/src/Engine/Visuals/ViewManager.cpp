@@ -70,7 +70,7 @@ void ViewManager::setup3D()
 
 void ViewManager::setupTextVisuals()
 {
-    ofVec3f position(42,16);
+    glm::vec3 position(42,16,0);
     float fontSize = 16;
     float width = 256;
     float height = fontSize;
@@ -78,7 +78,7 @@ void ViewManager::setupTextVisuals()
     string fontName ="fonts/helvetica-neue-medium.ttf";
     ofColor textColor = ofColor::white;
 
-    //m_frameRateText = ofPtr<TextVisual> (new TextVisual(position,width,height));
+    //m_frameRateText = shared_ptr<TextVisual> (new TextVisual(position,width,height));
     //m_frameRateText->setText(text,fontName,fontSize,textColor);
 }
 
@@ -151,7 +151,7 @@ void ViewManager::drawOverlays()
 
 }
 
-void ViewManager::addOverlay(ofPtr<BasicVisual> visual,int zOrder)
+void ViewManager::addOverlay(shared_ptr<BasicVisual> visual,int zOrder)
 {
     if(!visual){
         return;
@@ -166,7 +166,7 @@ void ViewManager::addOverlay(ofPtr<BasicVisual> visual,int zOrder)
 }
 
 
-void ViewManager::removeOverlay(ofPtr<BasicVisual> visual)
+void ViewManager::removeOverlay(shared_ptr<BasicVisual> visual)
 {
     if(!visual){
         return;
@@ -183,7 +183,7 @@ void ViewManager::removeOverlay(ofPtr<BasicVisual> visual)
 	}
 }
 
-void ViewManager::addVisual(ofPtr<BasicVisual> visual)
+void ViewManager::addVisual(shared_ptr<BasicVisual> visual)
 {
     if(!visual){
         return;
@@ -197,7 +197,7 @@ void ViewManager::addVisual(ofPtr<BasicVisual> visual)
     m_visuals.push_back(visual);
 }
 
-void ViewManager::removeVisual(ofPtr<BasicVisual> visual)
+void ViewManager::removeVisual(shared_ptr<BasicVisual> visual)
 {
     for(VisualList::iterator it = m_visuals.begin(); it != m_visuals.end();) {
         if(*it== visual) {
@@ -210,7 +210,7 @@ void ViewManager::removeVisual(ofPtr<BasicVisual> visual)
     }
 }
 
-bool ViewManager::isOverlayAlreadyAdded(ofPtr<BasicVisual> visual)
+bool ViewManager::isOverlayAlreadyAdded(shared_ptr<BasicVisual> visual)
 {
     if(!visual)
         return true;
@@ -224,7 +224,7 @@ bool ViewManager::isOverlayAlreadyAdded(ofPtr<BasicVisual> visual)
 	return false;
 }
 
-bool ViewManager::isVisualAlreadyAdded(ofPtr<BasicVisual> visual)
+bool ViewManager::isVisualAlreadyAdded(shared_ptr<BasicVisual> visual)
 {
     if(!visual)
         return true;

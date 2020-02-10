@@ -26,7 +26,7 @@ public:
     VideoVisual();
     
     //! Constructor
-    VideoVisual(const ofVec3f& pos, const string& resourceName, bool centred = false);
+    VideoVisual(const glm::vec3& pos, const string& resourceName, bool centred = false);
 
     //! Destructor
     virtual ~VideoVisual();

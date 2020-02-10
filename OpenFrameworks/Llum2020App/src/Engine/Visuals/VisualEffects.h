@@ -43,7 +43,7 @@ class VisualEffect
 public:
 
 	//! Constructor
-	VisualEffect(ofPtr<BasicVisual> visual, EasingFunction function = LINEAR, EasingType type = EASE_IN);
+	VisualEffect(shared_ptr<BasicVisual> visual, EasingFunction function = LINEAR, EasingType type = EASE_IN);
 
 	//! Destructor
 	virtual ~VisualEffect(){}
@@ -61,7 +61,7 @@ public:
 	virtual void finish();
 
 	//! Returns the shared pointer associated with the visual effect
-	ofPtr<BasicVisual> getVisual() { return m_visual; }
+	shared_ptr<BasicVisual> getVisual() { return m_visual; }
 
 	//! Returns the name with the visual effect
 	const string& getName() { return m_name; }
@@ -84,7 +84,7 @@ protected:
 
 protected:
 
-	ofPtr<BasicVisual>     	m_visual;				///< stores the visual as a shared pointer (ofPtr)
+	shared_ptr<BasicVisual>     	m_visual;				///< stores the visual as a shared pointer (shared_ptr)
 	bool					m_isActive;				///< determines whether an animation is currently updated or not
     bool					m_isFinished;           ///< determines whether an animation is finished
 	double					m_animationTime;		///< duration of the animation in ms
@@ -111,7 +111,7 @@ class FadeVisual: public VisualEffect
 public:
 
 	//! Constructor
-	FadeVisual(ofPtr<BasicVisual> visual, EasingFunction function = LINEAR, EasingType type = EASE_IN);
+	FadeVisual(shared_ptr<BasicVisual> visual, EasingFunction function = LINEAR, EasingType type = EASE_IN);
 
 
     //========================= Fade Interface ================================
@@ -152,7 +152,7 @@ class ScaleVisual: public VisualEffect
 public:
 
 	//! Constructor
-	ScaleVisual(ofPtr<BasicVisual> visual, EasingFunction function = LINEAR, EasingType type = EASE_IN);
+	ScaleVisual(shared_ptr<BasicVisual> visual, EasingFunction function = LINEAR, EasingType type = EASE_IN);
 
 
     //========================= Fade Interface ================================
@@ -163,17 +163,17 @@ public:
     //==============================================================================
 
     //! Sets the final scale value and the duration of the animation
-	virtual void setParameters(const ofVec3f& endScale, double animationTime);
+	virtual void setParameters(const glm::vec3& endScale, double animationTime);
 
 	//! Sets the starting and final scale value and the duration of the animation
-	virtual void setParameters(const ofVec3f& startScale,const ofVec3f& endScale, double animationTime);
+	virtual void setParameters(const glm::vec3& startScale,const glm::vec3& endScale, double animationTime);
 
 
 protected:
 
-	ofVec3f	m_startScale;		///< start scale value
-	ofVec3f	m_endScale;         ///< end scale value
-    ofVec3f	m_scale;            ///< stores the current scale
+	glm::vec3	m_startScale;		///< start scale value
+	glm::vec3	m_endScale;         ///< end scale value
+    glm::vec3	m_scale;            ///< stores the current scale
 
 };
 
@@ -192,7 +192,7 @@ class MoveVisual: public VisualEffect
 public:
 
 	//! Constructor
-	MoveVisual(ofPtr<BasicVisual> visual, EasingFunction function = LINEAR, EasingType type = EASE_IN);
+	MoveVisual(shared_ptr<BasicVisual> visual, EasingFunction function = LINEAR, EasingType type = EASE_IN);
 
 
     //========================= Fade Interface ================================
@@ -204,17 +204,17 @@ public:
     //==============================================================================
 
     //! Sets the final position and the duration of the animation
-	virtual void setParameters(const ofVec3f& endPos, double animationTime);
+	virtual void setParameters(const glm::vec3& endPos, double animationTime);
 
 	//! Sets the starting and final position and the duration of the animation
-	virtual void setParameters(const ofVec3f& startPos,const ofVec3f& endPos, double animationTime);
+	virtual void setParameters(const glm::vec3& startPos,const glm::vec3& endPos, double animationTime);
 
 
 protected:
 
-	ofVec3f	m_startPos;		///< start position
-	ofVec3f	m_endPos;       ///< end position
-    ofVec3f	m_pos;          ///< stores the current position
+	glm::vec3	m_startPos;		///< start position
+	glm::vec3	m_endPos;       ///< end position
+    glm::vec3	m_pos;          ///< stores the current position
 
 };
 
@@ -231,7 +231,7 @@ class ColorEffect: public VisualEffect
 public:
 
 	//! Constructor
-	ColorEffect(ofPtr<BasicVisual> visual, EasingFunction function = LINEAR, EasingType type = EASE_IN);
+	ColorEffect(shared_ptr<BasicVisual> visual, EasingFunction function = LINEAR, EasingType type = EASE_IN);
 
 
     //========================= Color Effect Interface ================================
@@ -271,7 +271,7 @@ class ValueEffect: public VisualEffect
 public:
     
     //! Constructor
-    ValueEffect(ofPtr<BasicVisual> visual, EasingFunction function = LINEAR, EasingType type = EASE_IN);
+    ValueEffect(shared_ptr<BasicVisual> visual, EasingFunction function = LINEAR, EasingType type = EASE_IN);
     
     
     //========================= Fade Interface ================================

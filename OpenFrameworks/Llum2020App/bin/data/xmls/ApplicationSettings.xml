@@ -15,6 +15,9 @@
     <texture name="Brush" path="images/general/brush.png"/>
     <texture name="Dot" path="images/general/dot.png"/>
     <texture name="ColorGradient" path="images/scenes/color_spectrum.png"/>    
+    <texture name="ColorGradient" path="images/scenes/color_spectrum.png"/> 
+    <texture name="RectSwipe" path="images/swipes/rectangleTransp.png"/> 
+    <texture name="RingSwipe" path="images/swipes/ringTransp.png"/> 
 
   </textures>
 

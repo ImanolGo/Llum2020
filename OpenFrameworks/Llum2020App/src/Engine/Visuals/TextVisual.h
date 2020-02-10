@@ -24,7 +24,7 @@ class TextVisual: public BasicVisual
 public:
     
     //! Constructor
-    TextVisual(ofVec3f pos, float width, float height, bool centred = false);
+    TextVisual(glm::vec3& pos, float width, float height, bool centred = false);
     
     //! Constructor
     TextVisual();
@@ -75,7 +75,7 @@ private:
     float             m_lineHeight;  ///< saves the current line height;
     bool              m_centred;     ///< determines whether the visual is centred or not
     ofRectangle       m_box;         ///< the box surrounding the text
-    ofVec3f           m_translation; ///< the point to which shift the origin
+    glm::vec3           m_translation; ///< the point to which shift the origin
     bool              m_drawBB;      ///< determines whether the bounding box should be drawn or not
     
     ofxTextBlock        m_textSuite;

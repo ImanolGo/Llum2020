@@ -26,7 +26,7 @@ public:
     RectangleVisual();
     
     //! Constructor
-    RectangleVisual(const ofVec3f& pos, float width, float height, bool centred = false);
+    RectangleVisual(const glm::vec3& pos, float width, float height, bool centred = false);
 
     //! Destructor
     virtual ~RectangleVisual();

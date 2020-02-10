@@ -34,7 +34,7 @@ class ResourceManager: public Manager
 		void setup();
 
         //! Searches for the specified texture name and returns the first found.
-        ofPtr<ofTexture> getTexture(const string& name) const;
+        shared_ptr<ofTexture> getTexture(const string& name) const;
     
         //! Add new texture externally
         bool addTexture(string name, string path);
@@ -58,12 +58,12 @@ class ResourceManager: public Manager
 
 		//======================= Typedefs =====================================
 
-		typedef std::map< string, ofPtr<ofTexture> >	TextureMap;			///< holds a list of textures sorted by name
+		typedef std::map< string, shared_ptr<ofTexture> >	TextureMap;			///< holds a list of textures sorted by name
 
 		//======================================================================
 
 		TextureMap		    m_textures;        ///< map of textures handles attached to a name
-		ofPtr<ofTexture>    m_defaultTexture;  ///< stores a default texture in case another resource cannot be loaded
+		shared_ptr<ofTexture>    m_defaultTexture;  ///< stores a default texture in case another resource cannot be loaded
 
 };
 

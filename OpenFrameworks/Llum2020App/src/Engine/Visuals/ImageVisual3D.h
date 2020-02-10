@@ -24,7 +24,7 @@ class ImageVisual3D: public ImageVisual
 public:
 
     //! Constructor
-    ImageVisual3D(const ofVec3f& pos, const string& resourceName);
+    ImageVisual3D(const glm::vec3& pos, const string& resourceName);
 
     //! Destructor
     virtual ~ImageVisual3D();

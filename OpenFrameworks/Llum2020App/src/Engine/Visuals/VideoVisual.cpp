@@ -18,7 +18,7 @@ VideoVisual::VideoVisual(): BasicVisual(), m_centred(false)
 }
 
 
-VideoVisual::VideoVisual(const ofVec3f& pos, const string& resourceName,bool centred):
+VideoVisual::VideoVisual(const glm::vec3& pos, const string& resourceName,bool centred):
     BasicVisual(pos, 0, 0), m_centred(centred)
 {
     this->setResource(resourceName);

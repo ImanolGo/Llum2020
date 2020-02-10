@@ -73,17 +73,17 @@ void LayoutManager::setupFbos()
     float width = AppManager::getInstance().getSettingsManager().getAppWidth();
     float height  = AppManager::getInstance().getSettingsManager().getAppHeight();
     
-    ofPtr<ofFbo> fbo = ofPtr<ofFbo>(new ofFbo());
+    shared_ptr<ofFbo> fbo = shared_ptr<ofFbo>(new ofFbo());
     fbo->allocate(width, height, GL_RGBA);
     fbo->begin(); ofClear(0);  fbo->end();
     m_fbos["3D"] = fbo;
     
-    fbo = ofPtr<ofFbo>(new ofFbo());
+    fbo = shared_ptr<ofFbo>(new ofFbo());
     fbo->allocate(width, height, GL_RGBA);
     fbo->begin(); ofClear(0);  fbo->end();
     m_fbos["2D"] = fbo;
     
-    fbo = ofPtr<ofFbo>(new ofFbo());
+    fbo = shared_ptr<ofFbo>(new ofFbo());
     fbo->allocate(width, height, GL_RGBA);
     fbo->begin(); ofClear(0);  fbo->end();
     m_fbos["Scene"] = fbo;
@@ -96,10 +96,10 @@ void LayoutManager::setupWindowFrames()
     
     for (auto& fbo : m_fbos)
     {
-        ofPtr<ofRectangle>  rect = ofPtr<ofRectangle> (new ofRectangle());
+        shared_ptr<ofRectangle>  rect = shared_ptr<ofRectangle> (new ofRectangle());
         m_windowRects[fbo.first] = rect;
         
-        ofPtr<RectangleVisual>  rectVisual = ofPtr<RectangleVisual> (new RectangleVisual());
+        shared_ptr<RectangleVisual>  rectVisual = shared_ptr<RectangleVisual> (new RectangleVisual());
         m_windowFrames[fbo.first] = rectVisual;
         m_windowFrames[fbo.first]->setColor(color);
     }
@@ -196,7 +196,7 @@ void LayoutManager::resetWindowFrames()
 {
     for (auto& rect : m_windowRects)
     {
-        m_windowFrames[rect.first]->setPosition(ofPoint(rect.second->x - FRAME_MARGIN, rect.second->y - FRAME_MARGIN));
+        m_windowFrames[rect.first]->setPosition(glm::vec3(rect.second->x - FRAME_MARGIN, rect.second->y - FRAME_MARGIN, 0.0));
         m_windowFrames[rect.first]->setWidth(rect.second->width + 2*FRAME_MARGIN);
         m_windowFrames[rect.first]->setHeight(rect.second->height+ 2*FRAME_MARGIN);
     }
@@ -278,11 +278,11 @@ void LayoutManager::createTextVisuals()
         float h = size;
         float x =  rect.second->x + w*0.5;
         float y =  rect.second->y - h - MARGIN;
-        ofPoint pos = ofPoint(x, y);
+        glm::vec3 pos = glm::vec3(x, y, 0.0);
         string text = rect.first;
         string fontName = LAYOUT_FONT;
         
-        auto textVisual = ofPtr<TextVisual>(new TextVisual(pos,w,h,true));
+        auto textVisual = make_shared<TextVisual>(pos,w,h,true);
         textVisual->setText(text, fontName, size, ofColor::white);
         m_textVisuals[rect.first] = textVisual;
     }
@@ -296,7 +296,7 @@ void LayoutManager::resetWindowTitles()
     {
         float x =  rect.second->x + rect.second->width*0.5;
         float y =  rect.second->y -  m_textVisuals[rect.first]->getHeight()*0.5 - MARGIN*0.5;
-        ofPoint pos = ofPoint(x, y);
+        glm::vec3 pos = glm::vec3(x, y,1.0);
         m_textVisuals[rect.first]->setPosition(pos);
     }
 }
