@@ -55,6 +55,10 @@ void KeyboardManager::keyPressed(ofKeyEventArgs &e)
     else if(key == '3'){
         AppManager::getInstance().getLayoutManager().setDrawMode(LayoutManager::DRAW_SCENE);
     }
+
+	else if (key == 's' || key == 'S') {
+		AppManager::getInstance().getGuiManager().toggleShowMode();
+	}
    
     
     

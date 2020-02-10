@@ -97,6 +97,8 @@ public:
 
 	bool getShowMode() const { return m_showMode.get(); }
 
+	void toggleShowMode() { m_showMode = !m_showMode; }
+
 private:
     
     void setupGuiParameters();

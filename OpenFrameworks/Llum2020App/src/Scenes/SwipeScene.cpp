@@ -101,11 +101,15 @@ void SwipeScene::draw()
 	float height = AppManager::getInstance().getSettingsManager().getAppHeight();
 
 	ofClear(0);
+	
+	AppManager::getInstance().getColorManager().beginColorCorrection();
+
 	ofSetColor(0);
 	ofDrawRectangle(0, 0, width, height);
 	ofSetColor(255);
-
 	this->drawSwipes();
+
+	AppManager::getInstance().getColorManager().endColorCorrection();
 }
 
 void SwipeScene::drawSwipes()
@@ -156,7 +160,7 @@ void SwipeScene::startSwipeRing(EffectSettings& settings)
 
 	settings.type = EASE_OUT;
 	swipe->setScale(glm::vec3(0, 0, 0));
-	AppManager::getInstance().getVisualEffectsManager().createScaleEffect(swipe, glm::vec3(0.5, 0.5, 1), glm::vec3(2.3, 2.3, 1), settings);
+	AppManager::getInstance().getVisualEffectsManager().createScaleEffect(swipe, glm::vec3(0.5, 0.5, 1), glm::vec3(2.0, 2.0, 1), settings);
 
 
 }
