@@ -12,7 +12,7 @@
 #include "scenes.h"
 #include "AppManager.h"
 
-SceneManager::SceneManager(): Manager(), m_alpha(-1), m_transitionTime(0.5), m_sceneOffset(2), m_currentVideoIndex(0), m_status(false)
+SceneManager::SceneManager(): Manager(), m_alpha(-1), m_transitionTime(0.5), m_sceneOffset(2), m_currentVideoIndex(0), m_status(false), m_showMode(false)
 {
 	//Intentionally left empty
 }
@@ -96,6 +96,25 @@ void SceneManager::createScenes()
     shaderScene->setup();
     m_mySceneManager->addScene(shaderScene);
     m_sceneOffset++;
+
+	//Create shader Scene
+	shaderScene = ofPtr<ShaderScene>(new ShaderScene("SunsetShader"));
+	shaderScene->setup();
+	m_mySceneManager->addScene(shaderScene);
+	m_sceneOffset++;
+
+	//Create shader Scene
+	shaderScene = ofPtr<ShaderScene>(new ShaderScene("StarWavesShader"));
+	shaderScene->setup();
+	m_mySceneManager->addScene(shaderScene);
+	m_sceneOffset++;
+
+	//Create shader Scene
+	shaderScene = ofPtr<ShaderScene>(new ShaderScene("CircularPlasmaShader"));
+	shaderScene->setup();
+	m_mySceneManager->addScene(shaderScene);
+	m_sceneOffset++;
+
 
 	//Create Etsatic Scene
 	scene = ofPtr<ofxScene>(new VectorFieldScene("Ecstatic"));
@@ -194,6 +213,10 @@ void SceneManager::updateFbo()
 
 void SceneManager::updatePixels()
 {
+	if (m_showMode) {
+		return;
+	}
+
     ofPixels pixels;
     m_reader.readToPixels(m_fbo, pixels, OF_IMAGE_COLOR_ALPHA);
     //m_fbo.readToPixels(pixels);
@@ -432,4 +455,16 @@ void SceneManager::initializeSceneList()
 {
 	m_sceneList.clear();
 	m_sceneList = { "Noise","Ecstatic"};
+}
+
+void SceneManager::onShowModeChange(bool& value)
+{
+	m_showMode = value;
+	if (m_showMode == true) {
+		AppManager::getInstance().getLayoutManager().setDrawMode(LayoutManager::DRAW_SCENE);
+	}
+	else {
+		AppManager::getInstance().getLayoutManager().setDrawMode(LayoutManager::DRAW_3D);
+	}
+
 }

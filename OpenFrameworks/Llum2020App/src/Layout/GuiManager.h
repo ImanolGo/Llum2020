@@ -95,6 +95,8 @@ public:
 
 	void setAudioHighOnset(bool value) { m_audioHighOnset = value; }
 
+	bool getShowMode() const { return m_showMode.get(); }
+
 private:
     
     void setupGuiParameters();
@@ -144,7 +146,9 @@ private:
 	ofParameterGroup m_particlesGroup;
 	ofParameterGroup m_audioGroup;
     ofParameterGroup m_communicationsGroup;
-    
+
+	
+	ofParameter<bool>       m_showMode;
     ofParameter<float>      m_sceneTransitionTime;
 	ofParameter<float>      m_sceneTimer;
     ofParameter<float>      m_shaderSpeed;

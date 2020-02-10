@@ -79,14 +79,15 @@ void VectorFieldScene::updateVectorField()
 
 void VectorFieldScene::setColors()
 {
-	
 	int numParticles = m_vectorField.getNumParticles();
 	auto& texture = AppManager::getInstance().getColorManager().getFboGradient().getTexture();
 	ofPixels pix;
-	texture.readToPixels(pix); // now all the pixels from tex are in pix'
+	texture.readToPixels(pix); // now all the pixels from tex are in pix
 	int y = texture.getHeight() / 2;
 
+
 	for (int i = 0; i < numParticles; i++) {
+		int index = floor(ofRandom(1, 5));
 		int x = (int)ceil(ofRandom(texture.getWidth()));
 		m_vectorField.setColor(i, pix.getColor(x, y));
 	}

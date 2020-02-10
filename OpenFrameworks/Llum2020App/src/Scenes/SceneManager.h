@@ -80,8 +80,10 @@ public:
     int getCurrentVideoIndex() const {return m_currentVideoIndex;}
     
     bool getCurrentStatus() const {return m_status;}
-    
 
+	void onShowModeChange(bool& value);
+
+ 
 private:
     
     //! Create the scenes
@@ -135,6 +137,7 @@ private:
     int                      m_sceneOffset;
     bool                     m_status;
     int                      m_currentVideoIndex;
+	bool					 m_showMode;
   
 };
 

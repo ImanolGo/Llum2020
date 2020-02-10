@@ -244,7 +244,11 @@ void LedsManager::setPixels(ofPixelsRef pixels)
 
 void LedsManager::draw()
 {
-    
+	bool showMode = AppManager::getInstance().getGuiManager().getShowMode();
+	if (showMode) {
+		return;
+	}
+
     if(m_drawGrid){
         float size = 5.0;
         float numSteps = 10;
@@ -259,6 +263,13 @@ void LedsManager::draw()
 
 void LedsManager::drawModel()
 {
+	bool showMode = AppManager::getInstance().getGuiManager().getShowMode();
+	if (showMode) {
+		return;
+	}
+
+
+
     for(auto& groups: m_ledGroups){
         groups.second->drawModel();
     }
@@ -266,6 +277,12 @@ void LedsManager::drawModel()
 
 void LedsManager::drawLayout()
 {
+	bool showMode = AppManager::getInstance().getGuiManager().getShowMode();
+	if (showMode) {
+		return;
+	}
+
+
     ofEnableAlphaBlending();
     
     ofRectangle rect1(0,0,m_fboMask.getWidth(), m_fboMask.getHeight());

@@ -77,7 +77,8 @@ public:
     void setDrawMode(DrawMode mode);
     
     DrawMode getDrawMode() {return m_drawMode;}
-    
+
+
 
 private:
 

@@ -88,7 +88,7 @@ void GuiManager::setupGuiParameters()
 
 void GuiManager::setupScenesGui()
 {
-     auto scenesManager = &AppManager::getInstance().getSceneManager();
+    auto scenesManager = &AppManager::getInstance().getSceneManager();
     
     m_sceneNames.clear();
     m_scenesGroup.setName("Scenes");
@@ -99,6 +99,11 @@ void GuiManager::setupScenesGui()
     for(int i=0; i< scenesManager->getNumberScenes(); i++){
         m_sceneNames.push_back(scenesManager->getSceneName(i));
     }
+
+	m_showMode.set("ShowMode", false);
+	m_showMode.addListener(scenesManager, &SceneManager::onShowModeChange);
+	m_parameters.add(m_showMode);
+	m_scenesGroup.add(m_showMode);
 
     m_sceneTransitionTime.set("TransitionTime", 2.0, 0.0, 10);
     m_sceneTransitionTime.addListener(scenesManager, &SceneManager::onTransitionTimeChange);
@@ -429,6 +434,7 @@ void GuiManager::drawGui()
            
             if (ofxImGui::BeginTree(m_scenesGroup, mainSettings))
             {
+				ofxImGui::AddParameter(m_showMode);
                 ofxImGui::AddParameter(m_sceneTransitionTime);
 				ofxImGui::AddParameter(m_sceneTimer);
                 ofxImGui::AddCombo(m_sceneMode, m_sceneNames);
