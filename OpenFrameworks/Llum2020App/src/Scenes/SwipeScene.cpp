@@ -138,13 +138,12 @@ void SwipeScene::startSwipe()
 	settings.startAnimation = 0.0;
 	settings.animationTime = animationTime;
 
-	if (ofRandomf() > 0) {
+	if (ofRandom(1.0) > 0.65) {
 		this->startSwipeRing(settings);
 	}
 	else {
 		this->startSwipeRectangle(settings);
-	}
-    
+	}    
 }
 
 void SwipeScene::startSwipeRing(EffectSettings& settings)
@@ -157,10 +156,15 @@ void SwipeScene::startSwipeRing(EffectSettings& settings)
 	shared_ptr<SwipeVisual> swipe = make_shared<SwipeVisual>(pos, resourceName, settings.animationTime);
 	swipe->setWidth(width); swipe->setHeight(height);
 	m_swipes.push_back(swipe);
-
 	settings.type = EASE_OUT;
-	swipe->setScale(glm::vec3(0, 0, 0));
-	AppManager::getInstance().getVisualEffectsManager().createScaleEffect(swipe, glm::vec3(0.5, 0.5, 1), glm::vec3(2.0, 2.0, 1), settings);
+
+	if (ofRandom(1.0) > 0.5) {
+		swipe->setScale(glm::vec3(2.0, 2.0, 1));
+		AppManager::getInstance().getVisualEffectsManager().createScaleEffect(swipe, glm::vec3(0.5, 0.5, 1), settings);
+	}
+	else {
+		AppManager::getInstance().getVisualEffectsManager().createScaleEffect(swipe, glm::vec3(0.5, 0.5, 1), glm::vec3(2.0, 2.0, 1), settings);
+	}
 
 
 }
@@ -176,11 +180,28 @@ void SwipeScene::startSwipeRectangle(EffectSettings& settings)
 	shared_ptr<SwipeVisual> swipe = make_shared<SwipeVisual>(pos, resourceName, settings.animationTime);
 	swipe->setWidth(width); swipe->setHeight(height);
 	m_swipes.push_back(swipe);
-
 	//settings.animationTime *= 0.5f;
 	settings.type = EASE_OUT;
-	swipe->setPosition(ofPoint(-width, 0));
-	AppManager::getInstance().getVisualEffectsManager().createMoveEffect(swipe, glm::vec3(-width * 0.5, height*0.5, 0), glm::vec3(width*0.5 + width, height*0.5, 0), settings);
+
+	float rand = ofRandom(4.0);
+	ofLogNotice() << "SwipeScene::startSwipeRectangle -> rand = " << rand;
+	
+	if (rand < 1.0) {
+		swipe->setPosition(glm::vec3(-width * 0.5, height*0.5, 0));
+		AppManager::getInstance().getVisualEffectsManager().createMoveEffect(swipe, glm::vec3(width*0.5 + width, height*0.5, 0), settings);
+	}
+	else if (rand < 2.0) {
+		swipe->setPosition(glm::vec3(width*0.5 + width, height*0.5, 0));
+		AppManager::getInstance().getVisualEffectsManager().createMoveEffect(swipe, glm::vec3(-width * 0.5, height*0.5, 0), settings);
+	}
+	else if (rand < 3.0) {
+		swipe->setPosition(glm::vec3(width*0.5, -height*0.5, 0));
+		AppManager::getInstance().getVisualEffectsManager().createMoveEffect(swipe, glm::vec3(width*0.5,height + height*0.5, 0), settings);
+	}
+	else{
+		swipe->setPosition(glm::vec3(width*0.5, height + height * 0.5, 0));
+		AppManager::getInstance().getVisualEffectsManager().createMoveEffect(swipe, glm::vec3(width*0.5, -height * 0.5, 0), settings);
+	}
 
 }
 

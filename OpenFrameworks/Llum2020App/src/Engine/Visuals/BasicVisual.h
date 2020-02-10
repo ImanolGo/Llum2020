@@ -45,10 +45,10 @@ class BasicVisual
         virtual const ofColor& getColor() {return m_color;}
 
         //! Gets the position of the BasicVisual
-        virtual const ofPoint& getPosition() const{ return m_position;}
+        virtual const glm::vec3& getPosition() const{ return m_position;}
 
         //! Sets the position of the BasicVisual
-        virtual void setPosition(const ofPoint& pos) {m_position = pos;}
+        virtual void setPosition(const glm::vec3& pos) {m_position = pos;}
 
         //! Sets the scale factor of the BasicVisual
         virtual void setScale(const glm::vec3& scale) {m_scale = scale;}

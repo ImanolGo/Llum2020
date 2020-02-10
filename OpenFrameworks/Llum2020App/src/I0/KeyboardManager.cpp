@@ -59,17 +59,17 @@ void KeyboardManager::keyPressed(ofKeyEventArgs &e)
 	else if (key == 's' || key == 'S') {
 		AppManager::getInstance().getGuiManager().toggleShowMode();
 	}
-   
-    
-    
+
+	else if (key == ' ') {
+		AppManager::getInstance().getAudioManager().triggerLow();
+	}
+
 }
 
 void KeyboardManager::keyReleased(ofKeyEventArgs &e)
 {
     int key = e.key;
-    
-    //ofLogVerbose() <<"KeyboardManager::keyReleased-> " + ofToString(key);
-    
+    //ofLogVerbose() <<"KeyboardManager::keyReleased-> " + ofToString(key);   
 }
 
 

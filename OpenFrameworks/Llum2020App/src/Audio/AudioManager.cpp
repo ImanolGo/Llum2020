@@ -131,7 +131,11 @@ void AudioManager::updateOnsets()
 
 }
 
-
+void AudioManager::triggerLow()
+{
+	m_lowOnset = true;
+	AppManager::getInstance().getGuiManager().setAudioLowOnset(m_lowOnset);
+}
 
 void AudioManager::draw()
 {

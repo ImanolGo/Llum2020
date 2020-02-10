@@ -64,6 +64,8 @@ public:
 
 	float getHigh() { return m_high; }
 
+	void triggerLow();
+
     
 private:
     
