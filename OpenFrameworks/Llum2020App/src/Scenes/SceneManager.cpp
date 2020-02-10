@@ -121,11 +121,25 @@ void SceneManager::createScenes()
 	m_sceneOffset++;
 
 	//Create Etsatic Scene
-	scene = shared_ptr<ofxScene>(new VectorFieldScene("Ecstatic"));
+	scene = shared_ptr<ofxScene>(new VectorFieldScene("Melancholic"));
 	m_mySceneManager->addScene(scene);
 
-	//Create Melancholic
-	auto vectorScene = shared_ptr<VectorFieldScene>(new VectorFieldScene("Melancholic"));
+	//Create Cheerful
+	auto vectorScene = shared_ptr<VectorFieldScene>(new VectorFieldScene("Cheerful"));
+	vectorScene->setAdditiveBlend(true);
+	m_mySceneManager->addScene(vectorScene);
+
+	//Create Calm
+	vectorScene = shared_ptr<VectorFieldScene>(new VectorFieldScene("Calm"));
+	vectorScene->setAdditiveBlend(true);
+	m_mySceneManager->addScene(vectorScene);
+
+	//Create Ectstatic
+	vectorScene = shared_ptr<VectorFieldScene>(new VectorFieldScene("Ectstatic"));
+	m_mySceneManager->addScene(vectorScene);
+
+	//Create Ectstatic
+	vectorScene = shared_ptr<VectorFieldScene>(new VectorFieldScene("Impatient"));
 	vectorScene->setAdditiveBlend(true);
 	m_mySceneManager->addScene(vectorScene);
 
