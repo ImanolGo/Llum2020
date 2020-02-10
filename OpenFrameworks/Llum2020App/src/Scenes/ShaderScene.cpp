@@ -73,10 +73,10 @@ void ShaderScene::updateSpeed()
 	bool isOnset = AppManager::getInstance().getAudioManager().getLowOnset();
 	float speed = AppManager::getInstance().getGuiManager().getShaderSpeed();
 	if (isOnset) {
-		m_addedSpeed = speed*8;
+		m_addedSpeed = speed*3;
 	}
 	
-	m_addedSpeed = m_addedSpeed + (m_targetAddedSpeed - m_addedSpeed)*0.02f;
+	m_addedSpeed = m_addedSpeed + (m_targetAddedSpeed - m_addedSpeed)*0.06f;
 }
 
 void ShaderScene::updateTime()

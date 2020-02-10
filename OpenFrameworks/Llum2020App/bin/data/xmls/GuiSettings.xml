@@ -1,7 +1,11 @@
 <?xml version="1.0"?>
 <group>
 	<TransitionTime>1.723</TransitionTime>
-	<LedSize>9.58</LedSize>
+	<ScenesTimer>120</ScenesTimer>
+	<LedSize>3.277</LedSize>
 	<Grid>0</Grid>
 	<VideoPath>/media/imanolgo/DATA/GoogleDrive/Freelancing/2020/KontrastMoment/KontrastMomentDress/Software/OpenFrameworks/KontrastMomentDressApp/bin/data/images</VideoPath>
+	<Volume>1</Volume>
+	<Threshold>0.5</Threshold>
+	<Smoothing>0.5</Smoothing>
 </group>

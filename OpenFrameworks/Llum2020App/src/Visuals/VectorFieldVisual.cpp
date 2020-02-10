@@ -13,7 +13,7 @@
 const int VectorFieldVisual::NUM_PARTICLES = 1500;
 
 
-VectorFieldVisual::VectorFieldVisual():m_speed(0.02), m_spacing(20), m_skipFrames(0), m_fadeTime(8), m_size(20), m_isAdditiveBlend(true)
+VectorFieldVisual::VectorFieldVisual():m_speed(0.02), m_spacing(20), m_skipFrames(0), m_fadeTime(8), m_size(20), m_isAdditiveBlend(false)
 {
     //Intentionaly left empty
 }
@@ -41,6 +41,7 @@ void VectorFieldVisual::setupFbo()
     float width = AppManager::getInstance().getSettingsManager().getAppWidth();
     float height  = AppManager::getInstance().getSettingsManager().getAppHeight();
     m_fbo.allocate(width,height, GL_RGBA32F_ARB);
+	//m_fbo.allocate(width, height, GL_RGB);
     m_fbo.begin(); ofClear(0); m_fbo.end();
 }
 
@@ -114,10 +115,10 @@ void VectorFieldVisual::setupParticles()
     }
 
 	// upload the data to the vbo
-	int total = (int)m_points.size();
-	m_vbo.setVertexData(&m_points[0], total, GL_STATIC_DRAW);
-	m_vbo.setNormalData(&m_sizes[0], total, GL_STATIC_DRAW);
-	m_vbo.setColorData(&m_colors[0], total, GL_STATIC_DRAW);
+	//int total = (int)m_points.size();
+	//m_vbo.setVertexData(&m_points[0], total, GL_DYNAMIC_DRAW);
+	//m_vbo.setNormalData(&m_sizes[0], total, GL_DYNAMIC_DRAW);
+	//m_vbo.setColorData(&m_colors[0], total, GL_DYNAMIC_DRAW);
 }
 
 void VectorFieldVisual::resetParticles()
@@ -165,9 +166,9 @@ void VectorFieldVisual::updateParticles()
 		}
     }
 
-	m_vbo.setVertexData(&m_points[0], (int)m_points.size(), GL_STATIC_DRAW);
-	m_vbo.setNormalData(&m_sizes[0], (int)m_sizes.size(), GL_STATIC_DRAW);
-	m_vbo.setColorData(&m_colors[0], (int)m_colors.size(), GL_STATIC_DRAW);
+	//m_vbo.setVertexData(&m_points[0], (int)m_points.size(), GL_DYNAMIC_DRAW);
+	//m_vbo.setNormalData(&m_sizes[0], (int)m_sizes.size(), GL_DYNAMIC_DRAW);
+	//m_vbo.setColorData(&m_colors[0], (int)m_colors.size(), GL_DYNAMIC_DRAW);
 }
 
 void VectorFieldVisual::updateFbo()

@@ -65,6 +65,8 @@ public:
 
 	ofTexture & getGradient() { return m_mainGradient; }
 
+	ofFbo & getFboGradient() { return m_gradientFbo; }
+
 	void onChangeBlur(float& value);
 
 	void setupBlur();

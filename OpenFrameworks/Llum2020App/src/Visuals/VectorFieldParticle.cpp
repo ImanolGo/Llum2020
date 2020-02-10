@@ -31,8 +31,9 @@ void VectorFieldParticle::setup(){
     m_pos.x = ofRandom(SCREEN_OFFSET,width-SCREEN_OFFSET);
     m_pos.y = ofRandom(SCREEN_OFFSET,height-SCREEN_OFFSET);
     m_prevPos = m_pos;
-    //m_color.setHsb(226, 255, 128);
-    m_color = ofColor(255);
+	float hue = ofRandom(255);
+    //m_color.setHsb(hue, 255, 255);
+    m_color = ofColor::white;
     
     this->setupBrush();
 }
