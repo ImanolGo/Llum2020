@@ -45,83 +45,87 @@ void SceneManager::createScenes()
     m_mySceneManager->setTransitionFade();
 	//m_mySceneManager->setTransitionDissolve();
     
-    ofPtr<ofxScene> scene;
+    shared_ptr<ofxScene> scene;
     
      m_sceneOffset = 0;
     
     //Create Blank Scene
-    scene = ofPtr<ofxScene> (new BlankScene());
+    scene = shared_ptr<ofxScene> (new BlankScene());
     m_mySceneManager->addScene(scene);
     m_sceneOffset++;
     
     //Create Color Scene
-    auto colorScene = ofPtr<ColorScene> (new ColorScene());
+    auto colorScene = shared_ptr<ColorScene> (new ColorScene());
     colorScene->setup();
     m_mySceneManager->addScene(colorScene);
     m_sceneOffset++;
     
     //Create Test Scene
-    auto sceneTest = ofPtr<TestScene> (new TestScene());
+    auto sceneTest = shared_ptr<TestScene> (new TestScene());
     sceneTest->setup();
     m_mySceneManager->addScene(sceneTest);
     m_sceneOffset++;
     
     
     //Create shader Scene
-    auto shaderScene = ofPtr<ShaderScene> (new ShaderScene("NoiseShader"));
+    auto shaderScene = shared_ptr<ShaderScene> (new ShaderScene("NoiseShader"));
     shaderScene->setup();
     m_mySceneManager->addScene(shaderScene);
     m_sceneOffset++;
 
     //Create shader Scene
-    shaderScene = ofPtr<ShaderScene> (new ShaderScene("CirclesShader"));
+    shaderScene = shared_ptr<ShaderScene> (new ShaderScene("CirclesShader"));
     shaderScene->setup();
     m_mySceneManager->addScene(shaderScene);
     m_sceneOffset++;
 
     //Create shader Scene
-    shaderScene = ofPtr<ShaderScene> (new ShaderScene("SparklesShader"));
+    shaderScene = shared_ptr<ShaderScene> (new ShaderScene("SparklesShader"));
     shaderScene->setup();
     m_mySceneManager->addScene(shaderScene);
     m_sceneOffset++;
 
     //Create shader Scene
-    shaderScene = ofPtr<ShaderScene> (new ShaderScene("BreathShader"));
+    shaderScene = shared_ptr<ShaderScene> (new ShaderScene("BreathShader"));
     shaderScene->setup();
     m_mySceneManager->addScene(shaderScene);
     m_sceneOffset++;
 
     //Create shader Scene
-    shaderScene = ofPtr<ShaderScene> (new ShaderScene("CloudsShader"));
+    shaderScene = shared_ptr<ShaderScene> (new ShaderScene("CloudsShader"));
     shaderScene->setup();
     m_mySceneManager->addScene(shaderScene);
     m_sceneOffset++;
 
 	//Create shader Scene
-	shaderScene = ofPtr<ShaderScene>(new ShaderScene("SunsetShader"));
+	shaderScene = shared_ptr<ShaderScene>(new ShaderScene("SunsetShader"));
 	shaderScene->setup();
 	m_mySceneManager->addScene(shaderScene);
 	m_sceneOffset++;
 
 	//Create shader Scene
-	shaderScene = ofPtr<ShaderScene>(new ShaderScene("StarWavesShader"));
+	shaderScene = shared_ptr<ShaderScene>(new ShaderScene("StarWavesShader"));
 	shaderScene->setup();
 	m_mySceneManager->addScene(shaderScene);
 	m_sceneOffset++;
 
 	//Create shader Scene
-	shaderScene = ofPtr<ShaderScene>(new ShaderScene("CircularPlasmaShader"));
+	shaderScene = shared_ptr<ShaderScene>(new ShaderScene("CircularPlasmaShader"));
 	shaderScene->setup();
 	m_mySceneManager->addScene(shaderScene);
 	m_sceneOffset++;
 
+	//Create swipe Scene
+	scene = shared_ptr<SwipeScene>(new SwipeScene());
+	m_mySceneManager->addScene(scene);
+	m_sceneOffset++;
 
 	//Create Etsatic Scene
-	scene = ofPtr<ofxScene>(new VectorFieldScene("Ecstatic"));
+	scene = shared_ptr<ofxScene>(new VectorFieldScene("Ecstatic"));
 	m_mySceneManager->addScene(scene);
 
 	//Create Melancholic
-	auto vectorScene = ofPtr<VectorFieldScene>(new VectorFieldScene("MELANCHOLIC"));
+	auto vectorScene = shared_ptr<VectorFieldScene>(new VectorFieldScene("Melancholic"));
 	vectorScene->setAdditiveBlend(true);
 	m_mySceneManager->addScene(vectorScene);
 
@@ -310,7 +314,7 @@ void SceneManager::addVideos()
     auto& videoPaths = AppManager::getInstance().getVideoManager().getVideoNames();
   
     for(auto& path : videoPaths){
-        auto videoScene = ofPtr<VideoScene>(new VideoScene(path));
+        auto videoScene = shared_ptr<VideoScene>(new VideoScene(path));
         videoScene->setup();
         ofLogNotice() <<"SceneManager::add video scene -> " << path;
         m_mySceneManager->addScene(videoScene);

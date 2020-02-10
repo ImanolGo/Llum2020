@@ -34,8 +34,8 @@ public:
     void changeScene(int sceneIndex);
     void changeScene(std::string sceneName);
 
-    void addScene(ofPtr<ofxScene> pScene);
-    void removeScene(ofPtr<ofxScene> pScene);
+    void addScene(shared_ptr<ofxScene> pScene);
+    void removeScene(shared_ptr<ofxScene> pScene);
 
     void setExitByTime(bool b);
     void setSceneDuration(float fadeInSec, float fadeOutSec);
@@ -47,14 +47,14 @@ public:
     
     float getCurrentAlpha(){return currentAlpha;}
 
-    vector<ofPtr<ofxScene> > scenes;
+    vector<shared_ptr<ofxScene> > scenes;
 
  private:
     int _sceneIndex = 0;
     int _nextSceneIndex;
     
-    ofPtr<ofxScene> _currentScene;
-    ofPtr<ofxScene> _nextScene;
+    shared_ptr<ofxScene> _currentScene;
+    shared_ptr<ofxScene> _nextScene;
 
     ofFbo _fbo;
     ofFbo _nextFbo;

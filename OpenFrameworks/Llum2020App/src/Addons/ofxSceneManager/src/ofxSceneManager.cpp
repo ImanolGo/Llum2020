@@ -35,7 +35,7 @@ void ofxSceneManager::run() {
     ofClear(255, 255, 255, 0);
     _nextFbo.end();
     
-    ofPtr<ofxScene> previousScene;
+    shared_ptr<ofxScene> previousScene;
     previousScene = _currentScene;
     _currentScene = scenes.at(_sceneIndex);
     _currentScene->setupScene(previousScene);
@@ -65,7 +65,7 @@ void ofxSceneManager::run(int width, int height) {
     ofClear(255, 255, 255, 0);
     _nextFbo.end();
     
-    ofPtr<ofxScene> previousScene;
+    shared_ptr<ofxScene> previousScene;
     previousScene = _currentScene;
     _currentScene = scenes.at(_sceneIndex);
     _currentScene->setupScene(previousScene);
@@ -138,7 +138,7 @@ void ofxSceneManager::changeScene(std::string sceneName) {
 }
 
 
-void ofxSceneManager::addScene(ofPtr<ofxScene> pScene) {
+void ofxSceneManager::addScene(shared_ptr<ofxScene> pScene) {
     ofAddListener(pScene->startFadingInEvent, this, &ofxSceneManager::_onStartFadingIn);
     ofAddListener(pScene->startDrawingEvent, this, &ofxSceneManager::_onStartDrawing);
     ofAddListener(pScene->finishedDrawingEvent, this, &ofxSceneManager::_onFinishedDrawing);    
@@ -149,10 +149,10 @@ void ofxSceneManager::addScene(ofPtr<ofxScene> pScene) {
 
 
 
-void ofxSceneManager::removeScene(ofPtr<ofxScene> pScene) {
+void ofxSceneManager::removeScene(shared_ptr<ofxScene> pScene) {
    
    
-    for(vector<ofPtr<ofxScene> >::iterator it = scenes.begin(); it != scenes.end();)
+    for(vector<shared_ptr<ofxScene> >::iterator it = scenes.begin(); it != scenes.end();)
     {
         if(*it == pScene) {
             ofRemoveListener(pScene->startFadingInEvent, this, &ofxSceneManager::_onStartFadingIn);
@@ -223,7 +223,7 @@ void ofxSceneManager::_onStartFadingOut(bool &b) {
 void ofxSceneManager::_onFinishScene(bool &b) {
     if (transition == TRANSITION_FADE) {
         _sceneIndex = _nextSceneIndex;
-        ofPtr<ofxScene> previousScene;
+        shared_ptr<ofxScene> previousScene;
         previousScene = _currentScene;
         _currentScene = scenes.at(_sceneIndex);
         _currentScene->setupScene(previousScene);

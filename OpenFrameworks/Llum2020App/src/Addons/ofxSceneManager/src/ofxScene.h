@@ -19,7 +19,7 @@ public:
     
     ofxScene(std::string name):_name(name) {}
     
-    void setupScene(ofPtr<ofxScene> previousScene) {
+    void setupScene(shared_ptr<ofxScene> previousScene) {
         setup();
         if (!_isSetupOverridden) {
             // If a subclass overrides setup(),
@@ -151,7 +151,7 @@ private:
     
 #pragma mark - To be overridden
     virtual void setup() {_isSetupOverridden = false;}  // a bit hacky...
-    virtual void setup(ofPtr<ofxScene> previousScene) {}
+    virtual void setup(shared_ptr<ofxScene> previousScene) {}
     virtual void update() {}
     virtual void draw() {}
     
