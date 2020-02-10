@@ -89,7 +89,8 @@ void VectorFieldScene::setColors()
 	for (int i = 0; i < numParticles; i++) {
 		int index = floor(ofRandom(1, 5));
 		int x = (int)ceil(ofRandom(texture.getWidth()));
-		m_vectorField.setColor(i, pix.getColor(x, y));
+        ofColor color = pix.getColor(x, y);
+		m_vectorField.setColor(i, color);
 	}
 }
 

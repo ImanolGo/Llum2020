@@ -53,7 +53,7 @@ public:
 
 	bool getUseHueCorrection() { return m_useHueCorrection; }
 
-	ofFloatColor getSolidColor() const { return m_solidColor; }
+	const ofFloatColor & getSolidColor() const { return m_solidColor; }
     
 	const vector<pair<string, ofImage>> & getGradients() const { return m_gradients; }
 

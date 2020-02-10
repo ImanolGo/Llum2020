@@ -59,8 +59,9 @@ void LayoutManager::setupOutput()
 	string name = "Llum2020";
 	#ifdef TARGET_WIN32
 		m_sender.init(name);
+    #endif
 
-	#elif TARGET_OSX
+	#ifdef TARGET_OSX
 		m_syphonServer.setName(name);
 	#endif	
 
@@ -216,12 +217,14 @@ void LayoutManager::update()
 void LayoutManager::sendOutput()
 {
 	auto & fbo = AppManager::getInstance().getSceneManager().getFbo();
-
+    
 	#ifdef TARGET_WIN32
 		m_sender.send(fbo.getTexture());
+    #endif
 
-	#elif TARGET_OSX
-		m_syphonServer.publishFBO(fbo);
+	#ifdef TARGET_OSX
+        ofTexture inputTexture = AppManager::getInstance().getSceneManager().getFbo().getTexture();
+        m_syphonServer.publishTexture( & inputTexture);
 	#endif	
 
 }

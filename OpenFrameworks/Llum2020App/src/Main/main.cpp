@@ -17,7 +17,7 @@ int main() {
     ofCreateWindow(settingsGL);
     
 	//ofSetupOpenGL(1024, 768, OF_WINDOW);
-	ofRunApp(new WindowTreeApp());
+	ofRunApp(new Llum2020App());
 
 }
 

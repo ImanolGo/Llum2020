@@ -18,9 +18,12 @@
 
 #ifdef TARGET_WIN32
 	 #include "ofxSpout.h"
-#elif TARGET_OSX
+#endif
+
+#ifdef TARGET_OSX
 	#include "ofxSyphon.h"
 #endif
+
 //========================== class LayoutManager ==============================
 //============================================================================
 /** \class LayoutManager LayoutManager.h
@@ -158,8 +161,9 @@ private:
 
 	#ifdef TARGET_WIN32
 		ofxSpout::Sender m_sender;
+    #endif
 
-	#elif TARGET_OSX
+	#ifdef TARGET_OSX
 		ofxSyphonServer     m_syphonServer;
 	#endif	
 

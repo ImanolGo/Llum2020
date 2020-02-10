@@ -78,7 +78,7 @@ void VectorFieldParticle::update()
     
     m_vel+=m_acc;
 	//m_vel = glm::clamp(m_vel, glm::vec3(0), glm::vec3(m_maxSpeed));
-	this->limit(m_vel, m_maxSpeed);
+	this->limitVec(m_vel, m_maxSpeed);
     //m_vel.limit(m_maxSpeed);
     m_prevPos = m_pos;
     m_pos+= (m_vel + glm::vec3(ofRandom(-m_randomness,m_randomness),ofRandom(-m_randomness,m_randomness), 0.0));
@@ -96,7 +96,7 @@ void VectorFieldParticle::update()
     m_brush.setColor(m_color);
 }
 
-void VectorFieldParticle::limit(glm::vec3& vec, float max) {
+void VectorFieldParticle::limitVec(glm::vec3& vec, float max) {
 	float lengthSquared = glm::length(vec);
 	if (lengthSquared > max*max && lengthSquared > 0) {
 		float ratio = max / (float)sqrt(lengthSquared);

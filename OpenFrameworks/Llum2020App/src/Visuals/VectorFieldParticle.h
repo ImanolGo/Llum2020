@@ -67,7 +67,7 @@ private:
     
     void stayOnScreen();
 
-	void VectorFieldParticle::limit(glm::vec3& vec, float max);
+	void limitVec(glm::vec3& vec, float max);
     
 private:
     
