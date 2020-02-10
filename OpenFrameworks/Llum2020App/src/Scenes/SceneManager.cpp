@@ -33,6 +33,7 @@ void SceneManager::setup()
 
     this->createScenes();
     this->setupFbos();
+	this->setupTimer();
     ofLogNotice() <<"SceneManager::initialized";
 
 }
@@ -451,7 +452,8 @@ void SceneManager::sendSceneChange()
 void SceneManager::onChangeSceneDuration(float& value)
 {
 	m_sceneTimer.setup(value * 1000);
-	ofLogNotice() << "SceneManager::setupTimer << Time = : " << time << "s";
+	m_sceneTimer.start(false);
+	ofLogNotice() << "SceneManager::setupTimer << Time = : " << value * 1000 << "s";
 }
 
 void SceneManager::stopScenes()
@@ -472,7 +474,8 @@ int SceneManager::getNumberScenes(){
 void SceneManager::initializeSceneList()
 {
 	m_sceneList.clear();
-	m_sceneList = { "Noise","Ecstatic"};
+	m_sceneList = { "NoiseShader","CirclesShader", "SparklesShader", "CloudsShader", "StarWavesShader", "CircularPlasmaShader", 
+	"SwipeScene", "Melancholic", "Cheerful", "Calm", "Ectstatic", "Impatient"};
 }
 
 void SceneManager::onShowModeChange(bool& value)
