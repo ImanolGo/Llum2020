@@ -39,6 +39,14 @@ public:
 
 	void sendControlChange(int control, int value);
 
+	void sendNoteOn(int channel, int pitch, int velocity);
+
+	void sendNoteOn(int pitch, int velocity);
+
+	void sendNoteOff(int channel, int pitch, int velocity);
+
+	void sendNoteOff(int pitch, int velocity);
+
 private:
 
     //! setups the midi ports

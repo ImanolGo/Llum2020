@@ -62,9 +62,24 @@ void MidiManager::sendControlChange(int control, int value)
 	m_midiOut.sendControlChange(m_channel, control, value);
 }
 
+void MidiManager::sendNoteOn(int channel, int pitch, int velocity)
+{
+	m_midiOut.sendNoteOn(channel, pitch, velocity);
+}
 
+void MidiManager::sendNoteOn(int pitch, int velocity)
+{
+	m_midiOut.sendNoteOn(m_channel, pitch, velocity);
+}
 
+void MidiManager::sendNoteOff(int channel, int pitch, int velocity)
+{
+	m_midiOut.sendNoteOff(channel, pitch, velocity);
+}
 
-
+void MidiManager::sendNoteOff(int pitch, int velocity)
+{
+	m_midiOut.sendNoteOff(m_channel, pitch, velocity);
+}
 
 

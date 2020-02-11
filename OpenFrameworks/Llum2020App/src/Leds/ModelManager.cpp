@@ -80,7 +80,7 @@ void ModelManager::draw()
     ofEnableBlendMode(OF_BLENDMODE_ALPHA);
     AppManager::getInstance().getLedsManager().drawModel();
     
-    //ofEnableBlendMode(OF_BLENDMODE_ADD);
+    ofEnableBlendMode(OF_BLENDMODE_ADD);
     AppManager::getInstance().getLedsManager().draw();
     
    // ofTranslate(rect->x, 0 , 0);
