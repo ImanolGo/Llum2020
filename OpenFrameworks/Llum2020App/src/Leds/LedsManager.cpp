@@ -133,7 +133,7 @@ void LedsManager::setupShader()
 
 void LedsManager::createLayout()
 {
-    float resolution = 1000;
+    float resolution = 1200;
     float percentage = 0.5;
     float width = m_boundingBox2D.getWidth();
     float height = m_boundingBox2D.getHeight();
