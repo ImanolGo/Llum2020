@@ -11,6 +11,7 @@
 #pragma once
 
 #include "Manager.h"
+#include "ofxPostProcessing.h"
 
 //========================== class ModelManager ==============================
 //============================================================================
@@ -41,9 +42,11 @@ class ModelManager: public Manager
     
         void resetCamera();
     
-        void setControlArea(ofRectangle& rect) {m_camera.setControlArea(rect);}
+        void setControlArea(ofRectangle& rect);
 
     private:
+    
+        void setupPostProcessing();
 
 
     
@@ -52,6 +55,7 @@ class ModelManager: public Manager
         ofEasyCam m_camera; // add mouse controls for camera movement
     
         ofFbo     m_fbo;
+        ofxPostProcessing m_postProcessing;
 
     
 

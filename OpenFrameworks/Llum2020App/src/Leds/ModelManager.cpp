@@ -35,8 +35,20 @@ void ModelManager::setup()
 
 	Manager::setup();
     
+    this->setupPostProcessing();
     this->resetCamera();
 }
+
+void ModelManager::setupPostProcessing()
+{
+    
+    float width = AppManager::getInstance().getSettingsManager().getAppWidth();
+    float height = AppManager::getInstance().getSettingsManager().getAppHeight();
+    
+    m_postProcessing.init(width, height);
+    m_postProcessing.createPass<BloomPass>()->setEnabled(true);
+}
+
 
 void ModelManager::resetCamera()
 {
@@ -74,6 +86,7 @@ void ModelManager::draw()
     //ofEnableDepthTest();
     //ofTranslate(-rect->x, 0, 0);
     m_camera.begin();
+    //m_postProcessing.begin(m_camera);
    // ofTranslate(-rect->x, 0, 0);
     //this->drawLeds();
     
@@ -85,8 +98,16 @@ void ModelManager::draw()
     
    // ofTranslate(rect->x, 0 , 0);
     m_camera.end();
+    //m_postProcessing.end();
     ofDisablePointSprites();
     ofEnableArbTex();
+    
+}
+
+void ModelManager::setControlArea(ofRectangle& rect)
+{
+    m_camera.setControlArea(rect);
+    m_postProcessing.init(rect.getWidth(), rect.getHeight());
     
 }
 

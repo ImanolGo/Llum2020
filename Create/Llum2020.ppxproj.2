@@ -1,0 +1,94 @@
+<project>
+    <version>6</version>
+    <parameters>
+        <manager_enabled type="bool">0</manager_enabled>
+        <scenes type="jsvalue">&quot;&quot;&#x0A;</scenes>
+        <color_palette type="jsvalue">&quot;&quot;&#x0A;</color_palette>
+        <manager_ON type="bool">1</manager_ON>
+        <current_scene type="jsvalue">&quot;&quot;&#x0A;</current_scene>
+        <current_scene_id type="string"></current_scene_id>
+    </parameters>
+    <workspaces>
+        <workspace>
+            <name>root</name>
+            <items>
+                <item>content:leds_layout.png</item>
+                <item>content:syphon</item>
+            </items>
+            <parameters>
+                <is_3D type="bool">0</is_3D>
+            </parameters>
+        </workspace>
+    </workspaces>
+    <fixtures></fixtures>
+    <contents>
+        <content>
+            <name>syphon</name>
+            <type>SyphonPipe</type>
+            <parameters>
+                <enabled type="bool">1</enabled>
+                <color_levels type="color">255, 255, 255, 255</color_levels>
+                <Zone type="string"></Zone>
+                <params_in_manager type="bool">0</params_in_manager>
+                <texture_filtering type="stringoption">linear</texture_filtering>
+                <texture_horizontal_offset type="int">0</texture_horizontal_offset>
+                <texture_vertical_offset type="int">0</texture_vertical_offset>
+                <projection_type type="stringoption">flatsimple</projection_type>
+                <projection_parameters>
+                    <width type="float">1</width>
+                    <height type="float">1</height>
+                </projection_parameters>
+                <syphonservername type="string">Llum2020</syphonservername>
+                <syphonappname type="string">Llum2020App</syphonappname>
+                <reverse_ratio type="bool">0</reverse_ratio>
+                <Syphon_Pipe type="stringoption">Llum2020App-&gt;Llum2020</Syphon_Pipe>
+            </parameters>
+            <transformation type="matrix4x4"> 1.04301,        0,        0,        0&#x0A;       0, 0.954649,        0,        0&#x0A;       0,        0,        1,        0&#x0A;       0,        0,        0,        1</transformation>
+        </content>
+        <content>
+            <name>leds_layout.png</name>
+            <type>py:image</type>
+            <parameters>
+                <enabled type="bool">1</enabled>
+                <color_levels type="color">255, 255, 255, 255</color_levels>
+                <Zone type="string"></Zone>
+                <params_in_manager type="bool">0</params_in_manager>
+                <texture_filtering type="stringoption">linear</texture_filtering>
+                <texture_horizontal_offset type="int">0</texture_horizontal_offset>
+                <texture_vertical_offset type="int">0</texture_vertical_offset>
+                <projection_type type="stringoption">flatsimple</projection_type>
+                <projection_parameters>
+                    <width type="float">1</width>
+                    <height type="float">1</height>
+                </projection_parameters>
+                <params>
+                    <image_path type="filepath">/Users/imanolgo/Desktop/Llum2020/OpenFrameworks/Llum2020App/bin/data/images/layout/leds_layout.png</image_path>
+                </params>
+            </parameters>
+            <transformation type="matrix4x4"> 1.35453,        0,        0,        0&#x0A;       0,  1.32161,        0,        0&#x0A;       0,        0,        1,        0&#x0A;       0,        0,        0,        1</transformation>
+        </content>
+    </contents>
+    <controllers></controllers>
+    <devices>
+        <device>
+            <MAC>3c:71:bf:dc:c6:0c</MAC>
+            <conf>{}&#x0A;</conf>
+        </device>
+        <device>
+            <MAC>3c:71:bf:de:ea:7c</MAC>
+            <conf>{}&#x0A;</conf>
+        </device>
+        <device>
+            <MAC>3c:71:bf:de:eb:44</MAC>
+            <conf>{}&#x0A;</conf>
+        </device>
+        <device>
+            <MAC>5c:cf:7f:ef:b1:93</MAC>
+            <conf>{}&#x0A;</conf>
+        </device>
+        <device>
+            <MAC>cc:50:e3:bb:c0:e4</MAC>
+            <conf>{}&#x0A;</conf>
+        </device>
+    </devices>
+</project>

@@ -15,7 +15,7 @@ AudioManager::AudioManager() : m_volume(1.0), m_lowLimit(10),
 m_highLimit(83), m_smoothing(0.37), m_lastLow(0.0), m_lastMid(0.0), m_lastHigh(0.0),
 m_low(0.0), m_mid(0.0), m_high(0.0), m_lowFlux(0.0), m_midFlux(0.0), m_highFlux(0.0),
 m_onsetThreshold(0.5), m_lowOnset(false), m_midOnset(false), m_highOnset(false), m_width(100.0f), m_height(100.0f)
-
+, m_externalOnset(false)
 {
     //Intentionaly left empty
 }
@@ -121,13 +121,23 @@ void AudioManager::updateBands()
 
 void AudioManager::updateOnsets()
 {
-	m_lowOnset = m_lowFlux > m_onsetThreshold;
-	m_midOnset = m_midFlux > m_onsetThreshold;
-	m_highOnset = m_highFlux > m_onsetThreshold;
+    if(m_externalOnset){
+        m_lowOnset = true;
+        m_midOnset = true;
+        m_highOnset = true;
+    }
+    else{
+        m_lowOnset = m_lowFlux > m_onsetThreshold;
+        m_midOnset = m_midFlux > m_onsetThreshold;
+        m_highOnset = m_highFlux > m_onsetThreshold;
+    }
+	
 
 	AppManager::getInstance().getGuiManager().setAudioLowOnset(m_lowOnset);
 	AppManager::getInstance().getGuiManager().setAudioMidOnset(m_midOnset);
 	AppManager::getInstance().getGuiManager().setAudioHighOnset(m_highOnset);
+    
+    m_externalOnset = false;
 
 }
 
@@ -178,4 +188,10 @@ void AudioManager::onChangeVolume(float& value)
     m_volume = value;
     m_fft.setVolume(m_volume);
 }
+
+void AudioManager::triggerExternalOnsets()
+{
+    m_externalOnset = true;
+}
+
 

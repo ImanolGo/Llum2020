@@ -61,7 +61,7 @@ void KeyboardManager::keyPressed(ofKeyEventArgs &e)
 	}
 
 	else if (key == ' ') {
-		AppManager::getInstance().getAudioManager().triggerLow();
+		AppManager::getInstance().getAudioManager().triggerExternalOnsets();
 	}
 
 }

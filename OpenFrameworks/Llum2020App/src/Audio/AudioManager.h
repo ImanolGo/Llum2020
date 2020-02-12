@@ -65,6 +65,8 @@ public:
 	float getHigh() { return m_high; }
 
 	void triggerLow();
+    
+    void triggerExternalOnsets();
 
     
 private:
@@ -91,6 +93,7 @@ private:
 	float			m_onsetThreshold;
 	bool			m_lowOnset, m_highOnset, m_midOnset;
 	float			m_width, m_height;
+    bool            m_externalOnset;
 
 
     ofxFFTLive      m_fft;
