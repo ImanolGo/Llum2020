@@ -290,7 +290,7 @@ bool LedGroup::parseLedLine(string& line, glm::vec3& position)
     }
     
     position.x = ofToFloat(positionsStrings[0]);
-    position.y = -ofToFloat(positionsStrings[1]);
+    position.y = ofToFloat(positionsStrings[1]);
     position.z = ofToFloat(positionsStrings[2]);
     
     return true;
