@@ -131,6 +131,10 @@ void AudioManager::updateOnsets()
         m_midOnset = m_midFlux > m_onsetThreshold;
         m_highOnset = m_highFlux > m_onsetThreshold;
     }
+    
+    if(m_lowOnset){
+        AppManager::getInstance().getMidiManager().sendNoteOn(127);
+    }
 	
 
 	AppManager::getInstance().getGuiManager().setAudioLowOnset(m_lowOnset);

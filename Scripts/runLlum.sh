@@ -2,44 +2,9 @@
 
 #-----------------------------------------------------------
 #
-# start Live application
+# start Llum application
 #
 #-----------------------------------------------------------
-
-
-echo "-> Quit Ableton Live"
-osascript <<EOD
-delay 0.5 -- time to release modifier keys if for example the script is run with command-R
-
-if application "Live" is running then
-  tell application "System Events"
-
-      set frontmost of process "Live" to true
-
-      keystroke "q" using command down
-
-      keystroke return
-
-  end tell
-
-  ignoring application responses
-    tell application "Live" to quit with saving
-  end ignoring
-
-  delay 10 -- Time to quit the application
-
-end if
-EOD
-
-PROCESS=Live
-
-if pgrep $PROCESS
-	then
-		echo '-> KILL LIVE'
-    killall Live
-	else
-		echo '-> Live already killed'
-fi
 
 
 while true
@@ -51,27 +16,35 @@ do
 		else
 			echo '-> Open Live'
 			
-			rm -f ~/Library/Preferences/Ableton/Live\ 10.1/CrashDetection.cfg
-			rm -f ~/Library/Preferences/Ableton/Live\ 10.1/CrashRecoveryInfo.cfg
-			rm -f -r ~/Library/Preferences/Ableton/Live\ 10.1/Crash
+			rm -f ~/Library/Preferences/Ableton/Live\ 10.1.7/CrashDetection.cfg
+			rm -f ~/Library/Preferences/Ableton/Live\ 10.1.7/CrashRecoveryInfo.cfg
+			rm -f -r ~/Library/Preferences/Ableton/Live\ 10.1.7/Crash
 			
-			open -a Ableton\ Live\ 10\ Suite ~/Desktop/HgZurichProject/HgZurichProject.als
+			open -a open -a Ableton\ Live\ 10\ Trial ~/Desktop/Llum2020/Ableton/Imanol\ Chains_v4\ Project/Imanol\ Chains_v4.als
 			
-			osascript <<EOD
+	fi
+	
+	sleep 2
+	
+	PROCESS=Llum2020App
+	if pgrep $PROCESS
+		then
+			echo '-> Llum2020App process already exit'
+		else
+			echo '-> Open Llum2020App'
+			
+			open -a ~/Desktop/Llum2020/OpenFrameworks/Llum2020App/bin/Llum2020App.app
+	fi
 
-			delay 5.0 -- time to release modifier keys if for example the script is run with command-R
-
-			tell application "System Events"
-
-					set frontmost of process "Live" to true
-
-					keystroke return
-					keystroke return
-
-			end tell
-EOD
-
-
+	sleep 5
+	PROCESS=ProtoPixel
+	if pgrep $PROCESS
+		then
+			echo '-> Create process already exit'
+		else
+			echo '-> Open ProtoPixel'
+			
+			open -a ProtoPixel ~/Desktop/Llum2020/Create/Llum2020.ppxproj
 	fi
 
 	sleep 30

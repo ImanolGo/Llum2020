@@ -210,7 +210,12 @@ void SwipeScene::willFadeIn()
 {
     ofLogNotice("SwipeScene::willFadeIn");
     AppManager::getInstance().getGuiManager().setColorCorrectionType(2);
-	AppManager::getInstance().getGuiManager().loadPresets(this->getName());
+    
+    AppManager::getInstance().getMidiManager().sendNoteOn(0);
+    AppManager::getInstance().getMidiManager().sendNoteOff(0);
+    AppManager::getInstance().getGuiManager().loadPresets(this->getName());
+    AppManager::getInstance().getMidiManager().sendNoteOn(127);
+    
 }
 
 void SwipeScene::willDraw(){

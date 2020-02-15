@@ -117,6 +117,8 @@ private:
     
     void setupModesGui();
     
+    void setupMidiGui();
+    
     void setupLedsGui();
 
 	void setupParticlesGui();
@@ -148,6 +150,7 @@ private:
 	ofParameterGroup m_particlesGroup;
 	ofParameterGroup m_audioGroup;
     ofParameterGroup m_communicationsGroup;
+    ofParameterGroup m_midiGroup;
 
 	
 	ofParameter<bool>       m_showMode;
@@ -167,6 +170,9 @@ private:
 	ofParameter<bool>       m_audioLowOnset;
 	ofParameter<bool>       m_audioMidOnset;
 	ofParameter<bool>       m_audioHighOnset;
+    
+    ofParameter<int>        m_midiControl;
+    ofParameter<int>        m_midiPitch;
     
     
     ofParameter<string>     m_videoPath;

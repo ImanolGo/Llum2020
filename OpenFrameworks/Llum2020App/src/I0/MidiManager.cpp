@@ -11,7 +11,7 @@
 #include "AppManager.h"
 
 
-MidiManager::MidiManager(): Manager(), m_channel(1)
+MidiManager::MidiManager(): Manager(), m_channel(1), m_control(0),m_pitch(0)
 {
     //Intentionally left empty
 }
@@ -41,11 +41,12 @@ void MidiManager::setupMidiPorts()
 {
 	// print input ports to console
 	ofLogNotice() << "MidiManager::setupMidiPorts-> Ports: ";
-	m_midiOut.listOutPorts(); // via instance
+    m_midiOut.listOutPorts(); // via instance
 	//ofxMidiIn::listPorts(); // via static as well
 
 	// connect
 	m_midiOut.openPort(0); // by number
+    //m_midiOut.openPort("IAC Driver IAC Bus 1"); // by name
 	//m_midiOut.openPort("IAC Driver Pure Data In"); // by name
 	//m_midiOut.openPort("loopMIDI Port"); // by name
 	//m_midiOut.openVirtualPort("ofxMidiOut"); // open a virtual port
@@ -82,4 +83,18 @@ void MidiManager::sendNoteOff(int pitch, int velocity)
 	m_midiOut.sendNoteOff(m_channel, pitch, velocity);
 }
 
+void  MidiManager::sendControlChange(int value)
+{
+    m_midiOut.sendControlChange(m_channel, m_control, value);
+}
+
+void MidiManager::sendNoteOn(int velocity)
+{
+    m_midiOut.sendNoteOn(m_channel, m_pitch, velocity);
+}
+
+void MidiManager::sendNoteOff(int velocity)
+{
+    m_midiOut.sendNoteOff(m_channel, m_pitch, velocity);
+}
 

@@ -52,6 +52,7 @@ void GuiManager::setup()
     this->setupShadersGui();
 	this->setupParticlesGui();
 	this->setupAudioGui();
+    this->setupMidiGui();
 	this->loadGuiValues();
     
     //this->drawGui();
@@ -115,6 +116,22 @@ void GuiManager::setupScenesGui()
 
 }
 
+void GuiManager::setupMidiGui()
+{
+    auto midiManager = &AppManager::getInstance().getMidiManager();
+    m_midiGroup.setName("MIDI");
+    
+    m_midiPitch.set("Pitch", 0, 0, 128);
+    m_midiPitch.addListener(midiManager, &MidiManager::setPitch);
+    m_presets.add(m_midiPitch);
+    m_midiGroup.add(m_midiPitch);
+    
+    m_midiControl.set("Control", 0, 0, 128);
+    m_midiControl.addListener(midiManager, &MidiManager::setControl);
+    m_presets.add(m_midiControl);
+    m_midiGroup.add(m_midiControl);
+
+}
 void GuiManager::setupColorsGui()
 {
 	auto colorManager = &AppManager::getInstance().getColorManager();
@@ -495,6 +512,13 @@ void GuiManager::drawGui()
 				ofxImGui::AddGroup(m_audioGroup, mainSettings);
 				ofxImGui::EndTree(mainSettings);
 			}
+            
+            if (ofxImGui::BeginTree(m_midiGroup, mainSettings))
+            {
+                //auto & group =
+                ofxImGui::AddGroup(m_midiGroup, mainSettings);
+                ofxImGui::EndTree(mainSettings);
+            }
 
 			if (ofxImGui::BeginTree(m_particlesGroup, mainSettings))
 			{

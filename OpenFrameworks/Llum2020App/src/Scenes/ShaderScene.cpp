@@ -139,7 +139,11 @@ void ShaderScene::willFadeIn() {
      this->setupShader();
      ofLogNotice("ShaderScene::willFadeIn");
      AppManager::getInstance().getGuiManager().setColorCorrectionType(1);
-	 AppManager::getInstance().getGuiManager().loadPresets(this->getName());
+   
+     AppManager::getInstance().getMidiManager().sendNoteOn(0);
+     AppManager::getInstance().getMidiManager().sendNoteOff(0);
+     AppManager::getInstance().getGuiManager().loadPresets(this->getName());
+     AppManager::getInstance().getMidiManager().sendNoteOn(127);
     
 }
 

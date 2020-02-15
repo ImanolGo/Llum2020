@@ -123,7 +123,13 @@ void VectorFieldScene::setAdditiveBlend(bool value)
 
 void VectorFieldScene::willFadeIn() {
 	ofLogNotice("VectorFieldScene::willFadeIn");
-	AppManager::getInstance().getGuiManager().loadPresets(this->getName());
+    
+    AppManager::getInstance().getMidiManager().sendNoteOn(0);
+    AppManager::getInstance().getMidiManager().sendNoteOff(0);
+    AppManager::getInstance().getGuiManager().loadPresets(this->getName());
+    AppManager::getInstance().getMidiManager().sendNoteOn(127);
+    
+	//AppManager::getInstance().getGuiManager().loadPresets(this->getName());
 	this->setColors();
 	m_vectorField.resetParticles();
 
@@ -136,6 +142,7 @@ void VectorFieldScene::willDraw() {
 void VectorFieldScene::willFadeOut() {
 	ofLogNotice("VectorFieldScene::willFadeOut");
 	AppManager::getInstance().getGuiManager().savePresets(this->getName());
+    
 }
 
 void VectorFieldScene::willExit() {

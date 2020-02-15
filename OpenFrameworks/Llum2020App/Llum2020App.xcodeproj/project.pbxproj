@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		00F8DAC81953313F8180A13C /* ofxTextBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1486C841BC2A30DB7CBC449C /* ofxTextBlock.cpp */; };
 		08C2F6947E69C234CCCBB2EE /* EngineGLFW.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31CC728D821F21EB13047258 /* EngineGLFW.cpp */; };
+		08D19BCE23F7FB6B00133729 /* ofxWatchdog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08D19BCD23F7FB6B00133729 /* ofxWatchdog.cpp */; };
 		08D85BD223F1B7F400DFD72A /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08D85BD123F1B7F400DFD72A /* CoreMIDI.framework */; };
 		08D85BD423F1B83500DFD72A /* Syphon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08D85BD323F1B83400DFD72A /* Syphon.framework */; };
 		08D85BD623F1B86300DFD72A /* Syphon.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08D85BD523F1B86300DFD72A /* Syphon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -164,6 +165,8 @@
 		05C7229BA31FC4B627D19D84 /* ofxSyphonServer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxSyphonServer.h; path = src/Addons/ofxSyphon/src/ofxSyphonServer.h; sourceTree = SOURCE_ROOT; };
 		06A5B3AA5459CC5F29B84644 /* addon_config.mk */ = {isa = PBXFileReference; explicitFileType = file; fileEncoding = 4; name = addon_config.mk; path = src/Addons/ofxImGui/addon_config.mk; sourceTree = SOURCE_ROOT; };
 		07A1090EAC62A836C4FD6044 /* OscPrintReceivedElements.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = OscPrintReceivedElements.cpp; path = ../../../../Applications/of_v0.10.1_osx_release/addons/ofxOsc/libs/oscpack/src/osc/OscPrintReceivedElements.cpp; sourceTree = SOURCE_ROOT; };
+		08D19BCC23F7FB6B00133729 /* ofxWatchdog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxWatchdog.h; path = "../../../../../Google Drive/Freelancing/2020/ProtoPixel/Llum2020/Software/OpenFrameworks/Llum2020App/src/Addons/ofxWatchdog/src/ofxWatchdog.h"; sourceTree = "<group>"; };
+		08D19BCD23F7FB6B00133729 /* ofxWatchdog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxWatchdog.cpp; path = "../../../../../Google Drive/Freelancing/2020/ProtoPixel/Llum2020/Software/OpenFrameworks/Llum2020App/src/Addons/ofxWatchdog/src/ofxWatchdog.cpp"; sourceTree = "<group>"; };
 		08D85BD123F1B7F400DFD72A /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
 		08D85BD323F1B83400DFD72A /* Syphon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Syphon.framework; path = src/Addons/ofxSyphon/libs/Syphon/lib/osx/Syphon.framework; sourceTree = "<group>"; };
 		08D85BD523F1B86300DFD72A /* Syphon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Syphon.framework; path = src/Addons/ofxSyphon/libs/Syphon/lib/osx/Syphon.framework; sourceTree = "<group>"; };
@@ -636,6 +639,23 @@
 			name = I0;
 			sourceTree = "<group>";
 		};
+		08D19BCA23F7FB3A00133729 /* ofxWatchDog */ = {
+			isa = PBXGroup;
+			children = (
+				08D19BCB23F7FB5E00133729 /* src */,
+			);
+			name = ofxWatchDog;
+			sourceTree = "<group>";
+		};
+		08D19BCB23F7FB5E00133729 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				08D19BCD23F7FB6B00133729 /* ofxWatchdog.cpp */,
+				08D19BCC23F7FB6B00133729 /* ofxWatchdog.h */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
 		08D85BD023F1B7F400DFD72A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1062,6 +1082,7 @@
 		AD642137CCDF61FB3E6CCEA2 /* Addons */ = {
 			isa = PBXGroup;
 			children = (
+				08D19BCA23F7FB3A00133729 /* ofxWatchDog */,
 				08D85BD723F45BF200DFD72A /* ofxPostProcessing */,
 				F79FFC9032CC6E409159B3E3 /* ofxBlur */,
 				08E16ED5FD8D48C6776B1270 /* ofxEasing */,
@@ -1866,6 +1887,7 @@
 				1835B306208122634C04CA79 /* ModelManager.cpp in Sources */,
 				1AF15FCF93D2DDD6D4285C8E /* AppManager.cpp in Sources */,
 				10DB10B0B9454575989DC25D /* Llum2020App.cpp in Sources */,
+				08D19BCE23F7FB6B00133729 /* ofxWatchdog.cpp in Sources */,
 				DA22DA3A4F2E611DF50078F2 /* main.cpp in Sources */,
 				58BCEB4034B30CB4A3456FC7 /* SettingsManager.cpp in Sources */,
 				2BF29CBD5F6758C8B2152081 /* BlankScene.cpp in Sources */,
